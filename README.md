@@ -6,13 +6,24 @@ Situs statis halaman depan ARIBA (aplikasi koperasi digital) untuk GitHub Pages.
 - `skor-kredit/` — ketentuan Skor Kredit Ariba Indonesia (ARIBA-SKOR-2.0)
 - `demo/` — prototipe ARIBA Cooperative OS dengan data contoh (noindex)
 - `img/` — screenshot aplikasi (data contoh), `og/` — gambar pratinjau tautan
-- `CNAME` — domain kustom `ariba.id`; `robots.txt`, `sitemap.xml`, `404.html`
+- `robots.txt`, `sitemap.xml`, `404.html`
 
 ## Memasang
 
-1. Settings → Pages → Source: *Deploy from a branch*, branch `main`, folder `/ (root)`.
-2. DNS domain ariba.id:
-   - Record `A` untuk `@`: 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153
-   - Record `CNAME` untuk `www`: `<akun-atau-organisasi>.github.io`
-3. Setelah DNS aktif, centang *Enforce HTTPS*.
-4. Daftarkan `https://ariba.id/sitemap.xml` di Google Search Console.
+Situs ariba.id berjalan di hosting DirectAdmin (`public_html`). Setiap push ke `main` diunggah otomatis oleh GitHub Actions (`.github/workflows/deploy.yml`) lewat FTPS. DNS tidak perlu diubah.
+
+Aplikasi lain di hosting yang sama (Kasbon, Jembara, dll.) aman: workflow hanya mengunggah file dari repositori ini dan hanya menghapus file yang dulu ia unggah sendiri (dicatat di `.ftp-deploy-sync-state.json` di server). Tidak ada `.htaccess` di akar.
+
+Pengaturan sekali saja (Settings → Secrets and variables → Actions):
+
+| Jenis | Nama | Isi |
+|---|---|---|
+| Secret | `FTP_SERVER` | mis. `ftp.ariba.id` atau IP server |
+| Secret | `FTP_USERNAME` | akun FTP |
+| Secret | `FTP_PASSWORD` | kata sandi akun FTP |
+| Variable (opsional) | `FTP_DIR` | `./` bila akun FTP khusus berpath `public_html` (disarankan); `domains/ariba.id/public_html/` bila memakai akun utama |
+| Variable (opsional) | `FTP_PROTOCOL` | `ftps` (bawaan) atau `ftp` |
+
+Disarankan membuat akun FTP khusus di DirectAdmin (FTP Management → Create FTP Account → Custom path ke `public_html`) agar workflow tidak bisa menyentuh folder di luar situs.
+
+Setelah tayang, daftarkan `https://ariba.id/sitemap.xml` di Google Search Console.
