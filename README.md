@@ -21,9 +21,9 @@ Pengaturan sekali saja (Settings → Secrets and variables → Actions):
 | Secret | `FTP_SERVER` | mis. `ftp.ariba.id` atau IP server |
 | Secret | `FTP_USERNAME` | akun FTP |
 | Secret | `FTP_PASSWORD` | kata sandi akun FTP |
-| Variable (opsional) | `FTP_DIR` | `./` bila akun FTP khusus berpath `public_html` (disarankan); `domains/ariba.id/public_html/` bila memakai akun utama |
+| Variable (opsional) | `FTP_DIR` | bawaan `public_html/` untuk akun `deploy@ariba.id` (path `/home/attaqwac/domains/ariba.id/`); `domains/ariba.id/public_html/` bila memakai akun utama |
 | Variable (opsional) | `FTP_PROTOCOL` | `ftps` (bawaan) atau `ftp` |
 
-Disarankan membuat akun FTP khusus di DirectAdmin (FTP Management → Create FTP Account → Custom path ke `public_html`) agar workflow tidak bisa menyentuh folder di luar situs.
+Akun yang dipakai: `deploy@ariba.id` (sudah ada di DirectAdmin → FTP Management).
 
 Setelah tayang, daftarkan `https://ariba.id/sitemap.xml` di Google Search Console.

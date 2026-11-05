@@ -10,9 +10,9 @@
 #   Secrets:   FTP_SERVER   mis. ftp.ariba.id
 #              FTP_USERNAME mis. web@ariba.id
 #              FTP_PASSWORD
-#   Variables: FTP_DIR      folder tujuan relatif terhadap akun FTP.
-#                           Akun FTP khusus yang path-nya public_html → "./" (bawaan)
-#                           Akun utama DirectAdmin → "domains/ariba.id/public_html/"
+#   Variables: FTP_DIR      folder tujuan relatif terhadap akun FTP (bawaan: public_html/).
+#                           Akun deploy@ariba.id (path /home/attaqwac/domains/ariba.id/) → "public_html/" (bawaan)
+#                           Akun utama attaqwac → "domains/ariba.id/public_html/"
 #              FTP_PROTOCOL ftps (bawaan) atau ftp bila server tidak mendukung TLS
 name: Deploy ke ariba.id
 
@@ -53,7 +53,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
-          server-dir: ${{ vars.FTP_DIR || './' }}
+          server-dir: ${{ vars.FTP_DIR || 'public_html/' }}
           dangerous-clean-slate: false
           exclude: |
             **/.git*
