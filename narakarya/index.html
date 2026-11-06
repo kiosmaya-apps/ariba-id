@@ -1,0 +1,1379 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#182B3A">
+<title>Narakarya</title>
+<meta name="description" content="Narakarya: tempat kerja lepas oleh Ariba Indonesia. Cari freelancer atau pekerjaan, dana ditahan aman, tanpa bunga dan tanpa denda.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+</head>
+<body>
+<style>/* Tata letak: pasar kerja padat dengan "nota kontrak" sebagai ciri khas; setiap rupiah terurai jelas.
+   Warna dan huruf mengikuti ariba.id. Sengaja satu tema terang, sama seperti situs induknya. */
+:root{
+  color-scheme:light;
+  --navy:#182B3A;--navy2:#22394C;--navy3:#4A6175;--navy-soft:#EEF1F4;--mist:#B9C4CE;
+  --wine:#7E293C;--wine-d:#5E1E2D;--wine-soft:#F7ECEE;
+  --sea:#2F7A69;--sea-soft:#EAF2EF;
+  --ok:#2E7D4F;--ok-soft:#E8F3EC;--warn:#9A6410;--warn-soft:#FBF1DF;--bad:#B3261E;--bad-soft:#FBEAE9;
+  --paper:#F7F5F0;--card:#FFFFFF;--line:#E2DDD3;--line2:#EEEAE2;--ink:#1C2430;--ink2:#4A5563;--ink3:#737C87;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:Inter,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 var(--sans)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--navy)}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--navy);text-wrap:balance;letter-spacing:-.005em}
+a{color:var(--wine)}a:hover{color:var(--wine-d)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+.num{font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-size:.86em;font-variant-numeric:tabular-nums}
+.muted{color:var(--ink2)}.small{font-size:13px}.xs{font-size:12px}
+.wrap{max-width:1200px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.stack{display:flex;flex-direction:column;gap:16px;min-width:0}.stack-s{display:flex;flex-direction:column;gap:8px;min-width:0}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;min-width:0}.between{justify-content:space-between}
+.grow{flex:1 1 0;min-width:0}
+
+/* strip & header */
+.strip{background:var(--warn-soft);color:#5f3f0b;font-size:12.5px;border-bottom:1px solid #EFDFC0}
+.strip .wrap{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;justify-content:space-between;padding-block:6px}
+.linkbtn{background:none;border:0;padding:0;color:inherit;text-decoration:underline;cursor:pointer}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--navy);color:#F7F5F0}
+.top .wrap{display:flex;align-items:center;gap:8px 22px;min-height:64px;flex-wrap:wrap;padding-block:8px}
+.brand{display:flex;align-items:center;gap:10px;color:#F7F5F0;text-decoration:none}
+.brand:hover{color:#fff}
+.brand b{font:600 20px/1 var(--serif);letter-spacing:.02em;display:block}
+.brand i{font:normal 9.5px/1 var(--sans);letter-spacing:.2em;color:var(--mist);display:block;margin-top:4px}
+.nav{display:flex;flex-wrap:wrap;gap:2px 18px;flex:1 1 auto}
+.nav a{color:#D5DDE4;text-decoration:none;font-size:14px;padding:8px 0;border-bottom:2px solid transparent}
+.nav a:hover,.nav a.on{color:#fff}.nav a.on{border-bottom-color:#C9717F}
+.acts{display:flex;align-items:center;gap:8px}
+.burger{display:none;background:none;border:1px solid var(--navy3);border-radius:6px;color:#fff;width:42px;height:42px;cursor:pointer}
+@media(max-width:860px){.nav{display:none;order:9;flex:1 1 100%;flex-direction:column;padding-bottom:6px}.nav.open{display:flex}.burger{display:inline-grid;place-items:center}.brand{flex:1}}
+
+/* tombol */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14px;font-weight:500;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--navy3);color:var(--ink)}
+.btn.pri{background:var(--wine);border-color:var(--wine);color:#fff;font-weight:600}.btn.pri:hover{background:var(--wine-d);border-color:var(--wine-d);color:#fff}
+.btn.sea{background:var(--sea);border-color:var(--sea);color:#fff;font-weight:600}.btn.sea:hover{background:#25665a;color:#fff}
+.btn.ghost{background:transparent;border-color:var(--navy3);color:#F7F5F0}.btn.ghost:hover{border-color:#fff;color:#fff}
+.btn.danger{color:var(--bad);border-color:#E7BDBA}.btn.danger:hover{border-color:var(--bad);color:var(--bad)}
+.btn.s{min-height:34px;padding:0 11px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+svg.i{width:1.15em;height:1.15em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero */
+.hero{background:var(--navy);color:#F7F5F0}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.85fr);gap:48px;align-items:center;padding-block:44px 64px}
+.hero h1{color:#fff;font-size:clamp(34px,4.6vw,54px);line-height:1.08}
+.hero p.lead{color:#D5DDE4;font-size:17px;max-width:56ch;margin-top:14px}
+@media(max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:28px 40px}}
+.searchbox{display:flex;gap:0;background:#fff;border-radius:8px;margin-top:22px;padding:5px;flex-wrap:wrap}
+.searchbox select{border:0;background:var(--navy-soft);border-radius:5px;padding:0 10px;min-height:44px;color:var(--navy);font-size:14px;font-weight:500}
+.searchbox input{flex:1 1 180px;min-width:0;border:0;padding:0 12px;min-height:44px;background:transparent;color:var(--ink);outline-offset:-2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:13px;color:var(--mist)}
+.chips a{color:#D5DDE4;text-decoration:underline;text-underline-offset:3px}
+
+/* nota */
+.nota{background:var(--card);color:var(--ink);border-radius:4px;padding:20px 20px 16px;box-shadow:0 12px 34px rgba(0,0,0,.28);font-size:14px}
+.nota h3{font-size:16px;font-family:var(--sans);font-weight:600;color:var(--navy)}
+.nota .no{font:500 11px var(--mono);color:var(--ink3);letter-spacing:.04em}
+.lines{display:flex;flex-direction:column;margin-top:10px}
+.lines>div{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-top:1px dashed var(--line)}
+.lines>div:first-child{border-top:0}
+.lines .t{border-top:1px solid var(--navy);font-weight:600;color:var(--navy)}
+.lines span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* sections */
+section.band{padding-block:44px}
+.band.alt{background:var(--card);border-block:1px solid var(--line)}
+.band.dark{background:var(--navy);color:#F7F5F0}.band.dark h2{color:#fff}
+.sect-h{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+h2{font-size:clamp(25px,3vw,32px);line-height:1.15}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media(max-width:980px){.grid3,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.grid2,.grid3,.grid4{grid-template-columns:minmax(0,1fr)}}
+.catlist{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0 22px}
+@media(max-width:980px){.catlist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.catlist a{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--line);color:var(--navy);text-decoration:none;font-weight:500;font-size:14px}
+.catlist a:hover{color:var(--wine)}.catlist span{color:var(--ink3);font-variant-numeric:tabular-nums;font-weight:400}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;min-width:0}
+a.card{display:block;text-decoration:none;color:inherit}a.card:hover{border-color:var(--navy3);color:inherit}
+.card h3{font-size:17px;line-height:1.3}
+.card.flat{border:0;padding:0;background:none}
+.clamp2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.clamp3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.price{font-weight:600;color:var(--navy);font-variant-numeric:tabular-nums}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;padding:2px 8px;border-radius:4px;background:var(--navy-soft);color:var(--navy)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:2px 8px;border-radius:999px;background:var(--navy-soft);color:var(--navy);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}.pill.warn{background:var(--warn-soft);color:var(--warn)}.pill.bad{background:var(--bad-soft);color:var(--bad)}.pill.wine{background:var(--wine-soft);color:var(--wine)}.pill.sea{background:var(--sea-soft);color:var(--sea)}
+.badge-m{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--sea);white-space:nowrap}
+.av{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:15px;color:#fff;background:var(--navy3)}
+.av.lg{width:72px;height:72px;font-size:24px}.av.sm{width:30px;height:30px;font-size:11.5px}
+.star{color:var(--warn);font-weight:600;white-space:nowrap}
+
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px;counter-reset:s}
+@media(max-width:980px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.steps{grid-template-columns:minmax(0,1fr)}}
+.steps>div{counter-increment:s;border-top:2px solid var(--navy);padding-top:10px}
+.steps>div::before{content:"Langkah " counter(s);font:500 11.5px var(--mono);color:var(--wine)}
+.steps h3{font-size:18px;margin:4px 0}
+
+/* tabel */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th{font-size:12px;font-weight:600;color:var(--ink2);text-align:left;background:#FBFAF7;white-space:nowrap}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line2);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.r,th.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tmin{min-width:720px}
+
+/* layout dua kolom */
+.page{padding-block:24px 56px}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:20px;align-items:start}
+.split.l{grid-template-columns:250px minmax(0,1fr)}
+@media(max-width:920px){.split,.split.l{grid-template-columns:minmax(0,1fr)}}
+.crumb{font-size:13px;color:var(--ink2);margin-bottom:6px}.crumb a{color:var(--ink2)}
+.title{font-size:clamp(25px,3.2vw,32px);line-height:1.15}
+
+/* form */
+label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:500;color:var(--ink);min-width:0}
+label.f small{font-weight:400;color:var(--ink2)}
+input.in,select.in,textarea.in{width:100%;min-height:42px;border:1px solid #CFC9BD;border-radius:6px;background:#fff;padding:8px 11px;font-size:15px;font-weight:400}
+textarea.in{min-height:96px;resize:vertical;line-height:1.5}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fgrid.x3{grid-template-columns:repeat(3,minmax(0,1fr))}.fgrid.x4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:620px){.fgrid,.fgrid.x3,.fgrid.x4{grid-template-columns:minmax(0,1fr)}}
+.span2{grid-column:1/-1}
+.choice{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:6px;padding:10px 12px;cursor:pointer;background:#fff}
+.choice:has(input:checked){border-color:var(--sea);background:var(--sea-soft)}
+.note{border-radius:6px;padding:10px 12px;font-size:13.5px;background:var(--navy-soft);color:var(--navy)}
+.note.warn{background:var(--warn-soft);color:#6b470c}.note.bad{background:var(--bad-soft);color:var(--bad)}.note.sea{background:var(--sea-soft);color:#1f5a4d}.note.ok{background:var(--ok-soft);color:#1f5e39}
+
+/* subnav */
+.sub{background:var(--card);border-bottom:1px solid var(--line)}
+.sub .wrap{display:flex;gap:4px 20px;overflow-x:auto;scrollbar-width:none}
+.sub a{padding:12px 0;font-size:14px;color:var(--ink2);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent}
+.sub a.on{color:var(--navy);font-weight:600;border-bottom-color:var(--wine)}
+
+/* termin */
+.ms{border:1px solid var(--line);border-radius:6px;background:var(--card);padding:14px}
+.ms+.ms{margin-top:10px}
+.thread{display:flex;flex-direction:column;gap:8px;max-height:340px;overflow-y:auto;padding:2px}
+.bub{max-width:88%;padding:8px 11px;border-radius:8px;background:var(--navy-soft);font-size:14px;overflow-wrap:anywhere}
+.bub.mine{align-self:flex-end;background:var(--sea-soft)}
+.bub small{display:block;color:var(--ink3);font-size:11px;margin-top:2px}
+
+/* admin */
+.adm{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:70vh}
+.adm-side{background:var(--navy2);color:#D5DDE4;padding:16px 12px;display:flex;flex-direction:column;gap:2px}
+.adm-side a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;color:#D5DDE4;text-decoration:none;font-size:14px}
+.adm-side a:hover{background:var(--navy);color:#fff}.adm-side a.on{background:var(--navy);color:#fff;font-weight:600}
+.adm-side em{margin-left:auto;font-style:normal;font:500 11.5px var(--mono);background:var(--wine);color:#fff;border-radius:999px;padding:1px 7px}
+.adm-main{padding:22px clamp(16px,3vw,32px) 56px;min-width:0;display:flex;flex-direction:column;gap:20px}
+@media(max-width:860px){.adm{grid-template-columns:minmax(0,1fr)}.adm-side{flex-direction:row;overflow-x:auto;padding:8px}.adm-side a{white-space:nowrap}}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media(max-width:980px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px 14px;min-width:0}
+.kpi span{font-size:12.5px;color:var(--ink2);display:block}
+.kpi b{display:block;font:600 clamp(19px,2.3vw,24px)/1.25 var(--sans);color:var(--navy);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi small{color:var(--ink3);font-size:12px}
+.bars text{font:11px var(--sans);fill:var(--ink2)}
+
+/* modal & toast */
+.ov{position:fixed;inset:0;background:rgba(24,43,58,.55);z-index:40;display:grid;place-items:center;padding:16px;overflow-y:auto}
+.modal{background:var(--card);border-radius:8px;padding:20px;width:min(560px,100%);display:flex;flex-direction:column;gap:14px;max-height:calc(100dvh - 32px);overflow-y:auto}
+.modal h3{font-size:20px}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:6px;font-size:14px;z-index:50;max-width:calc(100vw - 32px);box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast.bad{background:var(--bad)}
+
+.persona{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:6px;padding:12px;cursor:pointer}
+.persona:hover{border-color:var(--navy3)}
+.foot{background:var(--navy);color:var(--mist);font-size:13.5px}
+.foot .wrap{padding-block:28px;display:flex;flex-wrap:wrap;gap:12px 40px;justify-content:space-between}
+.foot a{color:#D5DDE4}
+details.q{border-bottom:1px solid var(--line);padding:12px 0}
+details.q summary{cursor:pointer;font-weight:600;color:var(--navy)}
+details.q p{margin-top:6px;color:var(--ink2);max-width:72ch}
+@media(prefers-reduced-motion:no-preference){a.card,.btn{transition:border-color .12s,background .12s}}
+.only-m{display:none}
+@media(max-width:480px){.acts .btn.pri{display:none}.only-m{display:block}.brand i{letter-spacing:.14em}.searchbox button{flex:1 1 100%;margin-top:5px}.searchbox input{flex:1 1 150px}}
+</style>
+<div id="app"></div>
+<noscript>Narakarya memerlukan JavaScript.</noscript>
+<script>
+/* ==========================================================================
+   Narakarya: mesin data prototipe (berjalan di peramban, tanpa server).
+   Nominal selalu Rupiah bulat. Setiap gerakan uang dicatat berpasangan.
+   ========================================================================== */
+const NK = (() => {
+  const KEY = 'narakarya.demo.v1';
+  const DAY = 864e5;
+  let clock = null;
+  const now = () => clock ?? Date.now();
+
+  const POLICY0 = {
+    version: 1,
+    commissionPct: 20,
+    quotaPublic: 10, quotaMember: 30,
+    holdDaysPublic: 3, holdDaysMember: 0,
+    payoutFeePublic: 2500, payoutFeeMember: 0,
+    autoReleaseDays: 7,
+    minMilestone: 50000, minPayout: 50000,
+    blocked: ['judi', 'slot gacor', 'togel', 'pinjol', 'pinjaman online', 'bunga harian', 'pornografi', 'phishing', 'penipuan'],
+    review: ['joki', 'followers palsu', 'ulasan palsu', 'skripsi', 'retas', 'kripto'],
+  };
+
+  const ACC = {
+    KAS: '1-1000 Rekening penampung mitra pembayaran',
+    HELD: '2-1000 Dana klien ditahan',
+    SALDO: '2-2000 Saldo freelancer',
+    PAYOUT: '2-3000 Pencairan diproses',
+    KOMISI: '4-1000 Pendapatan komisi Ariba Indonesia',
+    FEE: '4-2000 Pendapatan biaya transfer',
+  };
+
+  const CATS = ['Desain & Kreatif', 'Web & Aplikasi', 'Penulisan & Terjemahan', 'Pemasaran Digital', 'Video & Animasi', 'Akuntansi & Pajak', 'Administrasi & Data', 'Hukum & Perizinan', 'Konsultasi Usaha', 'Pelatihan & Mengajar'];
+
+  const blank = () => ({
+    seq: 100, session: null, policy: { ...POLICY0, blocked: [...POLICY0.blocked], review: [...POLICY0.review] },
+    users: [], jobs: [], proposals: [], services: [], contracts: [], msgs: [], reviews: [],
+    earnings: [], payouts: [], disputes: [], ledger: [], audit: [], invites: [],
+  });
+  let S = blank();
+
+  /* ---------- penyimpanan ---------- */
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { /* mode privat: tetap jalan di memori */ } };
+  const load = () => {
+    let raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (e) { raw = null; }
+    if (raw) { try { S = JSON.parse(raw); sweep(); return; } catch (e) { /* data rusak: mulai ulang */ } }
+    reset();
+  };
+  const reset = () => { S = blank(); seed(); clock = null; sweep(); save(); };
+
+  /* ---------- utilitas ---------- */
+  const ok = (value) => ({ ok: true, value });
+  const err = (error, code) => ({ ok: false, error, code });
+  const id = (p) => p + (++S.seq);
+  const user = (u) => S.users.find((x) => x.id === u);
+  const isMember = (u) => !!(u && u.member && u.member.status === 'AKTIF');
+  const clean = (t) => String(t ?? '').trim();
+  const num = (v) => Math.round(Number(String(v ?? '').replace(/[^\d]/g, '')) || 0);
+  const pol = () => S.policy;
+
+  const audit = (actor, action, detail) => {
+    S.audit.unshift({ id: id('a'), at: now(), actor, action, detail });
+  };
+
+  const post = (memo, lines, ref) => {
+    const dr = lines.reduce((a, l) => a + (l.dr || 0), 0);
+    const cr = lines.reduce((a, l) => a + (l.cr || 0), 0);
+    if (dr !== cr) throw new Error('Jurnal tidak seimbang: ' + memo);
+    S.ledger.unshift({ id: id('j'), at: now(), memo, ref, lines: lines.filter((l) => (l.dr || l.cr)) });
+  };
+
+  const commissionOf = (amount, bps) => Math.floor(amount * bps / 10000);
+  const split = (amount, pct = pol().commissionPct) => {
+    const komisi = commissionOf(amount, Math.round(pct * 100));
+    return { amount, komisi, net: amount - komisi };
+  };
+
+  const screen = (text) => {
+    const t = ' ' + clean(text).toLowerCase() + ' ';
+    const hit = (w) => t.includes(w.toLowerCase());
+    const b = pol().blocked.find(hit);
+    if (b) return { verdict: 'BLOCK', word: b };
+    const r = pol().review.find(hit);
+    if (r) return { verdict: 'REVIEW', word: r };
+    return { verdict: 'ALLOW' };
+  };
+
+  /* ---------- akun ---------- */
+  const register = ({ name, kind, city, email }) => {
+    name = clean(name);
+    if (name.length < 3) return err('Isi nama lengkap, minimal 3 huruf.');
+    if (!['F', 'K'].includes(kind)) return err('Pilih apakah Anda mencari kerja atau mencari freelancer.');
+    if (!/.+@.+\..+/.test(clean(email))) return err('Isi alamat email yang benar.');
+    const u = { id: id('u'), name, kind, city: clean(city) || 'Indonesia', email: clean(email), status: 'AKTIF', kyc: 'BELUM', member: null, headline: '', skills: [], rate: 0, bio: '', cat: CATS[0], joinedAt: now() };
+    S.users.push(u); S.session = u.id;
+    audit(u.name, 'Pendaftaran akun', kind === 'F' ? 'Freelancer umum' : 'Klien umum');
+    save(); return ok(u);
+  };
+  const login = (uid) => { S.session = uid; save(); };
+  const logout = () => { S.session = null; save(); };
+  const me = () => user(S.session);
+
+  const saveProfile = (uid, p) => {
+    const u = user(uid); if (!u) return err('Akun tidak ditemukan.');
+    Object.assign(u, { headline: clean(p.headline), bio: clean(p.bio), city: clean(p.city), rate: num(p.rate), cat: p.cat || u.cat,
+      skills: clean(p.skills).split(',').map((s) => s.trim()).filter(Boolean).slice(0, 10) });
+    save(); return ok(u);
+  };
+  const requestKyc = (uid) => {
+    const u = user(uid);
+    if (u.kyc === 'TERVERIFIKASI') return err('Identitas Anda sudah terverifikasi.');
+    u.kyc = 'MENUNGGU'; u.kycAt = now();
+    audit(u.name, 'Mengirim identitas', 'Menunggu tinjauan pengelola'); save(); return ok(u);
+  };
+
+  /* ---------- lowongan ---------- */
+  const postJob = (cid, j) => {
+    const u = user(cid);
+    if (!u || u.status !== 'AKTIF') return err('Akun Anda sedang ditangguhkan.');
+    const title = clean(j.title), desc = clean(j.desc), budget = num(j.budget);
+    if (title.length < 10) return err('Judul minimal 10 huruf agar mudah dipahami.');
+    if (desc.length < 30) return err('Jelaskan pekerjaannya minimal 30 huruf. Lingkup yang jelas mencegah sengketa.');
+    if (budget < pol().minMilestone) return err('Anggaran minimal ' + pol().minMilestone.toLocaleString('id-ID') + ' rupiah.');
+    const sc = screen(title + ' ' + desc);
+    if (sc.verdict === 'BLOCK') {
+      audit(u.name, 'Lowongan diblokir ARIBA-NK-003', `Kata "${sc.word}" pada "${title}"`); save();
+      return err(`Lowongan tidak dapat ditayangkan karena memuat "${sc.word}". Narakarya menolak pekerjaan yang terkait riba, judi, penipuan, dan konten terlarang (ARIBA-NK-003).`, 'ARIBA-NK-003');
+    }
+    const job = { id: id('j'), clientId: cid, title, desc, budget, cat: j.cat || CATS[0], level: j.level || 'Menengah', days: num(j.days) || 14,
+      skills: clean(j.skills).split(',').map((s) => s.trim()).filter(Boolean).slice(0, 8), at: now(), flag: sc.verdict === 'REVIEW' ? sc.word : null,
+      status: (isMember(u) && sc.verdict === 'ALLOW') ? 'TERBUKA' : 'TINJAUAN' };
+    S.jobs.unshift(job);
+    audit(u.name, 'Memasang lowongan', `${title} (${job.status})`); save();
+    return ok(job);
+  };
+  const moderateJob = (admin, jid, approve, reason) => {
+    const j = S.jobs.find((x) => x.id === jid); if (!j) return err('Lowongan tidak ditemukan.');
+    if (!approve && clean(reason).length < 10) return err('Tulis alasan penolakan, minimal 10 huruf.');
+    j.status = approve ? 'TERBUKA' : 'DITOLAK'; j.reason = clean(reason); j.flag = approve ? null : j.flag;
+    audit(admin, approve ? 'Menyetujui lowongan' : 'Menolak lowongan', j.title + (reason ? ': ' + reason : '')); save(); return ok(j);
+  };
+  const closeJob = (cid, jid) => {
+    const j = S.jobs.find((x) => x.id === jid && x.clientId === cid); if (!j) return err('Lowongan tidak ditemukan.');
+    j.status = 'DITUTUP';
+    S.proposals.filter((p) => p.jobId === jid && p.status === 'TERKIRIM').forEach((p) => { p.status = 'DITOLAK'; });
+    audit(user(cid).name, 'Menutup lowongan', j.title); save(); return ok(j);
+  };
+
+  /* ---------- proposal ---------- */
+  const quotaOf = (u) => (isMember(u) ? pol().quotaMember : pol().quotaPublic);
+  const quotaUsed = (fid) => {
+    const d = new Date(now()); const m0 = new Date(d.getFullYear(), d.getMonth(), 1).getTime();
+    return S.proposals.filter((p) => p.freelancerId === fid && p.at >= m0).length;
+  };
+  const propose = (fid, jid, p) => {
+    const u = user(fid), j = S.jobs.find((x) => x.id === jid);
+    if (!u || u.status !== 'AKTIF') return err('Akun Anda sedang ditangguhkan.');
+    if (!j || j.status !== 'TERBUKA') return err('Lowongan ini sudah tidak menerima lamaran.');
+    if (j.clientId === fid) return err('Anda tidak dapat melamar lowongan sendiri.');
+    if (S.proposals.some((x) => x.jobId === jid && x.freelancerId === fid && x.status !== 'DITARIK')) return err('Anda sudah melamar lowongan ini.');
+    if (quotaUsed(fid) >= quotaOf(u)) return err(`Kuota lamaran bulan ini (${quotaOf(u)}) sudah habis.${isMember(u) ? '' : ' Anggota koperasi mendapat ' + pol().quotaMember + ' lamaran per bulan.'}`);
+    const cover = clean(p.cover), price = num(p.price), days = num(p.days);
+    if (cover.length < 30) return err('Tulis surat lamaran minimal 30 huruf: apa yang akan Anda kerjakan dan pengalaman yang relevan.');
+    if (price < pol().minMilestone) return err('Harga yang diajukan terlalu kecil.');
+    if (days < 1) return err('Isi perkiraan lama pengerjaan dalam hari.');
+    const x = { id: id('p'), jobId: jid, freelancerId: fid, cover, price, days, status: 'TERKIRIM', at: now() };
+    S.proposals.unshift(x);
+    audit(u.name, 'Mengirim proposal', j.title); save(); return ok(x);
+  };
+  const withdrawProposal = (fid, pid) => {
+    const p = S.proposals.find((x) => x.id === pid && x.freelancerId === fid);
+    if (!p || p.status !== 'TERKIRIM') return err('Proposal ini tidak dapat ditarik.');
+    p.status = 'DITARIK'; save(); return ok(p);
+  };
+  const rejectProposal = (cid, pid) => {
+    const p = S.proposals.find((x) => x.id === pid); if (!p) return err('Proposal tidak ditemukan.');
+    const j = S.jobs.find((x) => x.id === p.jobId);
+    if (!j || j.clientId !== cid || p.status !== 'TERKIRIM') return err('Proposal ini tidak dapat ditolak.');
+    p.status = 'DITOLAK'; save(); return ok(p);
+  };
+
+  /* ---------- kontrak ---------- */
+  const newContract = ({ clientId, freelancerId, title, jobId, serviceId, milestones }) => {
+    const year = new Date(now()).getFullYear();
+    const c = { id: id('k'), no: `NK-${year}-${String(S.contracts.length + 1).padStart(4, '0')}`, clientId, freelancerId, title, jobId: jobId || null, serviceId: serviceId || null,
+      total: milestones.reduce((a, m) => a + m.amount, 0), commissionBps: Math.round(pol().commissionPct * 100), policyVersion: pol().version, status: 'AKTIF', at: now(),
+      milestones: milestones.map((m) => ({ id: id('m'), title: m.title, amount: m.amount, days: m.days || null, status: 'BELUM_DANA', revisions: 0 })) };
+    S.contracts.unshift(c);
+    return c;
+  };
+  const acceptProposal = (cid, pid, rows) => {
+    const p = S.proposals.find((x) => x.id === pid); if (!p || p.status !== 'TERKIRIM') return err('Proposal ini sudah tidak aktif.');
+    const j = S.jobs.find((x) => x.id === p.jobId); if (!j || j.clientId !== cid) return err('Hanya pemilik lowongan yang dapat menerima proposal.');
+    if (user(p.freelancerId).status !== 'AKTIF') return err('Akun freelancer ini sedang ditangguhkan.');
+    const ms = rows.map((r) => ({ title: clean(r.title), amount: num(r.amount) })).filter((r) => r.title || r.amount);
+    if (!ms.length) return err('Isi minimal satu termin.');
+    if (ms.some((m) => m.title.length < 3)) return err('Setiap termin perlu judul hasil kerja yang jelas (ARIBA-NK-001).', 'ARIBA-NK-001');
+    if (ms.some((m) => m.amount < pol().minMilestone)) return err(`Nilai tiap termin minimal Rp ${pol().minMilestone.toLocaleString('id-ID')}.`);
+    const sum = ms.reduce((a, m) => a + m.amount, 0);
+    if (sum !== p.price) return err(`Total termin harus sama dengan harga proposal (selisih Rp ${Math.abs(sum - p.price).toLocaleString('id-ID')}).`);
+    p.status = 'DITERIMA'; j.status = 'TERISI';
+    S.proposals.filter((x) => x.jobId === j.id && x.id !== p.id && x.status === 'TERKIRIM').forEach((x) => { x.status = 'DITOLAK'; });
+    const c = newContract({ clientId: cid, freelancerId: p.freelancerId, title: j.title, jobId: j.id, milestones: ms });
+    audit(user(cid).name, 'Menerima proposal', `${c.no} dengan ${user(p.freelancerId).name}`); save(); return ok(c);
+  };
+  const orderService = (cid, sid, tier) => {
+    const s = S.services.find((x) => x.id === sid), u = user(cid);
+    if (!s || s.status !== 'TAYANG') return err('Jasa ini tidak tersedia.');
+    if (s.freelancerId === cid) return err('Anda tidak dapat memesan jasa sendiri.');
+    const t = s.tiers[tier]; if (!t) return err('Pilih paket.');
+    const c = newContract({ clientId: cid, freelancerId: s.freelancerId, title: `${s.title} (${t.name})`, serviceId: sid, milestones: [{ title: t.scope, amount: t.price, days: t.days }] });
+    audit(u.name, 'Memesan jasa', c.no + ' ' + s.title); save(); return ok(c);
+  };
+  const getC = (cid) => S.contracts.find((c) => c.id === cid);
+  const getM = (c, mid) => c.milestones.find((m) => m.id === mid);
+
+  const settle = (c) => {
+    if (c.milestones.every((m) => ['CAIR', 'DIKEMBALIKAN'].includes(m.status))) {
+      c.status = c.milestones.some((m) => m.status === 'CAIR') ? 'SELESAI' : 'DIBATALKAN';
+      c.closedAt = now();
+    }
+  };
+  const fund = (uid, cid, mid, method) => {
+    const c = getC(cid); if (!c || c.clientId !== uid) return err('Hanya klien kontrak ini yang dapat mendanai termin.');
+    const m = getM(c, mid); if (!m) return err('Termin tidak ditemukan.');
+    if (m.status !== 'BELUM_DANA') return ok(m); /* idempoten: notifikasi ganda tidak memposting dua kali */
+    m.status = 'DITAHAN'; m.fundedAt = now(); m.method = method || 'QRIS';
+    post(`Pendanaan ${c.no}: ${m.title}`, [{ acc: 'KAS', dr: m.amount }, { acc: 'HELD', cr: m.amount }], c.id);
+    audit(user(uid).name, 'Mendanai termin', `${c.no} Rp ${m.amount.toLocaleString('id-ID')} via ${m.method}`); save(); return ok(m);
+  };
+  const submitWork = (uid, cid, mid, note) => {
+    const c = getC(cid); if (!c || c.freelancerId !== uid) return err('Hanya freelancer kontrak ini yang dapat mengirim hasil.');
+    const m = getM(c, mid); if (!m || m.status !== 'DITAHAN') return err('Termin ini belum didanai atau sudah dikirim.');
+    if (clean(note).length < 10) return err('Jelaskan hasil yang dikirim, minimal 10 huruf.');
+    m.status = 'DIKIRIM'; m.submittedAt = now(); m.note = clean(note);
+    audit(user(uid).name, 'Mengirim hasil kerja', `${c.no}: ${m.title}`); save(); return ok(m);
+  };
+  const askRevision = (uid, cid, mid, note) => {
+    const c = getC(cid); if (!c || c.clientId !== uid) return err('Hanya klien yang dapat meminta revisi.');
+    const m = getM(c, mid); if (!m || m.status !== 'DIKIRIM') return err('Termin ini tidak sedang menunggu tinjauan.');
+    if (clean(note).length < 10) return err('Jelaskan bagian yang perlu diperbaiki, minimal 10 huruf.');
+    m.status = 'DITAHAN'; m.revisions += 1; m.revisionNote = clean(note); delete m.submittedAt;
+    audit(user(uid).name, 'Meminta revisi', `${c.no}: ${m.title}`); save(); return ok(m);
+  };
+  const release = (c, m, amount, by) => {
+    const s = commissionOf(amount, c.commissionBps), net = amount - s;
+    const f = user(c.freelancerId);
+    const hold = isMember(f) ? pol().holdDaysMember : pol().holdDaysPublic;
+    if (amount > 0) {
+      post(`Pencairan ${c.no}: ${m.title}`, [{ acc: 'HELD', dr: amount }, { acc: 'SALDO', cr: net }, { acc: 'KOMISI', cr: s }], c.id);
+      S.earnings.unshift({ id: id('e'), freelancerId: c.freelancerId, contractId: c.id, msId: m.id, gross: amount, komisi: s, net, at: now(), availableAt: now() + hold * DAY });
+    }
+    m.komisi = (m.komisi || 0) + s; m.net = (m.net || 0) + net; m.paidAt = now(); m.releasedBy = by;
+  };
+  const approve = (uid, cid, mid) => {
+    const c = getC(cid); if (!c || c.clientId !== uid) return err('Hanya klien yang dapat menyetujui hasil.');
+    const m = getM(c, mid); if (!m || m.status !== 'DIKIRIM') return err('Belum ada hasil kerja untuk disetujui.');
+    release(c, m, m.amount, user(uid).name); m.status = 'CAIR'; settle(c);
+    audit(user(uid).name, 'Menyetujui hasil, dana cair', `${c.no} Rp ${m.amount.toLocaleString('id-ID')}, komisi Rp ${m.komisi.toLocaleString('id-ID')}`); save(); return ok(m);
+  };
+  const refundByFreelancer = (uid, cid, mid) => {
+    const c = getC(cid); if (!c || c.freelancerId !== uid) return err('Hanya freelancer yang dapat mengembalikan dana.');
+    const m = getM(c, mid); if (!m || !['DITAHAN', 'DIKIRIM'].includes(m.status)) return err('Termin ini tidak dapat dikembalikan.');
+    post(`Pengembalian ${c.no}: ${m.title}`, [{ acc: 'HELD', dr: m.amount }, { acc: 'KAS', cr: m.amount }], c.id);
+    m.status = 'DIKEMBALIKAN'; m.refund = m.amount; settle(c);
+    audit(user(uid).name, 'Mengembalikan dana ke klien', `${c.no} Rp ${m.amount.toLocaleString('id-ID')}, tanpa potongan`); save(); return ok(m);
+  };
+  const cancelUnfunded = (uid, cid, mid) => {
+    const c = getC(cid); if (!c || (c.clientId !== uid && c.freelancerId !== uid)) return err('Anda bukan pihak kontrak ini.');
+    const m = getM(c, mid); if (!m || m.status !== 'BELUM_DANA') return err('Hanya termin yang belum didanai yang dapat dibatalkan.');
+    m.status = 'DIKEMBALIKAN'; m.refund = 0; settle(c);
+    audit(user(uid).name, 'Membatalkan termin', `${c.no}: ${m.title}`); save(); return ok(m);
+  };
+
+  /* ---------- sengketa ---------- */
+  const openDispute = (uid, cid, mid, reason) => {
+    const c = getC(cid); if (!c || (c.clientId !== uid && c.freelancerId !== uid)) return err('Anda bukan pihak kontrak ini.');
+    const m = getM(c, mid); if (!m || !['DITAHAN', 'DIKIRIM'].includes(m.status)) return err('Sengketa hanya untuk termin yang dananya sedang ditahan.');
+    if (clean(reason).length < 20) return err('Jelaskan masalahnya minimal 20 huruf.');
+    m.prevStatus = m.status; m.status = 'SENGKETA'; c.status = 'SENGKETA';
+    const d = { id: id('d'), contractId: cid, msId: mid, by: uid, reason: clean(reason), status: 'TERBUKA', at: now() };
+    S.disputes.unshift(d);
+    audit(user(uid).name, 'Membuka sengketa', `${c.no}: ${m.title}`); save(); return ok(d);
+  };
+  const resolveDispute = (admin, did, toFreelancer, note) => {
+    const d = S.disputes.find((x) => x.id === did); if (!d || d.status !== 'TERBUKA') return err('Sengketa ini sudah ditutup.');
+    const c = getC(d.contractId), m = getM(c, d.msId);
+    const a = num(toFreelancer);
+    if (a > m.amount) return err('Bagian freelancer melebihi nilai termin.');
+    if (clean(note).length < 20) return err('Tulis dasar keputusan minimal 20 huruf. Kedua pihak akan membacanya.');
+    const back = m.amount - a;
+    if (back > 0) { post(`Pengembalian sengketa ${c.no}: ${m.title}`, [{ acc: 'HELD', dr: back }, { acc: 'KAS', cr: back }], c.id); m.refund = back; }
+    if (a > 0) release(c, m, a, admin);
+    m.status = a > 0 ? 'CAIR' : 'DIKEMBALIKAN';
+    d.status = 'SELESAI'; d.resolution = { toFreelancer: a, toClient: back, note: clean(note), admin, at: now() };
+    c.status = 'AKTIF'; settle(c);
+    audit(admin, 'Memutus sengketa', `${c.no}: freelancer Rp ${a.toLocaleString('id-ID')}, klien Rp ${back.toLocaleString('id-ID')}`); save(); return ok(d);
+  };
+
+  /* ---------- pesan & ulasan ---------- */
+  const OFFSITE = /(\+?62|08)[\d\s-]{8,}|wa\.me|whats\s?app|@[a-z0-9.-]+\.[a-z]{2,}|telegram/i;
+  const send = (uid, cid, text) => {
+    const c = getC(cid); if (!c || (c.clientId !== uid && c.freelancerId !== uid)) return err('Anda bukan pihak kontrak ini.');
+    const t = clean(text); if (!t) return err('Tulis pesan terlebih dahulu.');
+    const flag = OFFSITE.test(t);
+    S.msgs.push({ id: id('s'), thread: cid, from: uid, text: t, at: now(), flag });
+    save(); return ok({ flag });
+  };
+  const review = (uid, cid, stars, text) => {
+    const c = getC(cid); if (!c || c.status !== 'SELESAI') return err('Ulasan dibuka setelah kontrak selesai.');
+    if (c.clientId !== uid && c.freelancerId !== uid) return err('Anda bukan pihak kontrak ini.');
+    if (S.reviews.some((r) => r.contractId === cid && r.from === uid)) return err('Anda sudah memberi ulasan.');
+    const s = num(stars); if (s < 1 || s > 5) return err('Pilih 1 sampai 5 bintang.');
+    if (clean(text).length < 10) return err('Tulis ulasan minimal 10 huruf.');
+    S.reviews.unshift({ id: id('r'), contractId: cid, from: uid, to: uid === c.clientId ? c.freelancerId : c.clientId, stars: s, text: clean(text), at: now() });
+    save(); return ok(true);
+  };
+  const ratingOf = (uid) => {
+    const r = S.reviews.filter((x) => x.to === uid);
+    return r.length ? { avg: r.reduce((a, x) => a + x.stars, 0) / r.length, n: r.length } : { avg: 0, n: 0 };
+  };
+
+  /* ---------- penghasilan & pencairan ---------- */
+  const balance = (fid) => {
+    const e = S.earnings.filter((x) => x.freelancerId === fid);
+    const out = S.payouts.filter((p) => p.freelancerId === fid && p.status !== 'DITOLAK').reduce((a, p) => a + p.amount, 0);
+    const total = e.reduce((a, x) => a + x.net, 0) - out;
+    const ready = e.filter((x) => x.availableAt <= now()).reduce((a, x) => a + x.net, 0) - out;
+    return { total, available: Math.max(0, ready), pending: total - Math.max(0, ready) };
+  };
+  const requestPayout = (uid, { amount, method, dest }) => {
+    const u = user(uid), a = num(amount), bal = balance(uid);
+    const member = isMember(u);
+    if (u.status !== 'AKTIF') return err('Akun Anda sedang ditangguhkan.');
+    if (u.kyc !== 'TERVERIFIKASI') return err('Verifikasi identitas dahulu sebelum mencairkan dana.');
+    if (a < pol().minPayout) return err(`Pencairan minimal Rp ${pol().minPayout.toLocaleString('id-ID')}.`);
+    if (a > bal.available) return err(`Saldo siap cair Rp ${bal.available.toLocaleString('id-ID')}.`);
+    if (method === 'DOMPET' && !member) return err('Dompet ARIBA hanya untuk anggota koperasi.');
+    if (method === 'BANK' && clean(dest).length < 6) return err('Isi bank dan nomor rekening tujuan.');
+    const fee = method === 'DOMPET' ? 0 : (member ? pol().payoutFeeMember : pol().payoutFeePublic);
+    if (a <= fee) return err('Nominal harus lebih besar dari biaya transfer.');
+    const p = { id: id('w'), freelancerId: uid, amount: a, fee, method, dest: method === 'DOMPET' ? `Dompet ARIBA ${u.member.no}` : clean(dest), status: 'DIAJUKAN', at: now() };
+    S.payouts.unshift(p);
+    post(`Pengajuan pencairan ${u.name}`, [{ acc: 'SALDO', dr: a }, { acc: 'PAYOUT', cr: a }], p.id);
+    audit(u.name, 'Mengajukan pencairan', `Rp ${a.toLocaleString('id-ID')} ke ${p.dest}`);
+    if (method === 'DOMPET') payPayout('Sistem', p.id); else save();
+    return ok(p);
+  };
+  const payPayout = (admin, pid) => {
+    const p = S.payouts.find((x) => x.id === pid); if (!p || p.status !== 'DIAJUKAN') return err('Pencairan ini sudah diproses.');
+    p.status = 'DIBAYAR'; p.paidAt = now(); p.paidBy = admin;
+    post(`Pembayaran pencairan ${user(p.freelancerId).name}`, [{ acc: 'PAYOUT', dr: p.amount }, { acc: 'KAS', cr: p.amount - p.fee }, { acc: 'FEE', cr: p.fee }], p.id);
+    audit(admin, 'Membayar pencairan', `${user(p.freelancerId).name} Rp ${(p.amount - p.fee).toLocaleString('id-ID')} ke ${p.dest}`); save(); return ok(p);
+  };
+  const rejectPayout = (admin, pid, reason) => {
+    const p = S.payouts.find((x) => x.id === pid); if (!p || p.status !== 'DIAJUKAN') return err('Pencairan ini sudah diproses.');
+    if (clean(reason).length < 10) return err('Tulis alasan penolakan, minimal 10 huruf.');
+    p.status = 'DITOLAK'; p.reason = clean(reason);
+    post(`Penolakan pencairan ${user(p.freelancerId).name}`, [{ acc: 'PAYOUT', dr: p.amount }, { acc: 'SALDO', cr: p.amount }], p.id);
+    audit(admin, 'Menolak pencairan', `${user(p.freelancerId).name}: ${reason}`); save(); return ok(p);
+  };
+
+  /* ---------- jasa siap pesan ---------- */
+  const postService = (uid, s) => {
+    const u = user(uid), title = clean(s.title), desc = clean(s.desc);
+    if (title.length < 10) return err('Judul jasa minimal 10 huruf.');
+    if (desc.length < 30) return err('Deskripsi minimal 30 huruf.');
+    const tiers = [['Dasar', s.p1, s.d1, s.s1], ['Standar', s.p2, s.d2, s.s2], ['Lengkap', s.p3, s.d3, s.s3]]
+      .map(([name, p, d, sc]) => ({ name, price: num(p), days: num(d), scope: clean(sc) })).filter((t) => t.price > 0);
+    if (!tiers.length) return err('Isi minimal satu paket dengan harga.');
+    if (tiers.some((t) => t.price < pol().minMilestone || !t.days || t.scope.length < 5)) return err('Setiap paket perlu harga, lama pengerjaan, dan isi paket yang jelas.');
+    const sc = screen(title + ' ' + desc);
+    if (sc.verdict === 'BLOCK') return err(`Jasa tidak dapat ditayangkan karena memuat "${sc.word}" (ARIBA-NK-003).`, 'ARIBA-NK-003');
+    const x = { id: id('v'), freelancerId: uid, title, desc, cat: s.cat || CATS[0], tiers, at: now(), flag: sc.verdict === 'REVIEW' ? sc.word : null,
+      status: (isMember(u) && sc.verdict === 'ALLOW') ? 'TAYANG' : 'TINJAUAN' };
+    S.services.unshift(x);
+    audit(u.name, 'Memasang jasa', `${title} (${x.status})`); save(); return ok(x);
+  };
+  const moderateService = (admin, sid, approve, reason) => {
+    const s = S.services.find((x) => x.id === sid); if (!s) return err('Jasa tidak ditemukan.');
+    if (!approve && clean(reason).length < 10) return err('Tulis alasan penolakan, minimal 10 huruf.');
+    s.status = approve ? 'TAYANG' : 'DITOLAK'; s.reason = clean(reason);
+    audit(admin, approve ? 'Menyetujui jasa' : 'Menolak jasa', s.title); save(); return ok(s);
+  };
+  const invite = (cid, jid, fid) => {
+    const j = S.jobs.find((x) => x.id === jid && x.clientId === cid);
+    if (!j || j.status !== 'TERBUKA') return err('Pilih lowongan Anda yang masih terbuka.');
+    if (S.invites.some((x) => x.jobId === jid && x.freelancerId === fid)) return err('Freelancer ini sudah Anda undang.');
+    S.invites.unshift({ id: id('i'), jobId: jid, freelancerId: fid, clientId: cid, at: now() }); save(); return ok(true);
+  };
+
+  /* ---------- admin ---------- */
+  const reviewKyc = (admin, uid, approve, reason) => {
+    const u = user(uid); if (!u) return err('Akun tidak ditemukan.');
+    if (!approve && clean(reason).length < 10) return err('Tulis alasan penolakan, minimal 10 huruf.');
+    u.kyc = approve ? 'TERVERIFIKASI' : 'DITOLAK'; u.kycReason = clean(reason);
+    audit(admin, approve ? 'Memverifikasi identitas' : 'Menolak identitas', u.name); save(); return ok(u);
+  };
+  const setUserStatus = (admin, uid, status, reason) => {
+    const u = user(uid); if (!u) return err('Akun tidak ditemukan.');
+    if (u.role === 'ADMIN') return err('Akun pengelola tidak dapat ditangguhkan dari sini.');
+    if (status === 'DITANGGUHKAN' && clean(reason).length < 10) return err('Tulis alasan penangguhan, minimal 10 huruf.');
+    u.status = status; u.statusReason = clean(reason);
+    audit(admin, status === 'AKTIF' ? 'Mengaktifkan akun' : 'Menangguhkan akun', u.name + (reason ? ': ' + reason : '')); save(); return ok(u);
+  };
+  const setPolicy = (admin, p) => {
+    const c = pol();
+    const n = { ...c, commissionPct: Number(p.commissionPct), quotaPublic: num(p.quotaPublic), quotaMember: num(p.quotaMember), holdDaysPublic: num(p.holdDaysPublic), holdDaysMember: num(p.holdDaysMember),
+      payoutFeePublic: num(p.payoutFeePublic), payoutFeeMember: num(p.payoutFeeMember), autoReleaseDays: num(p.autoReleaseDays), minMilestone: num(p.minMilestone), minPayout: num(p.minPayout),
+      blocked: clean(p.blocked).split(',').map((s) => s.trim().toLowerCase()).filter(Boolean), review: clean(p.review).split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) };
+    if (!(n.commissionPct >= 0 && n.commissionPct <= 50)) return err('Komisi harus antara 0 dan 50 persen.');
+    if (n.autoReleaseDays < 3) return err('Batas pencairan otomatis minimal 3 hari agar klien sempat meninjau.');
+    n.version = c.version + 1;
+    const changed = Object.keys(n).filter((k) => k !== 'version' && JSON.stringify(n[k]) !== JSON.stringify(c[k]));
+    if (!changed.length) return err('Tidak ada yang berubah.');
+    S.policy = n;
+    audit(admin, `Mengubah kebijakan ke versi ${n.version}`, changed.join(', ')); save(); return ok(n);
+  };
+  const reconcile = () => {
+    const bal = {}; Object.keys(ACC).forEach((k) => { bal[k] = 0; });
+    let dr = 0, cr = 0;
+    S.ledger.forEach((j) => j.lines.forEach((l) => {
+      bal[l.acc] += (l.dr || 0) - (l.cr || 0); dr += l.dr || 0; cr += l.cr || 0;
+    }));
+    const held = S.contracts.flatMap((c) => c.milestones).filter((m) => ['DITAHAN', 'DIKIRIM', 'SENGKETA'].includes(m.status)).reduce((a, m) => a + m.amount, 0);
+    const saldo = S.users.reduce((a, u) => a + balance(u.id).total, 0);
+    const payout = S.payouts.filter((p) => p.status === 'DIAJUKAN').reduce((a, p) => a + p.amount, 0);
+    const komisi = S.earnings.reduce((a, e) => a + e.komisi, 0);
+    return { bal, dr, cr, held, saldo, payout, komisi,
+      ok: dr === cr && -bal.HELD === held && -bal.SALDO === saldo && -bal.PAYOUT === payout && -bal.KOMISI === komisi };
+  };
+  const sweep = () => {
+    const lim = pol().autoReleaseDays * DAY;
+    S.contracts.forEach((c) => c.milestones.forEach((m) => {
+      if (m.status === 'DIKIRIM' && m.submittedAt + lim <= now()) {
+        release(c, m, m.amount, 'Sistem'); m.status = 'CAIR'; settle(c);
+        audit('Sistem', 'Pencairan otomatis', `${c.no}: klien tidak merespons ${pol().autoReleaseDays} hari`);
+      }
+    }));
+  };
+
+  /* ---------- data contoh ---------- */
+  function seed() {
+    const at = (d, h = 0) => Date.now() - d * DAY + h * 36e5;
+    const mk = (u) => { S.users.push({ status: 'AKTIF', kyc: 'BELUM', member: null, skills: [], rate: 0, bio: '', headline: '', cat: CATS[0], joinedAt: at(200), ...u }); return u.id; };
+    const M = (no, coop) => ({ no, coop, status: 'AKTIF' });
+    const k = 'TERVERIFIKASI';
+
+    mk({ id: 'admin', name: 'Pengelola Ariba Indonesia', kind: 'A', role: 'ADMIN', city: 'Jakarta', kyc: k });
+    /* freelancer anggota */
+    mk({ id: 'f1', name: 'Agus Setiawan', kind: 'F', city: 'Sleman', kyc: k, member: M('KAI-250012', 'Koperasi Ariba Indonesia'), cat: 'Akuntansi & Pajak', headline: 'Pembukuan koperasi dan UMKM, siap audit', rate: 150000, skills: ['Pembukuan', 'Laporan keuangan', 'Excel', 'SAK EP'], bio: 'Sebelas tahun menyusun pembukuan koperasi dan UMKM. Saya merapikan transaksi, menyusun laporan keuangan, dan menyiapkan bahan RAT.' });
+    mk({ id: 'f2', name: 'Siti Nurhaliza Rahma', kind: 'F', city: 'Bandung', kyc: k, member: M('KJK-240208', 'Koperasi Jasa Kopi Gayo Lestari'), cat: 'Desain & Kreatif', headline: 'Desain kemasan dan identitas merek UMKM pangan', rate: 175000, skills: ['Desain kemasan', 'Logo', 'Figma', 'Illustrator'], bio: 'Membantu produsen kopi, keripik, dan sambal naik kelas lewat kemasan yang siap cetak dan lolos syarat label.' });
+    mk({ id: 'f3', name: 'Bayu Pradipta', kind: 'F', city: 'Pamulang', kyc: k, member: M('KOP-230077', 'Koperasi Komunitas Ojol Pamulang'), cat: 'Web & Aplikasi', headline: 'Pengembang web dan integrasi pembayaran', rate: 250000, skills: ['Laravel', 'React', 'PHP', 'MySQL', 'API'], bio: 'Membangun toko daring, sistem internal, dan integrasi pembayaran untuk usaha kecil sampai menengah.' });
+    mk({ id: 'f4', name: 'Dian Puspitasari', kind: 'F', city: 'Semarang', kyc: k, member: M('KSL-250044', 'Koperasi Karyawan Sinar Logistik'), cat: 'Hukum & Perizinan', headline: 'Pendirian koperasi, NIB, dan perizinan usaha', rate: 200000, skills: ['Perizinan OSS', 'Akta koperasi', 'AD/ART', 'Sertifikat halal'], bio: 'Mendampingi pendirian koperasi dan pengurusan izin usaha, dari NIB sampai sertifikat halal.' });
+    mk({ id: 'f5', name: 'Wahyu Hidayat', kind: 'F', city: 'Banda Aceh', kyc: k, member: M('KNB-240119', 'Koperasi Nelayan Bahari'), cat: 'Video & Animasi', headline: 'Video profil usaha dan konten pendek', rate: 125000, skills: ['Videografi', 'CapCut', 'Premiere Pro', 'Drone'], bio: 'Merekam dan menyunting video profil, testimoni, dan konten pendek untuk usaha di Sumatra.' });
+    /* freelancer umum */
+    mk({ id: 'f6', name: 'Putri Maharani', kind: 'F', city: 'Surabaya', kyc: k, cat: 'Pemasaran Digital', headline: 'Pengelola media sosial dan iklan berbayar', rate: 160000, skills: ['Instagram', 'TikTok', 'Meta Ads', 'Copywriting'], bio: 'Merancang kalender konten dan iklan berbayar untuk brand lokal dengan laporan bulanan yang mudah dibaca.' });
+    mk({ id: 'f7', name: 'Reza Firmansyah', kind: 'F', city: 'Yogyakarta', kyc: k, cat: 'Penulisan & Terjemahan', headline: 'Penerjemah Inggris-Indonesia dan penulis artikel', rate: 110000, skills: ['Terjemahan', 'Artikel SEO', 'Penyuntingan'], bio: 'Menerjemahkan dokumen bisnis dan menulis artikel yang enak dibaca dan ramah mesin pencari.' });
+    mk({ id: 'f8', name: 'Larasati Wulandari', kind: 'F', city: 'Malang', kyc: 'MENUNGGU', kycAt: at(1), cat: 'Administrasi & Data', headline: 'Asisten virtual dan entri data rapi', rate: 75000, skills: ['Google Sheets', 'Entri data', 'Admin marketplace'], bio: 'Mengelola surat-menyurat, entri data, dan admin toko daring dengan laporan harian.' });
+    mk({ id: 'f9', name: 'Fajar Nugroho', kind: 'F', city: 'Depok', kyc: 'MENUNGGU', kycAt: at(0, -6), cat: 'Pelatihan & Mengajar', headline: 'Pelatih literasi digital untuk komunitas', rate: 180000, skills: ['Pelatihan', 'Canva', 'Public speaking'], bio: 'Melatih pengurus dan anggota komunitas memakai alat digital sehari-hari.' });
+    /* klien */
+    mk({ id: 'c1', name: 'CV Rasa Nusantara', kind: 'K', city: 'Jakarta', kyc: k, joinedAt: at(190) });
+    mk({ id: 'c2', name: 'Koperasi Tani Makmur Sejahtera', kind: 'K', city: 'Klaten', kyc: k, member: M('ORG-KTMS', 'Koperasi Tani Makmur Sejahtera'), joinedAt: at(180) });
+    mk({ id: 'c3', name: 'Yayasan Cahaya Ilmu', kind: 'K', city: 'Bogor', kyc: k, joinedAt: at(170) });
+    mk({ id: 'c4', name: 'Hana Kurniawati', kind: 'K', city: 'Tangerang', kyc: k, member: M('KPK-240033', 'Koperasi Pedagang Pasar Kranggan'), joinedAt: at(160) });
+    mk({ id: 'c5', name: 'PT Lintas Karya Mandiri', kind: 'K', city: 'Bekasi', joinedAt: at(9) });
+
+    const mustOk = (r) => { if (!r.ok) throw new Error('Seed: ' + r.error); return r.value; };
+    const J = (c, title, cat, budget, level, days, skills, desc, d) => { clock = at(d); return mustOk(postJob(c, { title, cat, budget, level, days, skills, desc })); };
+    const openJob = (...a) => { const j = J(...a); if (j.status === 'TINJAUAN') mustOk(moderateJob('Pengelola Ariba Indonesia', j.id, true, '')); return j; };
+    const P = (f, j, price, days, cover, d) => { clock = at(d); return mustOk(propose(f, j.id, { cover, price, days })); };
+
+    /* layanan siap pesan */
+    const V = (f, title, cat, desc, tiers, d) => {
+      clock = at(d);
+      const s = { title, cat, desc };
+      tiers.forEach((t, i) => { s['p' + (i + 1)] = t[0]; s['d' + (i + 1)] = t[1]; s['s' + (i + 1)] = t[2]; });
+      const x = mustOk(postService(f, s));
+      if (x.status === 'TINJAUAN') mustOk(moderateService('Pengelola Ariba Indonesia', x.id, true, ''));
+      return x;
+    };
+    const s1 = V('f1', 'Rapikan pembukuan koperasi satu tahun buku', 'Akuntansi & Pajak', 'Saya merapikan transaksi satu tahun buku koperasi Anda dan menyusun neraca, laporan SHU, serta catatan untuk bahan RAT.', [[1500000, 7, 'Sampai 500 transaksi dan neraca'], [3000000, 14, 'Sampai 1.500 transaksi, neraca, laporan SHU'], [5500000, 21, 'Sampai 3.000 transaksi dan bahan RAT lengkap']], 150);
+    const s2 = V('f2', 'Desain kemasan produk pangan siap cetak', 'Desain & Kreatif', 'Kemasan standing pouch atau kotak, lengkap dengan area label wajib dan berkas siap cetak.', [[750000, 5, '1 varian, 2 kali revisi'], [1500000, 7, '3 varian, 3 kali revisi'], [2750000, 10, '6 varian dan panduan merek singkat']], 140);
+    const s3 = V('f3', 'Toko daring dengan pembayaran QRIS dan VA', 'Web & Aplikasi', 'Situs toko sederhana yang terhubung ke payment gateway, cocok untuk UMKM yang baru berjualan daring.', [[3500000, 14, '10 produk, QRIS'], [6500000, 21, '50 produk, QRIS dan VA'], [12000000, 35, 'Tak terbatas, laporan penjualan']], 130);
+    const s4 = V('f4', 'Pendampingan pendirian koperasi sampai berbadan hukum', 'Hukum & Perizinan', 'Penyusunan AD/ART, rapat pendirian, koordinasi notaris, dan pengesahan badan hukum koperasi.', [[2500000, 30, 'Konsultasi dan draf AD/ART'], [6000000, 60, 'Pendampingan sampai pengesahan']], 120);
+    const s5 = V('f6', 'Kelola Instagram brand lokal selama sebulan', 'Pemasaran Digital', 'Kalender konten, 12 unggahan, dan laporan performa akhir bulan.', [[1800000, 30, '12 unggahan'], [3200000, 30, '20 unggahan dan 4 video pendek']], 110);
+    const s6 = V('f7', 'Terjemahan dokumen bisnis Inggris-Indonesia', 'Penulisan & Terjemahan', 'Terjemahan kontrak, proposal, dan laporan dengan istilah yang konsisten.', [[300000, 3, 'Sampai 10 halaman'], [800000, 7, 'Sampai 30 halaman']], 100);
+    const s7 = V('f5', 'Video profil usaha 2 menit', 'Video & Animasi', 'Pengambilan gambar satu hari dan penyuntingan video profil untuk situs dan media sosial.', [[2000000, 10, '1 video 2 menit'], [3500000, 14, '1 video dan 3 potongan pendek']], 90);
+
+    /* riwayat selesai: alur penuh lewat mesin yang sama */
+    const history = [
+      ['f1', 'c2', 'Pembukuan tahun buku 2025 Koperasi Tani', 'Akuntansi & Pajak', 3200000, 178, 5, 'Rapi dan tepat waktu, laporan siap dibawa ke RAT.'],
+      ['f2', 'c1', 'Kemasan sambal tiga varian', 'Desain & Kreatif', 1500000, 165, 5, 'Hasil cetak bagus, revisi cepat.'],
+      ['f6', 'c1', 'Kampanye Instagram Ramadan', 'Pemasaran Digital', 2400000, 150, 4, 'Laporannya jelas dan penjualan naik.'],
+      ['f3', 'c3', 'Situs pendaftaran santri baru', 'Web & Aplikasi', 6500000, 138, 5, 'Bekerja rapi, serah terima lengkap.'],
+      ['f7', 'c3', 'Terjemahan proposal hibah', 'Penulisan & Terjemahan', 800000, 124, 5, 'Bahasanya luwes dan istilahnya tepat.'],
+      ['f4', 'c4', 'Pengurusan NIB dan sertifikat halal', 'Hukum & Perizinan', 2000000, 112, 5, 'Sangat membantu sampai izin terbit.'],
+      ['f5', 'c2', 'Video profil panen padi organik', 'Video & Animasi', 2800000, 100, 5, 'Gambarnya bagus dan anggota senang.'],
+      ['f1', 'c4', 'Pembukuan toko kelontong tiga bulan', 'Akuntansi & Pajak', 1200000, 88, 5, 'Sekarang saya paham arus kas toko.'],
+      ['f2', 'c4', 'Logo dan label toko', 'Desain & Kreatif', 900000, 75, 4, 'Sesuai permintaan.'],
+      ['f3', 'c1', 'Integrasi QRIS ke toko daring', 'Web & Aplikasi', 4800000, 62, 5, 'Stabil dan didampingi setelah rilis.'],
+      ['f6', 'c5', 'Audit akun Instagram', 'Pemasaran Digital', 950000, 50, 4, 'Masukannya praktis.'],
+      ['f4', 'c2', 'Perubahan AD/ART koperasi', 'Hukum & Perizinan', 1750000, 41, 5, 'Proses cepat dan mudah dipahami pengurus.'],
+      ['f7', 'c1', 'Artikel blog 10 judul', 'Penulisan & Terjemahan', 1000000, 28, 5, 'Enak dibaca.'],
+      ['f1', 'c3', 'Laporan keuangan yayasan', 'Akuntansi & Pajak', 2600000, 19, 5, 'Teliti, pertanyaan auditor terjawab.'],
+      ['f3', 'c2', 'Dasbor stok gabah', 'Web & Aplikasi', 5200000, 11, 5, 'Pengurus langsung bisa memakainya.'],
+    ];
+    history.forEach(([f, c, title, cat, amount, d, stars, text]) => {
+      const j = openJob(c, title, cat, amount, 'Menengah', 14, '', `${title}. Rincian lengkap dibahas setelah proposal diterima.`, d);
+      const p = P(f, j, amount, 10, 'Saya sudah beberapa kali mengerjakan pekerjaan serupa dan siap memulai segera.', d - 0.2);
+      clock = at(d - 0.5);
+      const half = Math.floor(amount / 2 / 1000) * 1000;
+      const ct = mustOk(acceptProposal(c, p.id, [{ title: 'Tahap pertama', amount: half }, { title: 'Tahap akhir dan serah terima', amount: amount - half }]));
+      ct.milestones.forEach((m, i) => {
+        clock = at(d - 1 - i * 3); mustOk(fund(c, ct.id, m.id, i ? 'VA BCA' : 'QRIS'));
+        clock = at(d - 3 - i * 3); mustOk(submitWork(f, ct.id, m.id, 'Hasil kerja terlampir untuk ditinjau.'));
+        clock = at(d - 4 - i * 3); mustOk(approve(c, ct.id, m.id));
+      });
+      clock = at(d - 8);
+      mustOk(review(c, ct.id, stars, text));
+      mustOk(review(f, ct.id, 5, 'Klien jelas memberi arahan dan cepat membayar.'));
+    });
+
+    /* kontrak berjalan */
+    const a1 = openJob('c1', 'Laporan keuangan semester dan rekonsiliasi bank', 'Akuntansi & Pajak', 4000000, 'Berpengalaman', 21, 'Pembukuan, Excel', 'Kami butuh rekonsiliasi bank enam bulan dan laporan keuangan semester untuk bahan rapat pemilik.', 16);
+    const ap = P('f1', a1, 4000000, 18, 'Saya biasa menyusun laporan semester untuk usaha kuliner, termasuk rekonsiliasi multi rekening.', 15);
+    clock = at(14);
+    const c1 = mustOk(acceptProposal('c1', ap.id, [{ title: 'Rekonsiliasi bank Januari sampai Juni', amount: 1500000 }, { title: 'Laporan keuangan semester', amount: 2500000 }]));
+    clock = at(13); mustOk(fund('c1', c1.id, c1.milestones[0].id, 'VA BCA'));
+    clock = at(8); mustOk(submitWork('f1', c1.id, c1.milestones[0].id, 'Rekonsiliasi enam bulan selesai, berkas Excel terlampir.'));
+    clock = at(7); mustOk(approve('c1', c1.id, c1.milestones[0].id));
+    clock = at(6); mustOk(fund('c1', c1.id, c1.milestones[1].id, 'QRIS'));
+    clock = at(6); mustOk(send('c1', c1.id, 'Terima kasih Pak Agus. Termin kedua sudah kami danai.'));
+    clock = at(5); mustOk(send('f1', c1.id, 'Baik Bu, saya kirim draf laporan akhir pekan ini.'));
+
+    const a2 = openJob('c3', 'Kalender konten tiga bulan untuk yayasan pendidikan', 'Pemasaran Digital', 1800000, 'Menengah', 10, 'Instagram, Copywriting', 'Susun kalender konten tiga bulan dengan tema pendaftaran santri dan kegiatan sekolah.', 12);
+    const bp = P('f6', a2, 1800000, 7, 'Saya sudah mengelola konten dua sekolah swasta dan akan menyiapkan template yang mudah dilanjutkan tim Anda.', 11);
+    clock = at(10);
+    const c2 = mustOk(acceptProposal('c3', bp.id, [{ title: 'Kalender konten dan template', amount: 1800000 }]));
+    clock = at(9); mustOk(fund('c3', c2.id, c2.milestones[0].id, 'VA BNI'));
+    clock = at(2); mustOk(submitWork('f6', c2.id, c2.milestones[0].id, 'Kalender konten 90 hari dan 6 template sudah saya unggah.'));
+
+    const a3 = openJob('c4', 'Desain ulang papan nama dan menu kios pasar', 'Desain & Kreatif', 650000, 'Pemula', 5, 'Desain cetak', 'Papan nama 2 x 1 meter dan menu A3 untuk kios makanan di pasar, siap cetak.', 4);
+    const cp = P('f2', a3, 650000, 4, 'Saya akan membuat dua alternatif, lalu menyesuaikan dengan warna kios Anda.', 3);
+    clock = at(1);
+    mustOk(acceptProposal('c4', cp.id, [{ title: 'Papan nama dan menu siap cetak', amount: 650000 }]));
+
+    const a4 = openJob('c1', 'Perbaikan bug aplikasi kasir restoran', 'Web & Aplikasi', 3000000, 'Berpengalaman', 10, 'PHP, MySQL', 'Aplikasi kasir sering gagal mencetak struk dan stok tidak berkurang saat transaksi ramai.', 20);
+    const dp = P('f3', a4, 3000000, 8, 'Saya akan menelusuri log, memperbaiki antrean cetak, dan menambahkan uji beban sederhana.', 19);
+    clock = at(18);
+    const c4 = mustOk(acceptProposal('c1', dp.id, [{ title: 'Perbaikan cetak struk', amount: 1200000 }, { title: 'Perbaikan stok saat transaksi ramai', amount: 1800000 }]));
+    clock = at(17); mustOk(fund('c1', c4.id, c4.milestones[0].id, 'QRIS'));
+    clock = at(13); mustOk(submitWork('f3', c4.id, c4.milestones[0].id, 'Antrean cetak sudah diperbaiki dan diuji di dua printer.'));
+    clock = at(12); mustOk(approve('c1', c4.id, c4.milestones[0].id));
+    clock = at(11); mustOk(fund('c1', c4.id, c4.milestones[1].id, 'QRIS'));
+    clock = at(4); mustOk(submitWork('f3', c4.id, c4.milestones[1].id, 'Penguncian stok sudah diterapkan, simulasi 50 transaksi berjalan.'));
+    clock = at(2); mustOk(openDispute('c1', c4.id, c4.milestones[1].id, 'Saat makan siang stok masih selisih di dua menu, jadi hasilnya belum sesuai lingkup kontrak.'));
+    clock = at(1); mustOk(send('f3', c4.id, 'Selisih itu berasal dari menu paket yang tidak ada di lingkup awal. Silakan WA saya di 0812 3456 7890.'));
+
+    clock = at(3);
+    const c5 = mustOk(orderService('c2', s2.id, 1));
+    clock = at(3); mustOk(fund('c2', c5.id, c5.milestones[0].id, 'QRIS'));
+
+    /* lowongan terbuka */
+    const j1 = openJob('c2', 'Aplikasi pencatatan hasil panen untuk anggota koperasi', 'Web & Aplikasi', 12000000, 'Berpengalaman', 45, 'React, PHP, MySQL', 'Kami ingin aplikasi web sederhana untuk mencatat setoran gabah per anggota, harga harian, dan rekap bulanan. Harus nyaman dibuka dari ponsel.', 2);
+    const j2 = openJob('c1', 'Foto produk dan katalog 40 menu', 'Desain & Kreatif', 3500000, 'Menengah', 14, 'Foto produk, Katalog', 'Foto 40 menu di dapur kami di Jakarta Selatan, lalu susun katalog digital dan cetak A5.', 1);
+    const j3 = openJob('c3', 'Pelatihan Excel untuk staf administrasi sekolah', 'Pelatihan & Mengajar', 2000000, 'Menengah', 7, 'Excel, Pelatihan', 'Pelatihan dua hari untuk 15 staf administrasi: rumus dasar, tabel pivot, dan rekap keuangan siswa.', 3);
+    const j4 = openJob('c4', 'Admin toko daring paruh waktu selama sebulan', 'Administrasi & Data', 1500000, 'Pemula', 30, 'Admin marketplace, Chat', 'Membalas pesan pembeli, memperbarui stok, dan menyiapkan resi harian di dua toko daring.', 1);
+    openJob('c2', 'Penyusunan modul pelatihan pengurus koperasi', 'Pelatihan & Mengajar', 4500000, 'Berpengalaman', 21, 'Perkoperasian, Modul', 'Modul 40 halaman tentang tata kelola koperasi, peran pengawas, dan persiapan RAT, dengan bahasa sederhana.', 4);
+    openJob('c1', 'Terjemahan menu dan situs ke bahasa Inggris', 'Penulisan & Terjemahan', 900000, 'Pemula', 5, 'Terjemahan', 'Menerjemahkan 30 halaman situs dan menu ke bahasa Inggris dengan istilah kuliner Indonesia yang tepat.', 5);
+    openJob('c3', 'Video dokumentasi wisuda santri', 'Video & Animasi', 2500000, 'Menengah', 10, 'Videografi, Editing', 'Merekam acara satu hari di Bogor dan menyunting video 5 menit serta tiga potongan pendek.', 2);
+    openJob('c4', 'Pengurusan izin edar PIRT dan label gizi', 'Hukum & Perizinan', 1800000, 'Menengah', 21, 'PIRT, Label', 'Mendampingi pengurusan PIRT untuk keripik singkong rumahan beserta label yang sesuai.', 6);
+    P('f3', j1, 11500000, 40, 'Saya pernah membuat dasbor stok gabah untuk koperasi tani dan bisa memakai struktur serupa agar lebih cepat selesai.', 1);
+    P('f7', j2, 3000000, 12, 'Saya bekerja sama dengan fotografer makanan di Jakarta dan bisa menyusun katalog dwibahasa.', 0.5);
+    P('f2', j2, 3400000, 14, 'Saya berpengalaman menata katalog pangan dan bisa mengarahkan foto agar selaras dengan kemasan Anda.', 0.4);
+    P('f1', j3, 1800000, 5, 'Saya sering melatih staf koperasi memakai Excel untuk rekap keuangan, materi sudah siap disesuaikan.', 2);
+    clock = at(1); mustOk(invite('c2', j1.id, 'f4'));
+
+    /* antrean moderasi */
+    J('c5', 'Pembuatan company profile perusahaan logistik', 'Desain & Kreatif', 2500000, 'Menengah', 14, 'Desain, Penulisan', 'Kami butuh company profile 16 halaman dalam dua bahasa untuk ditawarkan ke calon pelanggan.', 0.6);
+    J('c5', 'Bantu joki skripsi manajemen pemasaran', 'Penulisan & Terjemahan', 1500000, 'Pemula', 30, 'Penulisan', 'Mencari penulis yang mengerjakan skripsi lengkap sampai sidang atas nama mahasiswa kami.', 0.2);
+    clock = at(0.3);
+    const sq = mustOk(postService('f8', { title: 'Asisten virtual harian untuk toko daring', desc: 'Membalas pesan, memperbarui stok, dan menyiapkan laporan harian selama jam kerja.', cat: 'Administrasi & Data', p1: 600000, d1: 7, s1: 'Satu toko selama seminggu' }));
+    void sq;
+
+    /* pencairan */
+    clock = at(30); mustOk(requestPayout('f1', { amount: 1500000, method: 'DOMPET' }));
+    clock = at(6); mustOk(requestPayout('f6', { amount: 1500000, method: 'BANK', dest: 'BCA 8810 2233 44 a.n. Putri Maharani' }));
+    clock = at(40); mustOk(requestPayout('f3', { amount: 4000000, method: 'BANK', dest: 'BRI 0021 01 009988 50 a.n. Bayu Pradipta' }));
+    clock = at(39); mustOk(payPayout('Pengelola Ariba Indonesia', S.payouts[0].id));
+    clock = at(0.1); mustOk(requestPayout('f7', { amount: 750000, method: 'BANK', dest: 'Mandiri 137 00 1122334 5 a.n. Reza Firmansyah' }));
+
+    S.audit = S.audit.filter((a) => !a.action.startsWith('Mendanai') && !a.action.startsWith('Mengirim hasil')).slice(0, 60);
+    clock = null; S.session = null;
+  }
+
+  return {
+    load, reset, save, now, DAY, ACC, CATS, get S() { return S; }, pol, user, me, isMember, login, logout, register, saveProfile, requestKyc,
+    postJob, moderateJob, closeJob, quotaOf, quotaUsed, propose, withdrawProposal, rejectProposal, acceptProposal, orderService, split, commissionOf, screen,
+    getC, fund, submitWork, askRevision, approve, refundByFreelancer, cancelUnfunded, openDispute, resolveDispute, send, review, ratingOf, balance, requestPayout, payPayout, rejectPayout,
+    postService, moderateService, invite, reviewKyc, setUserStatus, setPolicy, reconcile, sweep,
+    _setClock(t) { clock = t; },
+  };
+})();
+/* ==========================================================================
+   Narakarya: tampilan portal publik dan ruang kerja.
+   ========================================================================== */
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const rp = (n) => 'Rp ' + Math.round(n || 0).toLocaleString('id-ID');
+const tgl = (t) => new Date(t).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+const ago = (t) => { const d = Math.floor((NK.now() - t) / NK.DAY); if (d < 1) return 'hari ini'; if (d === 1) return 'kemarin'; if (d < 30) return d + ' hari lalu'; return tgl(t); };
+const I = {
+  search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>', check: '<path d="M20 6 9 17l-5-5"/>', shield: '<path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/><path d="m9 12 2 2 4-4"/>',
+  menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', x: '<path d="M6 6l12 12M18 6 6 18"/>', plus: '<path d="M12 5v14M5 12h14"/>', out: '<path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/>',
+  home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/>', file: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/>', flag: '<path d="M5 21V4h13l-3 4 3 4H5"/>', users: '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M16 5a3.5 3.5 0 0 1 0 6.5M21 20c0-3-1.5-5-4-5.6"/>',
+  wallet: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/>', sliders: '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>', list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
+  alert: '<path d="M12 3 2 21h20z"/><path d="M12 10v5M12 18h.01"/>', scale: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7c1.5 1.5 4.5 1.5 6 0zM19 7l-3 7c1.5 1.5 4.5 1.5 6 0z"/>', brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"/>',
+};
+const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
+const avatarColors = ['#22394C', '#7E293C', '#2F7A69', '#9A6410', '#4A6175', '#5E1E2D'];
+const av = (u, c = '') => { const ini = u.name.replace(/^(CV|PT|Koperasi|Yayasan)\s/, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase(); const k = [...u.id].reduce((a, x) => a + x.charCodeAt(0), 0) % avatarColors.length; return `<span class="av ${c}" style="background:${avatarColors[k]}" aria-hidden="true">${esc(ini)}</span>`; };
+const mBadge = (u) => (NK.isMember(u) ? `<span class="badge-m" title="${esc(u.member.coop)}">${ic('shield')} Anggota koperasi</span>` : '');
+const stars = (uid) => { const r = NK.ratingOf(uid); return r.n ? `<span class="star num">★ ${r.avg.toFixed(1).replace('.', ',')}</span> <span class="muted small">(${r.n})</span>` : '<span class="muted small">Belum ada ulasan</span>'; };
+const empty = (t, sub = '') => `<div class="card" style="text-align:center;padding:28px"><strong>${esc(t)}</strong>${sub ? `<div class="muted small">${sub}</div>` : ''}</div>`;
+const STAT = {
+  BELUM_DANA: ['Menunggu dana klien', ''], DITAHAN: ['Dana ditahan, sedang dikerjakan', 'sea'], DIKIRIM: ['Hasil dikirim, menunggu klien', 'warn'], SENGKETA: ['Sengketa', 'bad'], CAIR: ['Selesai, dana cair', 'ok'], DIKEMBALIKAN: ['Dikembalikan', 'wine'],
+  AKTIF: ['Aktif', 'sea'], SELESAI: ['Selesai', 'ok'], DIBATALKAN: ['Dibatalkan', 'wine'], TERBUKA: ['Terbuka', 'sea'], TINJAUAN: ['Ditinjau pengelola', 'warn'], TERISI: ['Terisi', ''], DITUTUP: ['Ditutup', ''], DITOLAK: ['Ditolak', 'bad'], TAYANG: ['Tayang', 'sea'],
+  TERKIRIM: ['Terkirim', ''], DITERIMA: ['Diterima', 'ok'], DITARIK: ['Ditarik', ''], DIAJUKAN: ['Diajukan', 'warn'], DIBAYAR: ['Dibayar', 'ok'],
+};
+const pill = (s) => { const [t, c] = STAT[s] || [s, '']; return `<span class="pill ${c}">${esc(t)}</span>`; };
+
+let filt = { q: '', cat: '', member: false, sort: 'baru', budget: 0 };
+let currentRoute = '';
+const go = (h) => { if (location.hash === '#' + h) render(); else location.hash = h; };
+const toast = (t, bad) => { const el = document.createElement('div'); el.className = 'toast' + (bad ? ' bad' : ''); el.setAttribute('role', 'status'); el.textContent = t; document.body.append(el); setTimeout(() => el.remove(), bad ? 5200 : 3000); };
+const done = (r, msg, after) => { if (!r.ok) { toast(r.error, true); return false; } if (msg) toast(msg); closeModal(); if (after) go(after); else render(); return true; };
+const modal = (html) => { closeModal(); const o = document.createElement('div'); o.className = 'ov'; o.id = 'ov'; o.innerHTML = `<div class="modal" role="dialog" aria-modal="true">${html}</div>`; document.body.append(o); o.addEventListener('click', (e) => { if (e.target === o) closeModal(); }); const f = $('input,textarea,select,button', o); if (f) f.focus(); };
+function closeModal() { const o = $('#ov'); if (o) o.remove(); }
+const need = (kind) => { const u = NK.me(); if (!u) { toast('Masuk dulu untuk melanjutkan.'); go('masuk'); return null; } if (kind && u.kind !== kind) { toast(kind === 'F' ? 'Fitur ini untuk akun freelancer.' : 'Fitur ini untuk akun klien.', true); return null; } return u; };
+
+/* ---------- kerangka ---------- */
+function header(route) {
+  const u = NK.me();
+  const L = [['talenta', 'Cari Talenta'], ['lowongan', 'Cari Kerja'], ['jasa', 'Jasa Siap Pesan'], ['biaya', 'Biaya & Anggota']];
+  return `<div class="strip"><div class="wrap"><span><strong>Prototipe.</strong> Data contoh tersimpan di peramban Anda. Tidak ada uang sungguhan.</span><button class="linkbtn" data-a="reset">Mulai ulang data contoh</button></div></div>
+  <header class="top"><div class="wrap">
+    <a class="brand" href="#beranda" aria-label="Narakarya, beranda"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="5" fill="#7E293C"/><rect x="8" y="11" width="16" height="3" rx="1" fill="#F7F5F0"/><rect x="8" y="18" width="16" height="3" rx="1" fill="#F7F5F0"/></svg><span><b>Narakarya</b><i>OLEH ARIBA INDONESIA</i></span></a>
+    <button class="burger" data-a="burger" aria-label="Buka menu">${ic('menu')}</button>
+    <nav class="nav" id="nav" aria-label="Navigasi utama">${L.map(([h, t]) => `<a href="#${h}" class="${route === h ? 'on' : ''}">${t}</a>`).join('')}${u ? '' : '<a class="only-m" href="#daftar">Daftar gratis</a>'}</nav>
+    <div class="acts">${u
+      ? `${u.role === 'ADMIN' ? '<a class="btn ghost s" href="#admin">Dashboard admin</a>' : '<a class="btn ghost s" href="#ruang">Ruang kerja</a>'}<button class="btn ghost s" data-a="logout" aria-label="Keluar">${ic('out')}</button>`
+      : '<a class="btn ghost s" href="#masuk">Masuk</a><a class="btn pri s" href="#daftar">Daftar gratis</a>'}</div>
+  </div></header>`;
+}
+const footer = () => `<footer class="foot"><div class="wrap"><div><strong style="color:#fff">Narakarya</strong><br>Tempat kerja lepas tanpa bunga dan tanpa denda.<br>Dikelola Ariba Indonesia.</div>
+<div class="stack-s"><a href="#biaya">Biaya dan keanggotaan</a><a href="#aturan">Aturan Narakarya</a><a href="https://ariba.id/">ariba.id</a></div>
+<div class="stack-s"><a href="#admin">Dashboard pengelola</a><a href="https://ariba.id/demo/">ARIBA Cooperative OS</a></div></div></footer>`;
+
+const jobCard = (j) => { const c = NK.user(j.clientId); const n = NK.S.proposals.filter((p) => p.jobId === j.id).length; return `<a class="card stack-s" href="#lowongan-${j.id}">
+  <div class="row between"><span class="tag">${esc(j.cat)}</span><span class="muted xs">${ago(j.at)}</span></div>
+  <h3>${esc(j.title)}</h3><p class="muted small clamp2">${esc(j.desc)}</p>
+  <div class="row between"><span class="price">${rp(j.budget)}</span><span class="muted xs">${j.days} hari · ${esc(j.level)} · ${n} proposal</span></div>
+  <div class="row small"><span class="muted">${esc(c.name)}</span>${mBadge(c)}</div></a>`; };
+const talentCard = (u) => { const done = NK.S.contracts.filter((c) => c.freelancerId === u.id && c.status === 'SELESAI').length; return `<a class="card stack-s" href="#talenta-${u.id}">
+  <div class="row" style="flex-wrap:nowrap">${av(u)}<div class="grow"><strong style="color:var(--navy)">${esc(u.name)}</strong><div class="muted xs">${esc(u.city)}</div></div></div>
+  <div class="small clamp2">${esc(u.headline)}</div>
+  <div class="row between small"><span>${stars(u.id)}</span><span class="muted">${done} kontrak</span></div>
+  <div class="row between small"><span class="price">${rp(u.rate)}<span class="muted" style="font-weight:400">/jam acuan</span></span>${mBadge(u)}</div></a>`; };
+const serviceCard = (s) => { const f = NK.user(s.freelancerId); return `<a class="card stack-s" href="#jasa-${s.id}"><span class="tag" style="align-self:flex-start">${esc(s.cat)}</span><h3>${esc(s.title)}</h3>
+  <div class="row small">${av(f, 'sm')}<span class="muted">${esc(f.name)}</span></div>
+  <div class="row between small"><span>${stars(f.id)}</span><span class="price">mulai ${rp(Math.min(...s.tiers.map((t) => t.price)))}</span></div>${mBadge(f)}</a>`; };
+const talents = () => NK.S.users.filter((u) => u.kind === 'F' && u.status === 'AKTIF' && u.headline);
+const sortTalents = (a) => a.slice().sort((x, y) => (NK.ratingOf(y.id).avg - NK.ratingOf(x.id).avg) || (NK.isMember(y) - NK.isMember(x)) || (NK.ratingOf(y.id).n - NK.ratingOf(x.id).n));
+const openJobs = () => NK.S.jobs.filter((j) => j.status === 'TERBUKA');
+const liveServices = () => NK.S.services.filter((s) => s.status === 'TAYANG');
+
+/* ---------- beranda ---------- */
+function vHome() {
+  const P = NK.pol(), x = NK.split(5000000), S = NK.S;
+  const counts = Object.fromEntries(NK.CATS.map((c) => [c, S.jobs.filter((j) => j.cat === c && j.status === 'TERBUKA').length + talents().filter((u) => u.cat === c).length]));
+  return `<section class="hero"><div class="wrap"><div>
+    <h1>Pekerjaan lepas yang dibayar adil, tanpa bunga dan tanpa denda.</h1>
+    <p class="lead">Temukan freelancer tepercaya atau pekerjaan berikutnya. Dana klien ditahan aman sampai hasil disetujui, dan setiap potongan tertulis sejak awal.</p>
+    <form class="searchbox" data-f="hsearch"><label class="sr" hidden for="hs-t">Cari</label><select id="hs-t" name="t" aria-label="Yang dicari"><option value="talenta">Talenta</option><option value="lowongan">Lowongan</option><option value="jasa">Jasa</option></select><input id="hs-q" name="q" placeholder="Contoh: pembukuan koperasi, desain kemasan" aria-label="Kata kunci"><button class="btn pri">${ic('search')} Cari</button></form>
+    <div class="chips"><span>Sering dicari:</span><a href="#talenta" data-cat="Akuntansi & Pajak">Pembukuan</a><a href="#talenta" data-cat="Desain & Kreatif">Desain kemasan</a><a href="#talenta" data-cat="Web & Aplikasi">Toko daring</a><a href="#talenta" data-cat="Hukum & Perizinan">Perizinan</a></div>
+  </div>
+  <aside class="nota" aria-label="Contoh rincian kontrak">
+    <div class="no">CONTOH NOTA KONTRAK</div><h3>Desain identitas merek</h3>
+    <div class="lines"><div><span>Harga disepakati</span><span>${rp(x.amount)}</span></div><div><span>Biaya untuk klien</span><span>Rp&nbsp;0</span></div><div><span>Komisi Narakarya ${P.commissionPct}%</span><span>−${rp(x.komisi)}</span></div><div><span>Bunga dan denda</span><span>Tidak ada</span></div><div class="t"><span>Freelancer terima</span><span>${rp(x.net)}</span></div></div>
+  </aside></div></section>
+  <section class="band"><div class="wrap"><div class="sect-h"><h2>Telusuri kategori</h2></div><div class="catlist">${NK.CATS.map((c) => `<a href="#talenta" data-cat="${esc(c)}">${esc(c)} <span>${counts[c]}</span></a>`).join('')}</div></div></section>
+  <section class="band alt"><div class="wrap"><div class="sect-h"><h2>Lowongan terbaru</h2><a href="#lowongan">Lihat semua lowongan</a></div><div class="grid2">${openJobs().slice(0, 4).map(jobCard).join('')}</div></div></section>
+  <section class="band"><div class="wrap"><div class="sect-h"><h2>Talenta dengan ulasan terbaik</h2><a href="#talenta">Lihat semua talenta</a></div><div class="grid4">${sortTalents(talents()).slice(0, 4).map(talentCard).join('')}</div></div></section>
+  <section class="band alt"><div class="wrap"><div class="sect-h"><h2>Cara kerjanya</h2></div><div class="steps">
+    <div><h3>Pasang atau pesan</h3><p class="muted">Klien memasang lowongan atau memesan jasa siap pakai. Lingkup dan harga ditulis jelas.</p></div>
+    <div><h3>Sepakati termin</h3><p class="muted">Pilih proposal, lalu bagi pekerjaan menjadi termin dengan hasil dan nominal yang pasti.</p></div>
+    <div><h3>Dana ditahan</h3><p class="muted">Klien mendanai termin. Freelancer mulai bekerja karena tahu dananya sudah tersedia.</p></div>
+    <div><h3>Setujui, dana cair</h3><p class="muted">Hasil disetujui, dana cair. Bila klien diam ${P.autoReleaseDays} hari, dana cair otomatis.</p></div></div></div></section>
+  <section class="band dark"><div class="wrap"><div class="sect-h"><h2>Lebih untung bagi anggota koperasi</h2><a href="#biaya" style="color:#D5DDE4">Lihat perbandingan</a></div><div class="grid4">
+    ${[['Lencana terverifikasi', 'Identitas otomatis terverifikasi lewat akun Ariba, dan klien bisa menyaring anggota koperasi.'], [`${P.quotaMember} lamaran per bulan`, `Tiga kali lipat kuota akun umum yang ${P.quotaPublic} lamaran.`], ['Cair langsung ke Dompet', `Gratis dan tanpa masa tunggu. Akun umum menunggu ${P.holdDaysPublic} hari.`], ['Lowongan langsung tayang', 'Lowongan dan jasa anggota tidak perlu antre tinjauan pengelola.']].map(([a, b]) => `<div><h3 style="color:#fff;font-size:18px">${a}</h3><p style="color:#D5DDE4;font-size:14px;margin-top:4px">${b}</p></div>`).join('')}
+  </div></div></section>`;
+}
+
+/* ---------- daftar publik ---------- */
+const filterBar = (extra = '') => `<form class="card fgrid x4" data-f="filter" style="align-items:end"><label class="f span2">Kata kunci<input class="in" id="fl-q" name="q" value="${esc(filt.q)}" placeholder="Cari"></label><label class="f">Kategori<select class="in" id="fl-cat" name="cat" data-submit><option value="">Semua kategori</option>${NK.CATS.map((c) => `<option ${c === filt.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>${extra}<button hidden>Cari</button></form>`;
+const hit = (t) => !filt.q || t.toLowerCase().includes(filt.q.toLowerCase());
+function vJobs() {
+  const u = NK.me();
+  const list = openJobs().filter((j) => (!filt.cat || j.cat === filt.cat) && (!filt.budget || j.budget >= filt.budget) && hit([j.title, j.desc, j.skills.join(' ')].join(' ')));
+  return `<div class="wrap page stack"><div class="row between"><div><h1 class="title">Cari kerja</h1><p class="muted">${list.length} lowongan terbuka${u && u.kind === 'F' ? ` · sisa kuota lamaran ${NK.quotaOf(u) - NK.quotaUsed(u.id)} bulan ini` : ''}</p></div>${u && u.kind === 'K' ? `<a class="btn pri" href="#pasang">${ic('plus')} Pasang lowongan</a>` : ''}</div>
+  ${filterBar(`<label class="f">Anggaran minimal<select class="in" id="fl-b" name="budget" data-submit>${[0, 1000000, 3000000, 10000000].map((v) => `<option value="${v}" ${filt.budget === v ? 'selected' : ''}>${v ? rp(v) : 'Semua'}</option>`).join('')}</select></label>`)}
+  ${list.length ? `<div class="grid2">${list.map(jobCard).join('')}</div>` : empty('Tidak ada lowongan yang cocok', 'Coba kata kunci lain atau hapus filter kategori.')}</div>`;
+}
+function vTalents() {
+  const list = sortTalents(talents()).filter((u) => (!filt.cat || u.cat === filt.cat) && (!filt.member || NK.isMember(u)) && hit([u.name, u.headline, u.skills.join(' '), u.bio].join(' ')));
+  return `<div class="wrap page stack"><div><h1 class="title">Cari talenta</h1><p class="muted">${list.length} freelancer. Urutan mengikuti nilai ulasan; saat nilainya sama, anggota koperasi tampil lebih dulu.</p></div>
+  ${filterBar(`<label class="f">Keanggotaan<select class="in" id="fl-m" name="member" data-submit><option value="">Semua</option><option value="1" ${filt.member ? 'selected' : ''}>Anggota koperasi</option></select></label>`)}
+  ${list.length ? `<div class="grid3">${list.map(talentCard).join('')}</div>` : empty('Tidak ada talenta yang cocok', 'Coba kata kunci lain atau hapus filter.')}</div>`;
+}
+function vServices() {
+  const list = liveServices().filter((s) => (!filt.cat || s.cat === filt.cat) && hit(s.title + ' ' + s.desc));
+  return `<div class="wrap page stack"><div><h1 class="title">Jasa siap pesan</h1><p class="muted">Harga dan isi paket sudah pasti. Pesan, danai, selesai.</p></div>${filterBar()}${list.length ? `<div class="grid3">${list.map(serviceCard).join('')}</div>` : empty('Tidak ada jasa yang cocok')}</div>`;
+}
+
+function vJob(id) {
+  const j = NK.S.jobs.find((x) => x.id === id); const u = NK.me();
+  if (!j || (j.status !== 'TERBUKA' && !(u && (u.id === j.clientId || u.role === 'ADMIN')))) return `<div class="wrap page">${empty('Lowongan tidak ditemukan', '<a href="#lowongan">Kembali ke daftar lowongan</a>')}</div>`;
+  const c = NK.user(j.clientId), mine = u && u.id === j.clientId;
+  const props = NK.S.proposals.filter((p) => p.jobId === j.id && p.status !== 'DITARIK');
+  const sent = u && NK.S.proposals.find((p) => p.jobId === j.id && p.freelancerId === u.id && p.status !== 'DITARIK');
+  const paid = NK.S.contracts.filter((k) => k.clientId === c.id).flatMap((k) => k.milestones).filter((m) => m.status === 'CAIR').reduce((a, m) => a + m.amount, 0);
+  let act;
+  if (mine) act = `<h2 style="font-size:22px">Proposal masuk (${props.length})</h2>${props.length ? props.map((p) => proposalRow(p, j)).join('') : empty('Belum ada proposal')}`;
+  else if (sent) act = `<div class="note sea">Proposal Anda ${rp(sent.price)} sudah terkirim ${ago(sent.at)}.</div>`;
+  else if (u && u.kind === 'F' && j.status === 'TERBUKA') act = applyForm(j, u);
+  else if (!u) act = `<div class="note">Ingin melamar? <a href="#masuk">Masuk</a> atau <a href="#daftar">daftar gratis</a> sebagai freelancer.</div>`;
+  else act = '';
+  return `<div class="wrap page split"><div class="stack"><div><div class="crumb"><a href="#lowongan">Cari kerja</a> / ${esc(j.cat)}</div><h1 class="title">${esc(j.title)}</h1><div class="row small muted" style="margin-top:6px">${pill(j.status)}<span>Dipasang ${ago(j.at)}</span></div></div>
+    <div class="card stack-s"><p style="white-space:pre-line">${esc(j.desc)}</p>${j.skills.length ? `<div class="tags">${j.skills.map((s) => `<span class="tag">${esc(s)}</span>`).join('')}</div>` : ''}</div>${act}</div>
+  <aside class="stack"><div class="card"><div class="lines"><div><span>Anggaran</span><span class="price">${rp(j.budget)}</span></div><div><span>Jenis harga</span><span>Tetap per termin</span></div><div><span>Perkiraan lama</span><span>${j.days} hari</span></div><div><span>Tingkat</span><span>${esc(j.level)}</span></div></div></div>
+    <div class="card stack-s"><div class="row" style="flex-wrap:nowrap">${av(c)}<div class="grow"><strong>${esc(c.name)}</strong><div class="muted xs">${esc(c.city)}</div></div></div>${mBadge(c)}<div class="small">${stars(c.id)}</div><div class="muted small">Total sudah dibayar ${rp(paid)}</div>${mine && j.status === 'TERBUKA' ? `<button class="btn s danger" data-a="closeJob" data-id="${j.id}">Tutup lowongan</button>` : ''}</div></aside></div>`;
+}
+function proposalRow(p, j) {
+  const f = NK.user(p.freelancerId);
+  return `<div class="card stack-s"><div class="row between"><a class="row" href="#talenta-${f.id}" style="text-decoration:none;color:inherit;flex-wrap:nowrap">${av(f)}<span><strong>${esc(f.name)}</strong><br><span class="small">${stars(f.id)}</span></span></a><div style="text-align:right"><span class="price">${rp(p.price)}</span><div class="muted xs">${p.days} hari</div></div></div>${mBadge(f)}<p class="small">${esc(p.cover)}</p>
+  ${p.status === 'TERKIRIM' && j.status === 'TERBUKA' ? `<div class="row"><button class="btn pri s" data-a="accept" data-id="${p.id}">Terima dan buat kontrak</button><button class="btn s" data-a="rejectP" data-id="${p.id}">Tolak</button></div>` : pill(p.status)}</div>`;
+}
+function applyForm(j, u) {
+  const left = NK.quotaOf(u) - NK.quotaUsed(u.id), x = NK.split(j.budget);
+  return `<form class="card stack" data-f="apply" data-id="${j.id}"><h2 style="font-size:22px">Kirim proposal</h2>
+  <label class="f">Surat lamaran<small>Tulis apa yang akan Anda kerjakan dan pengalaman yang relevan.</small><textarea class="in" id="ap-cover" name="cover" required></textarea></label>
+  <div class="fgrid"><label class="f">Harga Anda<input class="in num" id="ap-price" name="price" inputmode="numeric" value="${j.budget}" data-net="ap-net"></label><label class="f">Lama pengerjaan (hari)<input class="in num" id="ap-days" name="days" inputmode="numeric" value="${j.days}"></label></div>
+  <div class="lines" id="ap-net">${netLines(x)}</div>
+  <div class="row between"><span class="muted small">Sisa kuota lamaran bulan ini: ${left} dari ${NK.quotaOf(u)}</span><button class="btn pri">Kirim proposal</button></div></form>`;
+}
+const netLines = (x) => `<div><span>Harga</span><span>${rp(x.amount)}</span></div><div><span>Komisi Narakarya ${NK.pol().commissionPct}%</span><span>−${rp(x.komisi)}</span></div><div class="t"><span>Anda terima</span><span>${rp(x.net)}</span></div>`;
+
+function vTalent(id) {
+  const f = NK.user(id); if (!f || f.kind !== 'F') return `<div class="wrap page">${empty('Talenta tidak ditemukan')}</div>`;
+  const u = NK.me();
+  const sv = liveServices().filter((s) => s.freelancerId === id), rv = NK.S.reviews.filter((r) => r.to === id);
+  const doneN = NK.S.contracts.filter((c) => c.freelancerId === id && c.status === 'SELESAI').length;
+  const myJobs = u && u.kind === 'K' ? openJobs().filter((j) => j.clientId === u.id) : [];
+  return `<div class="wrap page split"><div class="stack"><div class="row" style="flex-wrap:nowrap;align-items:flex-start">${av(f, 'lg')}<div class="grow"><div class="crumb"><a href="#talenta">Cari talenta</a></div><h1 class="title">${esc(f.name)}</h1><div>${esc(f.headline)}</div><div class="row small" style="margin-top:4px"><span class="muted">${esc(f.city)}</span>${mBadge(f)}${f.kyc === 'TERVERIFIKASI' ? '<span class="pill ok">Identitas terverifikasi</span>' : ''}</div></div></div>
+    <div class="card stack-s"><h3>Tentang</h3><p>${esc(f.bio)}</p><div class="tags">${f.skills.map((s) => `<span class="tag">${esc(s)}</span>`).join('')}</div></div>
+    ${sv.length ? `<div class="stack-s"><h2 style="font-size:22px">Jasa siap pesan</h2><div class="grid2">${sv.map(serviceCard).join('')}</div></div>` : ''}
+    <div class="stack-s"><h2 style="font-size:22px">Ulasan (${rv.length})</h2>${rv.length ? rv.map((r) => `<div class="card stack-s"><div class="row between"><span class="star">${'★'.repeat(r.stars)}</span><span class="muted xs">${ago(r.at)}</span></div><p class="small">${esc(r.text)}</p><span class="muted xs">${esc(NK.user(r.from).name)}</span></div>`).join('') : empty('Belum ada ulasan')}</div></div>
+  <aside class="stack"><div class="card"><div class="lines"><div><span>Nilai</span><span>${stars(id)}</span></div><div><span>Kontrak selesai</span><span>${doneN}</span></div><div><span>Tarif acuan</span><span>${rp(f.rate)}/jam</span></div>${NK.isMember(f) ? `<div><span>Koperasi</span><span style="white-space:normal;text-align:right">${esc(f.member.coop)}</span></div>` : ''}</div></div>
+  ${myJobs.length ? `<form class="card stack-s" data-f="invite" data-id="${f.id}"><label class="f">Undang ke lowongan<select class="in" id="inv-j" name="job">${myJobs.map((j) => `<option value="${j.id}">${esc(j.title)}</option>`).join('')}</select></label><button class="btn pri">Kirim undangan</button></form>` : (!u || u.kind === 'K' ? `<a class="btn pri" href="${u ? '#pasang' : '#masuk'}">Pasang lowongan untuk mengundang</a>` : '')}</aside></div>`;
+}
+function vService(id) {
+  const s = NK.S.services.find((x) => x.id === id); if (!s) return `<div class="wrap page">${empty('Jasa tidak ditemukan')}</div>`;
+  const f = NK.user(s.freelancerId);
+  return `<div class="wrap page stack"><div><div class="crumb"><a href="#jasa">Jasa siap pesan</a> / ${esc(s.cat)}</div><h1 class="title">${esc(s.title)}</h1><a class="row small" href="#talenta-${f.id}" style="margin-top:6px;text-decoration:none;color:inherit">${av(f, 'sm')}${esc(f.name)} ${stars(f.id)} ${mBadge(f)}</a></div>
+  <div class="card"><p>${esc(s.desc)}</p></div><div class="grid3">${s.tiers.map((t, i) => `<div class="card stack-s"><div class="row between"><h3>${esc(t.name)}</h3><span class="muted xs">${t.days} hari</span></div><div class="price" style="font-size:22px">${rp(t.price)}</div><p class="small muted">${esc(t.scope)}</p><button class="btn pri" data-a="order" data-id="${s.id}" data-t="${i}">Pesan paket ini</button></div>`).join('')}</div></div>`;
+}
+
+/* ---------- biaya & aturan ---------- */
+function vPricing() {
+  const P = NK.pol();
+  const R = [['Komisi dari penghasilan', `${P.commissionPct}%`, `${P.commissionPct}%`], ['Biaya untuk klien', 'Rp 0', 'Rp 0'], ['Kuota lamaran per bulan', P.quotaPublic, P.quotaMember], ['Masa tunggu pencairan', `${P.holdDaysPublic} hari`, P.holdDaysMember ? P.holdDaysMember + ' hari' : 'Tanpa masa tunggu'], ['Biaya pencairan', `${rp(P.payoutFeePublic)} ke bank`, 'Gratis'], ['Tujuan pencairan', 'Rekening bank', 'Dompet ARIBA atau rekening bank'], ['Verifikasi identitas', 'Unggah KTP, ditinjau pengelola', 'Otomatis lewat akun Ariba'], ['Lowongan dan jasa baru', 'Ditinjau pengelola dahulu', 'Langsung tayang'], ['Lencana dan filter anggota', 'Tidak', 'Ya']];
+  return `<div class="wrap page stack" style="max-width:940px"><div><h1 class="title">Biaya dan keanggotaan</h1><p class="muted" style="max-width:62ch;margin-top:6px">Narakarya terbuka untuk umum. Komisi ${P.commissionPct}% hanya dipotong saat dana cair ke freelancer. Tidak ada biaya daftar, tidak ada bunga, tidak ada denda.</p></div>
+  <div class="split"><form class="card stack" data-f="noop"><h2 style="font-size:22px">Hitung penghasilan Anda</h2><label class="f">Nilai kontrak<input class="in num" id="calc" value="5000000" inputmode="numeric" data-net="calc-net"></label><div class="lines" id="calc-net">${netLines(NK.split(5000000))}</div></form>
+  <div class="note">Komisi dikunci saat kontrak dibuat. Perubahan kebijakan hanya berlaku untuk kontrak baru.</div></div>
+  <h2 style="font-size:24px;margin-top:10px">Umum dan anggota koperasi</h2><div class="tw"><table><thead><tr><th></th><th>Akun umum</th><th>Anggota koperasi ARIBA</th></tr></thead><tbody>${R.map(([a, b, c]) => `<tr><td><strong>${a}</strong></td><td>${b}</td><td>${c}</td></tr>`).join('')}</tbody></table></div>
+  <p class="muted small">Belum menjadi anggota? Koperasi di ekosistem ARIBA terdaftar di <a href="https://ariba.id/">ariba.id</a>.</p>
+  <h2 style="font-size:24px;margin-top:10px">Pertanyaan umum</h2><div>
+  ${[['Siapa yang membayar komisi?', `Freelancer. Komisi ${P.commissionPct}% dipotong dari setiap dana yang cair. Klien hanya membayar harga yang disepakati.`], ['Bagaimana bila pekerjaan dibatalkan?', 'Dana termin kembali utuh ke klien tanpa potongan, dan komisi tidak dikenakan.'], ['Bagaimana bila klien terlambat mendanai termin?', 'Tidak ada denda atau bunga. Freelancer boleh menunggu dan tidak wajib bekerja sebelum dana ditahan.'], ['Bagaimana bila terjadi perselisihan?', 'Salah satu pihak membuka sengketa. Pengelola memeriksa kontrak dan pesan, lalu memutus pembagian dana beserta alasannya.'], ['Apakah ada kontrak per jam?', 'Belum. Narakarya memakai harga tetap per termin agar lingkup dan harga jelas sejak awal.']].map(([q, a]) => `<details class="q"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>`;
+}
+function vRules() {
+  const P = NK.pol();
+  const R = [['ARIBA-NK-001', 'Harga dan lingkup jelas', 'Setiap termin wajib memiliki hasil dan nominal yang pasti sebelum dikerjakan.'], ['ARIBA-NK-002', 'Tanpa bunga dan denda', 'Tidak ada bunga, denda keterlambatan, atau biaya tambahan karena waktu, bagi klien maupun freelancer.'], ['ARIBA-NK-003', 'Pekerjaan yang dilarang', 'Riba dan pinjaman berbunga, judi, penipuan, konten terlarang, dan pekerjaan yang melanggar hukum ditolak. Joki akademik, ulasan palsu, dan sejenisnya ditahan untuk ditinjau.'], ['ARIBA-NK-004', 'Dana ditahan sampai disetujui', `Dana cair saat klien menyetujui hasil, atau otomatis ${P.autoReleaseDays} hari setelah hasil dikirim bila klien tidak merespons.`], ['ARIBA-NK-005', 'Pembatalan tanpa potongan', 'Dana yang dikembalikan ke klien tidak dikenakan komisi.'], ['ARIBA-NK-006', 'Transaksi tetap di Narakarya', 'Berbagi kontak untuk memindahkan pembayaran ke luar platform ditandai dan dapat ditinjau pengelola.']];
+  return `<div class="wrap page stack" style="max-width:820px"><div><h1 class="title">Aturan Narakarya</h1><p class="muted">Berlaku versi ${P.version}. Aturan ini melengkapi Konstitusi Ekonomi ARIBA.</p></div>${R.map(([c, t, d]) => `<div class="card stack-s"><span class="mono" style="color:var(--wine)">${c}</span><h3>${t}</h3><p class="muted">${d}</p></div>`).join('')}</div>`;
+}
+
+/* ---------- masuk & daftar ---------- */
+function vLogin() {
+  const p = [['f1', 'Freelancer anggota koperasi'], ['f6', 'Freelancer umum'], ['c2', 'Klien anggota koperasi'], ['c1', 'Klien umum'], ['admin', 'Pengelola Ariba Indonesia']];
+  return `<div class="wrap page" style="max-width:560px"><div class="stack"><div><h1 class="title">Masuk ke Narakarya</h1><p class="muted">Pilih akun contoh untuk mencoba setiap peran. Pada versi tayang, anggota masuk dengan akun Ariba.</p></div>
+  <div class="stack-s">${p.map(([id, t]) => { const u = NK.user(id); return `<button class="persona" data-a="login" data-id="${id}">${av(u)}<span class="grow"><strong>${esc(u.name)}</strong><br><span class="muted small">${t}</span></span></button>`; }).join('')}</div>
+  <p class="muted small">Belum punya akun? <a href="#daftar">Daftar gratis</a>.</p></div></div>`;
+}
+function vRegister() {
+  return `<div class="wrap page" style="max-width:560px"><form class="stack" data-f="register"><div><h1 class="title">Daftar gratis</h1><p class="muted">Terbuka untuk umum. Anggota koperasi ARIBA mendapat <a href="#biaya">kelebihan tambahan</a>.</p></div>
+  <label class="choice"><input type="radio" name="kind" value="F" checked><span><strong>Saya mencari kerja</strong><br><span class="muted small">Melamar lowongan dan menjual jasa.</span></span></label>
+  <label class="choice"><input type="radio" name="kind" value="K"><span><strong>Saya mencari freelancer</strong><br><span class="muted small">Memasang lowongan dan memesan jasa.</span></span></label>
+  <label class="f">Nama lengkap atau nama usaha<input class="in" id="rg-n" name="name" required></label><label class="f">Email<input class="in" id="rg-e" name="email" type="email" required></label><label class="f">Kota<input class="in" id="rg-c" name="city"></label>
+  <button class="btn pri">Buat akun</button><p class="muted xs">Dalam prototipe ini, data hanya tersimpan di peramban Anda.</p></form></div>`;
+}
+
+/* ---------- ruang kerja ---------- */
+function shell(active, body) {
+  const u = NK.me(); const F = u.kind === 'F';
+  const L = F ? [['ruang', 'Ringkasan'], ['kontrak', 'Kontrak'], ['proposal', 'Proposal'], ['jasa-saya', 'Jasa saya'], ['pesan', 'Pesan'], ['penghasilan', 'Penghasilan'], ['profil', 'Profil']]
+    : [['ruang', 'Ringkasan'], ['kontrak', 'Kontrak'], ['lowongan-saya', 'Lowongan saya'], ['pesan', 'Pesan'], ['pembayaran', 'Pembayaran']];
+  return `<div class="sub"><div class="wrap">${L.map(([h, t]) => `<a href="#${h}" class="${active === h ? 'on' : ''}">${t}</a>`).join('')}</div></div><div class="wrap page stack">${body}</div>`;
+}
+const myContracts = (u) => NK.S.contracts.filter((c) => c.clientId === u.id || c.freelancerId === u.id);
+const other = (c, u) => NK.user(c.clientId === u.id ? c.freelancerId : c.clientId);
+const contractRow = (c, u) => { const paid = c.milestones.filter((m) => m.status === 'CAIR').length; return `<a class="card row between" href="#kontrak-${c.id}"><div class="grow"><div class="mono muted">${c.no}</div><strong style="color:var(--navy)">${esc(c.title)}</strong><div class="muted small">${esc(other(c, u).name)} · ${paid}/${c.milestones.length} termin selesai</div></div><div style="text-align:right"><div class="price">${rp(c.total)}</div>${pill(c.status)}</div></a>`; };
+function todo(u) {
+  const out = [];
+  myContracts(u).forEach((c) => c.milestones.forEach((m) => {
+    const link = `<a href="#kontrak-${c.id}">${esc(c.no)}</a>`;
+    if (u.id === c.clientId && m.status === 'BELUM_DANA' && c.status === 'AKTIF') { out.push(['warn', `Danai termin "${esc(m.title)}" ${link}`]); }
+    if (u.id === c.clientId && m.status === 'DIKIRIM') { const left = Math.max(0, NK.pol().autoReleaseDays - Math.floor((NK.now() - m.submittedAt) / NK.DAY)); out.push(['warn', `Tinjau hasil "${esc(m.title)}" ${link}. Cair otomatis dalam ${left} hari.`]); }
+    if (u.id === c.freelancerId && m.status === 'DITAHAN') out.push(['sea', `Kerjakan dan kirim "${esc(m.title)}" ${link}`]);
+    if (m.status === 'SENGKETA') out.push(['bad', `Sengketa sedang ditinjau pengelola ${link}`]);
+  }));
+  NK.S.contracts.filter((c) => c.status === 'SELESAI' && (c.clientId === u.id || c.freelancerId === u.id) && !NK.S.reviews.some((r) => r.contractId === c.id && r.from === u.id)).forEach((c) => out.push(['', `Beri ulasan untuk <a href="#kontrak-${c.id}">${esc(c.no)}</a>`]));
+  NK.S.invites.filter((i) => i.freelancerId === u.id && !NK.S.proposals.some((p) => p.jobId === i.jobId && p.freelancerId === u.id)).forEach((i) => { const j = NK.S.jobs.find((x) => x.id === i.jobId); if (j && j.status === 'TERBUKA') out.push(['sea', `${esc(NK.user(i.clientId).name)} mengundang Anda ke <a href="#lowongan-${j.id}">${esc(j.title)}</a>`]); });
+  return out;
+}
+function vDash() {
+  const u = NK.me(), F = u.kind === 'F', T = todo(u), cs = myContracts(u).filter((c) => ['AKTIF', 'SENGKETA'].includes(c.status));
+  const b = NK.balance(u.id);
+  const held = myContracts(u).flatMap((c) => c.milestones).filter((m) => ['DITAHAN', 'DIKIRIM', 'SENGKETA'].includes(m.status)).reduce((a, m) => a + m.amount, 0);
+  const k = F ? [['Saldo siap cair', rp(b.available)], ['Sedang ditahan', rp(held)], ['Kuota lamaran', `${NK.quotaOf(u) - NK.quotaUsed(u.id)} / ${NK.quotaOf(u)}`], ['Nilai', NK.ratingOf(u.id).n ? NK.ratingOf(u.id).avg.toFixed(1).replace('.', ',') : '–']]
+    : [['Kontrak aktif', cs.length], ['Dana ditahan', rp(held)], ['Lowongan terbuka', openJobs().filter((j) => j.clientId === u.id).length], ['Total dibayar', rp(myContracts(u).flatMap((c) => c.milestones).filter((m) => m.status === 'CAIR').reduce((a, m) => a + m.amount, 0))]];
+  return shell('ruang', `<div class="row between"><div><h1 class="title">Halo, ${esc(u.name.split(' ')[0])}</h1><div class="row small">${mBadge(u)}${NK.isMember(u) ? `<span class="muted">${esc(u.member.coop)}</span>` : '<a href="#biaya">Lihat kelebihan anggota koperasi</a>'}</div></div>${F ? '<a class="btn pri" href="#lowongan">Cari lowongan</a>' : `<a class="btn pri" href="#pasang">${ic('plus')} Pasang lowongan</a>`}</div>
+  <div class="kpis">${k.map(([a, b]) => `<div class="kpi"><span>${a}</span><b>${b}</b></div>`).join('')}</div>
+  ${u.kyc !== 'TERVERIFIKASI' ? `<div class="note warn row between"><span>${u.kyc === 'MENUNGGU' ? 'Identitas Anda sedang ditinjau pengelola.' : 'Verifikasi identitas diperlukan sebelum mencairkan dana.'}</span>${u.kyc === 'MENUNGGU' ? '' : '<button class="btn s" data-a="kyc">Kirim KTP (simulasi)</button>'}</div>` : ''}
+  <div class="split"><div class="stack-s"><h2 style="font-size:22px">Kontrak berjalan</h2>${cs.length ? cs.map((c) => contractRow(c, u)).join('') : empty('Belum ada kontrak berjalan', F ? '<a href="#lowongan">Lamar lowongan pertama Anda</a>' : '<a href="#talenta">Temukan talenta</a>')}</div>
+  <div class="stack-s"><h2 style="font-size:22px">Perlu tindakan</h2>${T.length ? `<div class="card stack-s small">${T.slice(0, 8).map(([c, t]) => `<div class="note ${c}">${t}</div>`).join('')}</div>` : empty('Semua beres')}</div></div>`);
+}
+function vContracts() {
+  const u = NK.me(), cs = myContracts(u);
+  return shell('kontrak', `<h1 class="title">Kontrak</h1>${cs.length ? `<div class="stack-s">${cs.map((c) => contractRow(c, u)).join('')}</div>` : empty('Belum ada kontrak')}`);
+}
+function vContract(id) {
+  const u = NK.me(), c = NK.getC(id);
+  if (!u) return vLogin();
+  if (!c || (u.role !== 'ADMIN' && c.clientId !== u.id && c.freelancerId !== u.id)) return `<div class="wrap page">${empty('Kontrak tidak ditemukan')}</div>`;
+  const cl = NK.user(c.clientId), fr = NK.user(c.freelancerId), isC = u.id === c.clientId, isF = u.id === c.freelancerId;
+  const pct = c.commissionBps / 100, x = { amount: c.total, komisi: NK.commissionOf(c.total, c.commissionBps) };
+  const msgs = NK.S.msgs.filter((m) => m.thread === c.id);
+  const reviewed = NK.S.reviews.some((r) => r.contractId === c.id && r.from === u.id);
+  const refunds = c.milestones.reduce((a, m) => a + (m.refund || 0), 0);
+  const body = `<div><div class="crumb"><a href="#${u.role === 'ADMIN' ? 'admin-kontrak' : 'kontrak'}">Kontrak</a> / <span class="mono">${c.no}</span></div><h1 class="title">${esc(c.title)}</h1><div class="row small muted" style="margin-top:6px">${pill(c.status)}<span>Klien ${esc(cl.name)}</span><span>Freelancer <a href="#talenta-${fr.id}">${esc(fr.name)}</a></span></div></div>
+  <div class="split"><div class="stack"><div><h2 style="font-size:22px;margin-bottom:8px">Termin</h2>${c.milestones.map((m) => msRow(c, m, isC, isF)).join('')}</div>
+    ${c.status === 'SELESAI' && (isC || isF) && !reviewed ? `<form class="card stack-s" data-f="review" data-id="${c.id}"><h3>Beri ulasan untuk ${esc(other(c, u).name)}</h3><div class="fgrid"><label class="f">Nilai<select class="in" id="rv-s" name="stars">${[5, 4, 3, 2, 1].map((n) => `<option value="${n}">${'★'.repeat(n)}</option>`).join('')}</select></label></div><label class="f">Ulasan<textarea class="in" id="rv-t" name="text"></textarea></label><button class="btn pri">Kirim ulasan</button></form>` : ''}
+    <div class="card stack-s"><h3>Pesan</h3><div class="thread">${msgs.length ? msgs.map((m) => `<div class="bub ${m.from === u.id ? 'mine' : ''}">${esc(m.text)}<small>${esc(NK.user(m.from).name)} · ${ago(m.at)}${m.flag ? ' · ditandai ARIBA-NK-006' : ''}</small></div>`).join('') : '<p class="muted small">Belum ada pesan.</p>'}</div>
+    ${isC || isF ? `<form class="row" data-f="msg" data-id="${c.id}" style="flex-wrap:nowrap"><input class="in grow" id="msg-t" name="text" placeholder="Tulis pesan" aria-label="Tulis pesan"><button class="btn">Kirim</button></form>` : ''}</div></div>
+  <aside class="stack"><div class="nota" style="box-shadow:none;border:1px solid var(--line)"><div class="no">NOTA KONTRAK ${c.no}</div><div class="lines"><div><span>Nilai kontrak</span><span>${rp(c.total)}</span></div>${isC ? '<div><span>Biaya untuk klien</span><span>Rp&nbsp;0</span></div>' : `<div><span>Komisi ${String(pct).replace('.', ',')}%</span><span>−${rp(x.komisi)}</span></div><div class="t"><span>Freelancer terima</span><span>${rp(c.total - x.komisi)}</span></div>`}${refunds ? `<div><span>Dikembalikan ke klien</span><span>${rp(refunds)}</span></div>` : ''}</div><p class="muted xs" style="margin-top:8px">Komisi dikunci dari kebijakan versi ${c.policyVersion}. Tanpa bunga dan denda.</p></div></aside></div>`;
+  return u.role === 'ADMIN' ? `<div class="wrap page stack">${body}</div>` : shell('kontrak', body);
+}
+function msRow(c, m, isC, isF) {
+  const B = [];
+  const d = `data-c="${c.id}" data-m="${m.id}"`;
+  if (isC && m.status === 'BELUM_DANA') { B.push(`<button class="btn pri s" data-a="fund" ${d}>Danai ${rp(m.amount)}</button>`); B.push(`<button class="btn s" data-a="cancelM" ${d}>Batalkan termin</button>`); }
+  if (isF && m.status === 'DITAHAN') { B.push(`<button class="btn pri s" data-a="submit" ${d}>Kirim hasil</button>`); B.push(`<button class="btn s" data-a="refund" ${d}>Kembalikan dana</button>`); }
+  if (isC && m.status === 'DIKIRIM') { B.push(`<button class="btn pri s" data-a="approve" ${d}>Setujui dan cairkan</button>`); B.push(`<button class="btn s" data-a="revise" ${d}>Minta revisi</button>`); }
+  if ((isC || isF) && ['DITAHAN', 'DIKIRIM'].includes(m.status)) B.push(`<button class="btn s danger" data-a="dispute" ${d}>Buka sengketa</button>`);
+  const left = m.status === 'DIKIRIM' ? Math.max(0, NK.pol().autoReleaseDays - Math.floor((NK.now() - m.submittedAt) / NK.DAY)) : 0;
+  const dp = NK.S.disputes.find((x) => x.msId === m.id);
+  return `<div class="ms stack-s"><div class="row between"><strong>${esc(m.title)}</strong><span class="price">${rp(m.amount)}</span></div><div>${pill(m.status)}${m.revisions ? ` <span class="muted xs">${m.revisions} kali revisi</span>` : ''}</div>
+  ${m.revisionNote && m.status === 'DITAHAN' ? `<div class="note warn">Permintaan revisi: ${esc(m.revisionNote)}</div>` : ''}${m.note && m.status !== 'DITAHAN' ? `<p class="small muted">Hasil: ${esc(m.note)}</p>` : ''}
+  ${m.status === 'DIKIRIM' ? `<p class="xs muted">Cair otomatis dalam ${left} hari bila klien tidak merespons.</p>` : ''}${m.status === 'CAIR' ? `<p class="xs muted num">Cair ${tgl(m.paidAt)} · komisi ${rp(m.komisi)} · diterima freelancer ${rp(m.net)}</p>` : ''}
+  ${dp ? `<div class="note ${dp.status === 'TERBUKA' ? 'bad' : ''}"><strong>Sengketa:</strong> ${esc(dp.reason)}${dp.resolution ? `<br><strong>Putusan:</strong> ${esc(dp.resolution.note)} (freelancer ${rp(dp.resolution.toFreelancer)}, klien ${rp(dp.resolution.toClient)})` : ''}</div>` : ''}
+  ${B.length ? `<div class="row">${B.join('')}</div>` : ''}</div>`;
+}
+function vProposals() {
+  const u = NK.me(), L = NK.S.proposals.filter((p) => p.freelancerId === u.id);
+  return shell('proposal', `<div class="row between"><h1 class="title">Proposal saya</h1><span class="muted small">Kuota bulan ini ${NK.quotaUsed(u.id)} dari ${NK.quotaOf(u)} terpakai</span></div>${L.length ? `<div class="stack-s">${L.map((p) => { const j = NK.S.jobs.find((x) => x.id === p.jobId); return `<div class="card row between"><div class="grow"><a href="#lowongan-${j.id}"><strong>${esc(j.title)}</strong></a><div class="muted small">${ago(p.at)} · ${p.days} hari</div></div><div class="row"><span class="price">${rp(p.price)}</span>${pill(p.status)}${p.status === 'TERKIRIM' ? `<button class="btn s" data-a="withdrawP" data-id="${p.id}">Tarik</button>` : ''}</div></div>`; }).join('')}</div>` : empty('Belum ada proposal', '<a href="#lowongan">Cari lowongan</a>')}`);
+}
+function vMyJobs() {
+  const u = NK.me(), L = NK.S.jobs.filter((j) => j.clientId === u.id);
+  return shell('lowongan-saya', `<div class="row between"><h1 class="title">Lowongan saya</h1><a class="btn pri" href="#pasang">${ic('plus')} Pasang lowongan</a></div>${L.length ? `<div class="stack-s">${L.map((j) => `<a class="card row between" href="#lowongan-${j.id}"><div class="grow"><strong style="color:var(--navy)">${esc(j.title)}</strong><div class="muted small">${NK.S.proposals.filter((p) => p.jobId === j.id && p.status !== 'DITARIK').length} proposal · ${ago(j.at)}${j.reason ? ' · ' + esc(j.reason) : ''}</div></div><div class="row"><span class="price">${rp(j.budget)}</span>${pill(j.status)}</div></a>`).join('')}</div>` : empty('Belum ada lowongan')}`);
+}
+function vPost() {
+  const u = NK.me(), m = NK.isMember(u);
+  return shell('lowongan-saya', `<form class="stack" style="max-width:720px" data-f="postJob"><div><h1 class="title">Pasang lowongan</h1><p class="muted">Gratis. ${m ? 'Sebagai anggota koperasi, lowongan Anda langsung tayang.' : 'Lowongan ditinjau pengelola sebelum tayang.'}</p></div>
+  <label class="f">Judul pekerjaan<input class="in" id="pj-t" name="title" placeholder="Contoh: Pembukuan koperasi tahun buku 2026" required></label>
+  <label class="f">Rincian pekerjaan<small>Tulis hasil yang Anda harapkan, batas lingkup, dan kebutuhan khusus.</small><textarea class="in" id="pj-d" name="desc" rows="5" required></textarea></label>
+  <div class="fgrid"><label class="f">Kategori<select class="in" id="pj-c" name="cat">${NK.CATS.map((c) => `<option>${esc(c)}</option>`).join('')}</select></label><label class="f">Tingkat pengalaman<select class="in" id="pj-l" name="level"><option>Pemula</option><option selected>Menengah</option><option>Berpengalaman</option></select></label><label class="f">Anggaran (harga tetap)<input class="in num" id="pj-b" name="budget" inputmode="numeric" placeholder="2000000" required></label><label class="f">Perkiraan lama (hari)<input class="in num" id="pj-x" name="days" inputmode="numeric" value="14"></label></div>
+  <label class="f">Keahlian<small>Pisahkan dengan koma.</small><input class="in" id="pj-s" name="skills" placeholder="Excel, Pembukuan"></label><div class="row"><button class="btn pri">Pasang lowongan</button></div></form>`);
+}
+function vMyServices() {
+  const u = NK.me(), L = NK.S.services.filter((s) => s.freelancerId === u.id);
+  const tier = (i, n) => `<div class="fgrid x3 span2"><label class="f">${n}: harga<input class="in num" id="sv-p${i}" name="p${i}" inputmode="numeric"></label><label class="f">Lama (hari)<input class="in num" id="sv-d${i}" name="d${i}" inputmode="numeric"></label><label class="f">Isi paket<input class="in" id="sv-s${i}" name="s${i}"></label></div>`;
+  return shell('jasa-saya', `<h1 class="title">Jasa saya</h1>${L.length ? `<div class="stack-s">${L.map((s) => `<a class="card row between" href="#jasa-${s.id}"><strong style="color:var(--navy)" class="grow">${esc(s.title)}</strong>${pill(s.status)}</a>`).join('')}</div>` : ''}
+  <form class="card fgrid" data-f="postService"><h2 class="span2" style="font-size:22px">Tambah jasa</h2><label class="f span2">Judul<input class="in" id="sv-t" name="title"></label><label class="f span2">Deskripsi<textarea class="in" id="sv-x" name="desc"></textarea></label><label class="f span2">Kategori<select class="in" id="sv-c" name="cat">${NK.CATS.map((c) => `<option ${c === u.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label>${tier(1, 'Dasar')}${tier(2, 'Standar')}${tier(3, 'Lengkap')}<div class="span2"><button class="btn pri">Pasang jasa</button></div></form>`);
+}
+function vInbox() {
+  const u = NK.me(); const T = myContracts(u).map((c) => ({ c, last: NK.S.msgs.filter((m) => m.thread === c.id).slice(-1)[0] })).filter((x) => x.last).sort((a, b) => b.last.at - a.last.at);
+  return shell('pesan', `<h1 class="title">Pesan</h1>${T.length ? `<div class="stack-s">${T.map(({ c, last }) => `<a class="card row" href="#kontrak-${c.id}" style="flex-wrap:nowrap">${av(other(c, u))}<div class="grow"><strong style="color:var(--navy)">${esc(other(c, u).name)}</strong> <span class="mono muted">${c.no}</span><div class="muted small clamp2">${esc(last.text)}</div></div><span class="muted xs">${ago(last.at)}</span></a>`).join('')}</div>` : empty('Belum ada pesan', 'Percakapan terbuka setelah kontrak dibuat.')}`);
+}
+function vEarn() {
+  const u = NK.me(), b = NK.balance(u.id), E = NK.S.earnings.filter((e) => e.freelancerId === u.id), W = NK.S.payouts.filter((p) => p.freelancerId === u.id);
+  const t = E.reduce((a, e) => ({ g: a.g + e.gross, k: a.k + e.komisi, n: a.n + e.net }), { g: 0, k: 0, n: 0 });
+  return shell('penghasilan', `<div class="row between"><h1 class="title">Penghasilan</h1><button class="btn pri" data-a="payout" ${b.available < NK.pol().minPayout ? 'disabled' : ''}>Cairkan dana</button></div>
+  <div class="kpis"><div class="kpi"><span>Siap cair</span><b>${rp(b.available)}</b></div><div class="kpi"><span>Masa tunggu</span><b>${rp(b.pending)}</b></div><div class="kpi"><span>Total diterima</span><b>${rp(t.n)}</b></div><div class="kpi"><span>Total komisi</span><b>${rp(t.k)}</b></div></div>
+  ${u.kyc !== 'TERVERIFIKASI' ? `<div class="note warn row between"><span>${u.kyc === 'MENUNGGU' ? 'Identitas sedang ditinjau pengelola.' : 'Verifikasi identitas sebelum mencairkan dana.'}</span>${u.kyc === 'MENUNGGU' ? '' : '<button class="btn s" data-a="kyc">Kirim KTP (simulasi)</button>'}</div>` : ''}
+  <h2 style="font-size:22px">Riwayat penghasilan</h2>${E.length ? `<div class="tw"><table class="tmin"><thead><tr><th>Tanggal</th><th>Kontrak</th><th class="r">Bruto</th><th class="r">Komisi</th><th class="r">Bersih</th></tr></thead><tbody>${E.map((e) => { const c = NK.getC(e.contractId); return `<tr><td>${tgl(e.at)}</td><td><a href="#kontrak-${c.id}">${c.no}</a> ${esc(c.title)}</td><td class="r">${rp(e.gross)}</td><td class="r">−${rp(e.komisi)}</td><td class="r"><strong>${rp(e.net)}</strong></td></tr>`; }).join('')}</tbody></table></div>` : empty('Belum ada penghasilan')}
+  <h2 style="font-size:22px">Pencairan</h2>${W.length ? `<div class="tw"><table class="tmin"><thead><tr><th>Tanggal</th><th>Tujuan</th><th class="r">Nominal</th><th class="r">Biaya</th><th>Status</th></tr></thead><tbody>${W.map((p) => `<tr><td>${tgl(p.at)}</td><td>${esc(p.dest)}</td><td class="r">${rp(p.amount)}</td><td class="r">${rp(p.fee)}</td><td>${pill(p.status)}${p.reason ? `<div class="xs muted">${esc(p.reason)}</div>` : ''}</td></tr>`).join('')}</tbody></table></div>` : empty('Belum ada pencairan')}`);
+}
+function vPaid() {
+  const u = NK.me(), rows = myContracts(u).flatMap((c) => c.milestones.filter((m) => m.fundedAt).map((m) => ({ c, m }))).sort((a, b) => b.m.fundedAt - a.m.fundedAt);
+  return shell('pembayaran', `<h1 class="title">Pembayaran</h1><p class="muted">Anda hanya membayar harga yang disepakati. Komisi dipotong dari penghasilan freelancer.</p>${rows.length ? `<div class="tw"><table class="tmin"><thead><tr><th>Tanggal</th><th>Kontrak</th><th>Termin</th><th>Metode</th><th class="r">Nominal</th><th>Status</th></tr></thead><tbody>${rows.map(({ c, m }) => `<tr><td>${tgl(m.fundedAt)}</td><td><a href="#kontrak-${c.id}">${c.no}</a></td><td>${esc(m.title)}</td><td>${esc(m.method)}</td><td class="r">${rp(m.amount)}</td><td>${pill(m.status)}</td></tr>`).join('')}</tbody></table></div>` : empty('Belum ada pembayaran')}`);
+}
+function vProfile() {
+  const u = NK.me();
+  return shell('profil', `<form class="fgrid" data-f="profile" style="max-width:720px"><h1 class="title span2">Profil</h1><label class="f span2">Judul profil<input class="in" id="pf-h" name="headline" value="${esc(u.headline)}" placeholder="Contoh: Pembukuan koperasi dan UMKM"></label><label class="f span2">Tentang Anda<textarea class="in" id="pf-b" name="bio">${esc(u.bio)}</textarea></label><label class="f">Kategori utama<select class="in" id="pf-c" name="cat">${NK.CATS.map((c) => `<option ${c === u.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label><label class="f">Kota<input class="in" id="pf-k" name="city" value="${esc(u.city)}"></label><label class="f">Tarif acuan per jam<input class="in num" id="pf-r" name="rate" inputmode="numeric" value="${u.rate || ''}"></label><label class="f">Keahlian (pisahkan koma)<input class="in" id="pf-s" name="skills" value="${esc(u.skills.join(', '))}"></label><div class="span2"><button class="btn pri">Simpan profil</button></div></form>`);
+}
+
+/* ---------- aksi ---------- */
+const form = (title, intro, fields, label, f, attrs = '') => modal(`<h3>${title}</h3>${intro ? `<p class="muted small">${intro}</p>` : ''}<form class="stack" data-f="${f}" ${attrs}>${fields}<div class="row"><button class="btn pri">${label}</button><button type="button" class="btn" data-a="close">Batal</button></div></form>`);
+const A = {
+  burger() { $('#nav').classList.toggle('open'); },
+  close: closeModal,
+  reset() { modal(`<h3>Mulai ulang data contoh?</h3><p class="muted small">Semua perubahan di peramban ini akan hilang.</p><div class="row"><button class="btn pri" data-a="resetYes">Mulai ulang</button><button class="btn" data-a="close">Batal</button></div>`); },
+  resetYes() { NK.reset(); closeModal(); toast('Data contoh dimulai ulang.'); go('beranda'); },
+  login(d) { NK.login(d.id); const u = NK.me(); toast('Masuk sebagai ' + u.name); go(u.role === 'ADMIN' ? 'admin' : 'ruang'); },
+  logout() { NK.logout(); toast('Anda sudah keluar.'); go('beranda'); },
+  kyc() { done(NK.requestKyc(NK.me().id), 'Identitas terkirim. Pengelola akan meninjau.'); },
+  closeJob(d) { done(NK.closeJob(NK.me().id, d.id), 'Lowongan ditutup.'); },
+  rejectP(d) { done(NK.rejectProposal(NK.me().id, d.id), 'Proposal ditolak.'); },
+  withdrawP(d) { done(NK.withdrawProposal(NK.me().id, d.id), 'Proposal ditarik.'); },
+  accept(d) {
+    const p = NK.S.proposals.find((x) => x.id === d.id), half = Math.floor(p.price / 2 / 1000) * 1000;
+    const row = (i, t, a) => `<div class="fgrid"><label class="f">Termin ${i} (hasil)<input class="in" id="ac-t${i}" name="t${i}" value="${esc(t)}"></label><label class="f">Nominal<input class="in num" id="ac-a${i}" name="a${i}" inputmode="numeric" value="${a}"></label></div>`;
+    form('Buat kontrak', `Bagi ${rp(p.price)} menjadi termin. Total harus tepat sama. Kosongkan termin yang tidak dipakai.`, row(1, 'Tahap pertama', half) + row(2, 'Tahap akhir dan serah terima', p.price - half) + row(3, '', ''), 'Buat kontrak', 'accept', `data-id="${d.id}"`);
+  },
+  order(d) {
+    if (!need('K')) return;
+    const r = NK.orderService(NK.me().id, d.id, Number(d.t)); if (done(r, 'Pesanan dibuat. Danai untuk memulai.', 'kontrak-' + (r.value || {}).id)) { /* selesai */ }
+  },
+  fund(d) {
+    const c = NK.getC(d.c), m = c.milestones.find((x) => x.id === d.m);
+    modal(`<h3>Danai termin</h3><div class="lines"><div><span>${esc(m.title)}</span><span>${rp(m.amount)}</span></div><div><span>Biaya untuk klien</span><span>Rp&nbsp;0</span></div><div class="t"><span>Total bayar</span><span>${rp(m.amount)}</span></div></div>
+    <form class="stack" data-f="fund" data-c="${d.c}" data-m="${d.m}">${['QRIS', 'VA BCA', 'VA BRI', 'VA Mandiri', 'Dompet digital'].map((x, i) => `<label class="choice"><input type="radio" name="method" value="${x}" ${i ? '' : 'checked'}><span>${x}</span></label>`).join('')}<div class="note warn">Simulasi. Tidak ada pembayaran sungguhan.</div><div class="row"><button class="btn pri">Simulasikan pembayaran berhasil</button><button type="button" class="btn" data-a="close">Batal</button></div></form>`);
+  },
+  submit(d) { form('Kirim hasil kerja', 'Jelaskan hasilnya dan tautan berkas bila ada.', '<label class="f">Keterangan hasil<textarea class="in" id="sb-n" name="note"></textarea></label>', 'Kirim hasil', 'submit', `data-c="${d.c}" data-m="${d.m}"`); },
+  revise(d) { form('Minta revisi', '', '<label class="f">Bagian yang perlu diperbaiki<textarea class="in" id="rv-n" name="note"></textarea></label>', 'Kirim permintaan', 'revise', `data-c="${d.c}" data-m="${d.m}"`); },
+  dispute(d) { form('Buka sengketa', 'Dana termin tetap ditahan sampai pengelola memutus.', '<label class="f">Apa masalahnya?<textarea class="in" id="dp-n" name="reason"></textarea></label>', 'Buka sengketa', 'dispute', `data-c="${d.c}" data-m="${d.m}"`); },
+  approve(d) {
+    const c = NK.getC(d.c), m = c.milestones.find((x) => x.id === d.m), k = NK.commissionOf(m.amount, c.commissionBps);
+    modal(`<h3>Setujui dan cairkan?</h3><div class="lines"><div><span>Nilai termin</span><span>${rp(m.amount)}</span></div><div><span>Komisi Narakarya</span><span>−${rp(k)}</span></div><div class="t"><span>Diterima freelancer</span><span>${rp(m.amount - k)}</span></div></div><p class="muted small">Pencairan tidak dapat dibatalkan.</p><div class="row"><button class="btn pri" data-a="approveYes" data-c="${d.c}" data-m="${d.m}">Setujui dan cairkan</button><button class="btn" data-a="close">Batal</button></div>`);
+  },
+  approveYes(d) { done(NK.approve(NK.me().id, d.c, d.m), 'Dana cair ke freelancer.'); },
+  refund(d) { modal(`<h3>Kembalikan dana ke klien?</h3><p class="muted small">Dana kembali utuh tanpa potongan dan komisi tidak dikenakan.</p><div class="row"><button class="btn danger" data-a="refundYes" data-c="${d.c}" data-m="${d.m}">Kembalikan dana</button><button class="btn" data-a="close">Batal</button></div>`); },
+  refundYes(d) { done(NK.refundByFreelancer(NK.me().id, d.c, d.m), 'Dana dikembalikan ke klien.'); },
+  cancelM(d) { done(NK.cancelUnfunded(NK.me().id, d.c, d.m), 'Termin dibatalkan.'); },
+  payout() {
+    const u = NK.me(), b = NK.balance(u.id), P = NK.pol(), m = NK.isMember(u);
+    form('Cairkan dana', `Saldo siap cair ${rp(b.available)}.`, `<label class="f">Nominal<input class="in num" id="po-a" name="amount" inputmode="numeric" value="${b.available}"></label>${m ? '<label class="choice"><input type="radio" name="method" value="DOMPET" checked><span><strong>Dompet ARIBA</strong><br><span class="muted small">Gratis, langsung masuk.</span></span></label>' : ''}<label class="choice"><input type="radio" name="method" value="BANK" ${m ? '' : 'checked'}><span><strong>Rekening bank</strong><br><span class="muted small">Biaya ${rp(m ? P.payoutFeeMember : P.payoutFeePublic)}, diproses pengelola.</span></span></label><label class="f">Bank dan nomor rekening<input class="in" id="po-d" name="dest" placeholder="BCA 1234567890 a.n. nama"></label>`, 'Cairkan', 'payout');
+  },
+};
+
+/* ---------- formulir ---------- */
+const Fm = {
+  noop() {},
+  hsearch(v) { filt = { ...filt, q: v.q || '', cat: '', member: false, budget: 0 }; go(v.t); },
+  filter(v) { filt = { ...filt, q: v.q || '', cat: v.cat || '', member: !!v.member, budget: Number(v.budget) || 0 }; render(); },
+  register(v) { const r = NK.register(v); if (done(r, 'Akun dibuat.', 'ruang')) { /* selesai */ } },
+  apply(v, el) { const u = need('F'); if (u) done(NK.propose(u.id, el.dataset.id, v), 'Proposal terkirim.'); },
+  accept(v, el) { const r = NK.acceptProposal(NK.me().id, el.dataset.id, [1, 2, 3].map((i) => ({ title: v['t' + i], amount: v['a' + i] }))); done(r, 'Kontrak dibuat. Danai termin pertama.', r.ok ? 'kontrak-' + r.value.id : null); },
+  fund(v, el) { done(NK.fund(NK.me().id, el.dataset.c, el.dataset.m, v.method), 'Dana ditahan aman sampai hasil disetujui.'); },
+  submit(v, el) { done(NK.submitWork(NK.me().id, el.dataset.c, el.dataset.m, v.note), 'Hasil dikirim ke klien.'); },
+  revise(v, el) { done(NK.askRevision(NK.me().id, el.dataset.c, el.dataset.m, v.note), 'Permintaan revisi terkirim.'); },
+  dispute(v, el) { done(NK.openDispute(NK.me().id, el.dataset.c, el.dataset.m, v.reason), 'Sengketa dibuka. Pengelola akan meninjau.'); },
+  msg(v, el) { const r = NK.send(NK.me().id, el.dataset.id, v.text); if (r.ok && r.value.flag) { toast('Pesan terkirim dan ditandai: jaga transaksi tetap di Narakarya (ARIBA-NK-006).'); render(); } else done(r); },
+  review(v, el) { done(NK.review(NK.me().id, el.dataset.id, v.stars, v.text), 'Ulasan terkirim.'); },
+  postJob(v) { const r = NK.postJob(NK.me().id, v); done(r, r.ok && r.value.status === 'TERBUKA' ? 'Lowongan tayang.' : 'Lowongan dikirim untuk ditinjau.', r.ok ? 'lowongan-saya' : null); },
+  postService(v) { const r = NK.postService(NK.me().id, v); done(r, r.ok && r.value.status === 'TAYANG' ? 'Jasa tayang.' : 'Jasa dikirim untuk ditinjau.'); },
+  profile(v) { done(NK.saveProfile(NK.me().id, v), 'Profil disimpan.'); },
+  payout(v) { done(NK.requestPayout(NK.me().id, v), v.method === 'DOMPET' ? 'Dana masuk ke Dompet ARIBA (simulasi).' : 'Pengajuan pencairan terkirim.'); },
+  invite(v, el) { done(NK.invite(NK.me().id, v.job, el.dataset.id), 'Undangan terkirim.'); },
+};
+
+/* ---------- rute ---------- */
+function render() {
+  const raw = (location.hash || '#beranda').slice(1) || 'beranda';
+  const [r, ...rest] = raw.split('-'); const arg = rest.join('-');
+  const u = NK.me();
+  const authed = (fn, kind) => { if (!u) return vLogin(); if (kind && u.kind !== kind) return `<div class="wrap page">${empty('Halaman ini untuk jenis akun lain', '<a href="#ruang">Kembali ke ruang kerja</a>')}</div>`; return fn(); };
+  let html;
+  if (r === 'admin') html = vAdmin(arg);
+  else if (r === 'beranda') html = vHome();
+  else if (r === 'lowongan') html = arg === 'saya' ? authed(vMyJobs, 'K') : (arg ? vJob(arg) : vJobs());
+  else if (r === 'talenta') html = arg ? vTalent(arg) : vTalents();
+  else if (r === 'jasa') html = arg === 'saya' ? authed(vMyServices, 'F') : (arg ? vService(arg) : vServices());
+  else if (r === 'biaya') html = vPricing();
+  else if (r === 'aturan') html = vRules();
+  else if (r === 'masuk') html = vLogin();
+  else if (r === 'daftar') html = vRegister();
+  else if (r === 'ruang') html = authed(vDash);
+  else if (r === 'kontrak') html = authed(() => (arg ? vContract(arg) : vContracts()));
+  else if (r === 'proposal') html = authed(vProposals, 'F');
+  else if (r === 'pasang') html = authed(vPost, 'K');
+  else if (r === 'pesan') html = authed(vInbox);
+  else if (r === 'penghasilan') html = authed(vEarn, 'F');
+  else if (r === 'pembayaran') html = authed(vPaid, 'K');
+  else if (r === 'profil') html = authed(vProfile, 'F');
+  else html = `<div class="wrap page">${empty('Halaman tidak ditemukan', '<a href="#beranda">Kembali ke beranda</a>')}</div>`;
+  $('#app').innerHTML = header(r) + `<main>${html}</main>` + footer();
+  if (raw !== currentRoute) { window.scrollTo(0, 0); currentRoute = raw; }
+}
+document.addEventListener('click', (e) => {
+  const cat = e.target.closest('[data-cat]');
+  if (cat) { filt = { ...filt, cat: cat.dataset.cat, q: '', member: false, budget: 0 }; }
+  const b = e.target.closest('[data-a]'); if (!b) return;
+  e.preventDefault(); const fn = A[b.dataset.a] || (typeof AA !== 'undefined' && AA[b.dataset.a]); if (fn) fn(b.dataset, b);
+});
+document.addEventListener('submit', (e) => {
+  const f = e.target.closest('[data-f]'); if (!f) return; e.preventDefault();
+  const fn = Fm[f.dataset.f] || (typeof FA !== 'undefined' && FA[f.dataset.f]); if (fn) fn(Object.fromEntries(new FormData(f)), f);
+});
+document.addEventListener('change', (e) => { if (e.target.matches('[data-submit]')) e.target.form.requestSubmit(); });
+document.addEventListener('input', (e) => {
+  const t = e.target.dataset && e.target.dataset.net; if (!t) return;
+  const n = Math.round(Number(e.target.value.replace(/[^\d]/g, '')) || 0); $('#' + t).innerHTML = netLines(NK.split(n));
+});
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+window.addEventListener('hashchange', render);
+/* ==========================================================================
+   Narakarya: dashboard pengelola Ariba Indonesia.
+   ========================================================================== */
+function adminCounts() {
+  const S = NK.S;
+  return {
+    moderasi: S.jobs.filter((j) => j.status === 'TINJAUAN').length + S.services.filter((s) => s.status === 'TINJAUAN').length,
+    verifikasi: S.users.filter((u) => u.kyc === 'MENUNGGU').length,
+    sengketa: S.disputes.filter((d) => d.status === 'TERBUKA').length,
+    pencairan: S.payouts.filter((p) => p.status === 'DIAJUKAN').length,
+    pesan: S.msgs.filter((m) => m.flag).length,
+  };
+}
+const monthKey = (t) => { const d = new Date(t); return d.getFullYear() * 12 + d.getMonth(); };
+const monthName = (k) => new Date(Math.floor(k / 12), k % 12, 1).toLocaleDateString('id-ID', { month: 'short' });
+const ADMIN_NAME = 'Pengelola Ariba Indonesia';
+
+function barChart(rows) {
+  const W = 620, H = 220, L = 58, B = 26, T = 18;
+  const max = Math.max(...rows.map((r) => r.v), 1);
+  const step = Math.pow(10, Math.floor(Math.log10(max)));
+  const nice = Math.ceil(max / step) * step;
+  const sc = (v) => (H - B - T) * (v / nice);
+  const bw = (W - L - 8) / rows.length;
+  const ticks = [0, 0.5, 1].map((f) => f * nice);
+  const short = (v) => (v >= 1e6 ? (v / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' jt' : v >= 1e3 ? (v / 1e3).toLocaleString('id-ID') + ' rb' : '0');
+  return `<svg class="bars" viewBox="0 0 ${W} ${H}" role="img" aria-label="Komisi per bulan" style="width:100%;height:auto;display:block">
+  ${ticks.map((t) => `<line x1="${L}" x2="${W}" y1="${H - B - sc(t)}" y2="${H - B - sc(t)}" stroke="#E2DDD3"/><text x="${L - 8}" y="${H - B - sc(t) + 4}" text-anchor="end">${short(t)}</text>`).join('')}
+  ${rows.map((r, i) => { const h = sc(r.v), x = L + i * bw + bw * 0.2, last = i === rows.length - 1; return `<rect x="${x}" y="${H - B - h}" width="${bw * 0.6}" height="${h}" rx="2" fill="${last ? '#7E293C' : '#4A6175'}"><title>${r.l}: ${rp(r.v)}</title></rect><text x="${x + bw * 0.3}" y="${H - 8}" text-anchor="middle">${r.l}</text>${r.v ? `<text x="${x + bw * 0.3}" y="${H - B - h - 5}" text-anchor="middle">${short(r.v)}</text>` : ''}`; }).join('')}</svg>`;
+}
+
+function aOverview() {
+  const S = NK.S, E = S.earnings, c = adminCounts(), rc = NK.reconcile();
+  const mNow = monthKey(NK.now());
+  const months = [5, 4, 3, 2, 1, 0].map((i) => mNow - i).map((k) => ({ l: monthName(k), v: E.filter((e) => monthKey(e.at) === k).reduce((a, e) => a + e.komisi, 0), k }));
+  const gmvAll = E.reduce((a, e) => a + e.gross, 0), kom = E.reduce((a, e) => a + e.komisi, 0);
+  const komNow = months[5].v, komPrev = months[4].v;
+  const fl = S.users.filter((u) => u.kind === 'F'), mem = fl.filter(NK.isMember);
+  const memGmv = E.filter((e) => NK.isMember(NK.user(e.freelancerId))).reduce((a, e) => a + e.gross, 0);
+  const cats = NK.CATS.map((n) => ({ n, v: S.contracts.filter((k) => { const j = S.jobs.find((x) => x.id === k.jobId), s = S.services.find((x) => x.id === k.serviceId); return (j || s || {}).cat === n; }).flatMap((k) => k.milestones).reduce((a, m) => a + (m.status === 'CAIR' ? m.amount : 0), 0) })).filter((x) => x.v).sort((a, b) => b.v - a.v).slice(0, 5);
+  const top = cats[0] ? cats[0].v : 1;
+  const Q = [['Moderasi', c.moderasi, 'moderasi', 'lowongan dan jasa menunggu'], ['Verifikasi', c.verifikasi, 'verifikasi', 'identitas menunggu'], ['Sengketa', c.sengketa, 'sengketa', 'perlu diputus'], ['Pencairan', c.pencairan, 'keuangan', 'menunggu dibayar'], ['Pesan ditandai', c.pesan, 'sengketa', 'berisi kontak luar']];
+  return `<div class="row between"><div><h1 class="title">Ringkasan</h1><p class="muted small">Dashboard pengelola Ariba Indonesia. Kebijakan versi ${NK.pol().version}, komisi ${NK.pol().commissionPct}%.</p></div><span class="pill ${rc.ok ? 'ok' : 'bad'}">${rc.ok ? 'Pembukuan seimbang' : 'Pembukuan selisih'}</span></div>
+  <div class="kpis"><div class="kpi"><span>Komisi bulan ini</span><b>${rp(komNow)}</b><small>bulan lalu ${rp(komPrev)}</small></div><div class="kpi"><span>Total komisi</span><b>${rp(kom)}</b><small>dari ${rp(gmvAll)} dana cair</small></div><div class="kpi"><span>Dana klien ditahan</span><b>${rp(rc.held)}</b><small>milik klien, bukan pendapatan</small></div><div class="kpi"><span>Saldo freelancer</span><b>${rp(rc.saldo)}</b><small>belum dicairkan</small></div>
+  <div class="kpi"><span>Freelancer</span><b>${fl.length}</b><small>${mem.length} anggota koperasi</small></div><div class="kpi"><span>Klien</span><b>${S.users.filter((u) => u.kind === 'K').length}</b><small>${openJobs().length} lowongan terbuka</small></div><div class="kpi"><span>Kontrak berjalan</span><b>${S.contracts.filter((k) => ['AKTIF', 'SENGKETA'].includes(k.status)).length}</b><small>${S.contracts.filter((k) => k.status === 'SELESAI').length} selesai</small></div><div class="kpi"><span>Porsi dana cair ke anggota</span><b>${gmvAll ? Math.round(memGmv / gmvAll * 100) : 0}%</b><small>${rp(memGmv)}</small></div></div>
+  <div class="split"><div class="card stack-s"><h3>Komisi per bulan</h3><p class="muted xs">Dihitung dari buku pendapatan komisi, enam bulan terakhir.</p>${barChart(months)}</div>
+  <div class="card stack-s"><h3>Perlu tindakan</h3>${Q.map(([t, n, h, s]) => `<a class="row between" href="#admin-${h}" style="text-decoration:none;color:inherit;padding:6px 0;border-bottom:1px solid var(--line2)"><span><strong>${t}</strong><br><span class="muted xs">${s}</span></span><span class="pill ${n ? 'warn' : ''} num">${n}</span></a>`).join('')}</div></div>
+  <div class="card stack-s"><h3>Kategori terlaris</h3><div class="stack-s">${cats.map((x) => `<div class="small"><div class="row between"><span>${esc(x.n)}</span><span class="num">${rp(x.v)}</span></div><div style="height:6px;background:var(--navy-soft);border-radius:3px"><div style="height:6px;width:${Math.round(x.v / top * 100)}%;background:var(--navy3);border-radius:3px"></div></div></div>`).join('')}</div></div>`;
+}
+function aModeration() {
+  const S = NK.S, J = S.jobs.filter((j) => j.status === 'TINJAUAN'), V = S.services.filter((s) => s.status === 'TINJAUAN');
+  const item = (x, type, owner) => `<div class="card stack-s"><div class="row between"><span class="tag">${type} · ${esc(x.cat)}</span><span class="muted xs">${ago(x.at)}</span></div><h3>${esc(x.title)}</h3><p class="small muted">${esc(x.desc)}</p><div class="row small"><span>${esc(owner.name)}</span>${mBadge(owner)}${x.budget ? `<span class="price">${rp(x.budget)}</span>` : ''}</div>${x.flag ? `<div class="note warn">Ditandai ARIBA-NK-003: memuat kata "${esc(x.flag)}".</div>` : ''}<div class="row"><button class="btn sea s" data-a="modOk" data-t="${type}" data-id="${x.id}">Setujui</button><button class="btn danger s" data-a="modNo" data-t="${type}" data-id="${x.id}">Tolak</button></div></div>`;
+  return `<h1 class="title">Moderasi</h1><p class="muted small">Lowongan dan jasa akun umum, serta semua yang memuat kata tertanda, ditinjau sebelum tayang.</p>${J.length + V.length ? `<div class="grid2">${J.map((j) => item(j, 'Lowongan', NK.user(j.clientId))).join('')}${V.map((s) => item(s, 'Jasa', NK.user(s.freelancerId))).join('')}</div>` : empty('Antrean moderasi kosong')}`;
+}
+function aVerify() {
+  const L = NK.S.users.filter((u) => u.kyc === 'MENUNGGU');
+  return `<h1 class="title">Verifikasi identitas</h1><p class="muted small">Anggota koperasi terverifikasi otomatis lewat akun Ariba. Akun umum ditinjau di sini.</p>${L.length ? `<div class="tw"><table class="tmin"><thead><tr><th>Nama</th><th>Kota</th><th>Dikirim</th><th>Berkas</th><th></th></tr></thead><tbody>${L.map((u) => `<tr><td><strong>${esc(u.name)}</strong><div class="muted xs">${esc(u.headline)}</div></td><td>${esc(u.city)}</td><td>${ago(u.kycAt)}</td><td class="muted small">KTP dan swafoto (simulasi)</td><td><div class="row"><button class="btn sea s" data-a="kycOk" data-id="${u.id}">Verifikasi</button><button class="btn danger s" data-a="kycNo" data-id="${u.id}">Tolak</button></div></td></tr>`).join('')}</tbody></table></div>` : empty('Tidak ada identitas yang menunggu')}`;
+}
+function aUsers() {
+  const L = NK.S.users.filter((u) => u.role !== 'ADMIN');
+  return `<h1 class="title">Pengguna</h1><div class="tw"><table class="tmin"><thead><tr><th>Nama</th><th>Jenis</th><th>Keanggotaan</th><th>Identitas</th><th class="r">Nilai transaksi</th><th>Status</th><th></th></tr></thead><tbody>${L.map((u) => { const tot = NK.S.contracts.filter((c) => c.clientId === u.id || c.freelancerId === u.id).flatMap((c) => c.milestones).reduce((a, m) => a + (m.status === 'CAIR' ? m.amount : 0), 0); return `<tr><td><strong>${esc(u.name)}</strong><div class="muted xs">${esc(u.city)}</div></td><td>${u.kind === 'F' ? 'Freelancer' : 'Klien'}</td><td class="small">${NK.isMember(u) ? `${mBadge(u)}<div class="muted xs">${esc(u.member.coop)}</div>` : '<span class="muted">Umum</span>'}</td><td>${u.kyc === 'TERVERIFIKASI' ? '<span class="pill ok">Terverifikasi</span>' : u.kyc === 'MENUNGGU' ? '<span class="pill warn">Menunggu</span>' : '<span class="pill">Belum</span>'}</td><td class="r">${rp(tot)}</td><td>${u.status === 'AKTIF' ? '<span class="pill sea">Aktif</span>' : '<span class="pill bad">Ditangguhkan</span>'}</td><td>${u.status === 'AKTIF' ? `<button class="btn s danger" data-a="suspend" data-id="${u.id}">Tangguhkan</button>` : `<button class="btn s" data-a="unsuspend" data-id="${u.id}">Aktifkan</button>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+}
+function aContracts() {
+  const L = NK.S.contracts;
+  return `<h1 class="title">Kontrak</h1><div class="tw"><table class="tmin"><thead><tr><th>Nomor</th><th>Judul</th><th>Klien</th><th>Freelancer</th><th class="r">Nilai</th><th class="r">Komisi</th><th>Status</th></tr></thead><tbody>${L.map((c) => `<tr><td><a class="mono" href="#kontrak-${c.id}">${c.no}</a></td><td>${esc(c.title)}</td><td>${esc(NK.user(c.clientId).name)}</td><td>${esc(NK.user(c.freelancerId).name)}</td><td class="r">${rp(c.total)}</td><td class="r">${rp(c.milestones.reduce((a, m) => a + (m.komisi || 0), 0))}</td><td>${pill(c.status)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function aDisputes() {
+  const L = NK.S.disputes, F = NK.S.msgs.filter((m) => m.flag);
+  return `<h1 class="title">Sengketa</h1>${L.length ? `<div class="stack-s">${L.map((d) => { const c = NK.getC(d.contractId), m = c.milestones.find((x) => x.id === d.msId); return `<div class="card stack-s"><div class="row between"><a class="mono" href="#kontrak-${c.id}">${c.no}</a>${d.status === 'TERBUKA' ? '<span class="pill bad">Terbuka</span>' : '<span class="pill ok">Diputus</span>'}</div><h3>${esc(m.title)}</h3><div class="row small muted"><span>Nilai ${rp(m.amount)}</span><span>Dibuka ${esc(NK.user(d.by).name)} ${ago(d.at)}</span></div><p class="small">${esc(d.reason)}</p>${m.note ? `<p class="small muted">Hasil yang dikirim: ${esc(m.note)}</p>` : ''}${d.resolution ? `<div class="note"><strong>Putusan:</strong> ${esc(d.resolution.note)}<br>Freelancer ${rp(d.resolution.toFreelancer)}, klien ${rp(d.resolution.toClient)}</div>` : `<div class="row"><button class="btn pri s" data-a="resolve" data-id="${d.id}">Putuskan</button><a class="btn s" href="#kontrak-${c.id}">Lihat kontrak dan pesan</a></div>`}</div>`; }).join('')}</div>` : empty('Tidak ada sengketa')}
+  <h2 style="font-size:22px">Pesan ditandai (ARIBA-NK-006)</h2>${F.length ? `<div class="stack-s">${F.map((m) => { const c = NK.getC(m.thread); return `<div class="card small"><a class="mono" href="#kontrak-${c.id}">${c.no}</a> · ${esc(NK.user(m.from).name)} · ${ago(m.at)}<p>${esc(m.text)}</p></div>`; }).join('')}</div>` : empty('Tidak ada pesan ditandai')}`;
+}
+function aFinance() {
+  const S = NK.S, rc = NK.reconcile(), W = S.payouts, Q = W.filter((p) => p.status === 'DIAJUKAN');
+  const accs = Object.keys(NK.ACC).map((k) => ({ k, n: NK.ACC[k], v: rc.bal[k] }));
+  return `<h1 class="title">Keuangan</h1><div class="kpis"><div class="kpi"><span>Pendapatan komisi</span><b>${rp(rc.komisi)}</b></div><div class="kpi"><span>Pendapatan biaya transfer</span><b>${rp(-rc.bal.FEE)}</b></div><div class="kpi"><span>Pencairan menunggu</span><b>${rp(rc.payout)}</b><small>${Q.length} pengajuan</small></div><div class="kpi"><span>Kas di mitra pembayaran</span><b>${rp(rc.bal.KAS)}</b><small>simulasi</small></div></div>
+  <h2 style="font-size:22px">Antrean pencairan</h2>${Q.length ? `<div class="tw"><table class="tmin"><thead><tr><th>Diajukan</th><th>Freelancer</th><th>Tujuan</th><th class="r">Nominal</th><th class="r">Biaya</th><th class="r">Ditransfer</th><th></th></tr></thead><tbody>${Q.map((p) => `<tr><td>${ago(p.at)}</td><td>${esc(NK.user(p.freelancerId).name)}</td><td class="small">${esc(p.dest)}</td><td class="r">${rp(p.amount)}</td><td class="r">${rp(p.fee)}</td><td class="r"><strong>${rp(p.amount - p.fee)}</strong></td><td><div class="row" style="flex-wrap:nowrap"><button class="btn sea s" data-a="payYes" data-id="${p.id}">Bayar</button><button class="btn danger s" data-a="payNo" data-id="${p.id}">Tolak</button></div></td></tr>`).join('')}</tbody></table></div>` : empty('Tidak ada pencairan yang menunggu')}
+  <h2 style="font-size:22px">Saldo buku</h2><div class="tw"><table><thead><tr><th>Akun</th><th class="r">Saldo</th></tr></thead><tbody>${accs.map((a) => `<tr><td>${esc(a.n)}</td><td class="r">${rp(Math.abs(a.v))}</td></tr>`).join('')}<tr><td><strong>Total debit sama dengan total kredit</strong></td><td class="r"><strong>${rc.dr === rc.cr ? 'Seimbang' : 'Selisih'} · ${rp(rc.dr)}</strong></td></tr></tbody></table></div>
+  <h2 style="font-size:22px">Jurnal terbaru</h2><div class="tw"><table class="tmin"><thead><tr><th>Waktu</th><th>Keterangan</th><th>Rincian</th></tr></thead><tbody>${S.ledger.slice(0, 20).map((j) => `<tr><td class="small" style="white-space:nowrap">${tgl(j.at)}</td><td>${esc(j.memo)}</td><td class="xs num">${j.lines.map((l) => `<div>${l.dr ? 'Dr' : 'Cr'} ${esc(NK.ACC[l.acc].split(' ').slice(1).join(' '))} ${rp(l.dr || l.cr)}</div>`).join('')}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function aPolicy() {
+  const P = NK.pol();
+  const f = (id, l, h = '') => `<label class="f">${l}${h ? `<small>${h}</small>` : ''}<input class="in num" id="pl-${id}" name="${id}" value="${P[id]}" inputmode="numeric"></label>`;
+  return `<h1 class="title">Kebijakan</h1><p class="muted small">Versi ${P.version}. Perubahan hanya berlaku untuk kontrak baru dan tercatat di Audit.</p>
+  <form class="stack" data-f="policy" style="max-width:820px"><div class="card stack"><h3>Komisi</h3><div class="fgrid">${f('commissionPct', 'Komisi Ariba Indonesia (%)', 'Dipotong dari penghasilan freelancer')}</div></div>
+  <div class="card stack"><h3>Akun umum dan anggota</h3><div class="fgrid">${f('quotaPublic', 'Kuota lamaran umum')}${f('quotaMember', 'Kuota lamaran anggota')}${f('holdDaysPublic', 'Masa tunggu umum (hari)')}${f('holdDaysMember', 'Masa tunggu anggota (hari)')}${f('payoutFeePublic', 'Biaya pencairan umum (Rp)')}${f('payoutFeeMember', 'Biaya pencairan anggota (Rp)')}</div></div>
+  <div class="card stack"><h3>Kontrak dan pencairan</h3><div class="fgrid">${f('autoReleaseDays', 'Pencairan otomatis (hari)', 'Bila klien tidak merespons')}${f('minMilestone', 'Nilai termin minimal (Rp)')}${f('minPayout', 'Pencairan minimal (Rp)')}</div></div>
+  <div class="card stack"><h3>Penyaringan isi (ARIBA-NK-003)</h3><label class="f">Kata diblokir<small>Pisahkan dengan koma. Lowongan dan jasa ditolak otomatis.</small><textarea class="in" id="pl-blocked" name="blocked">${esc(P.blocked.join(', '))}</textarea></label><label class="f">Kata ditinjau<small>Ditahan untuk ditinjau pengelola, termasuk dari anggota.</small><textarea class="in" id="pl-review" name="review">${esc(P.review.join(', '))}</textarea></label></div>
+  <div class="row"><button class="btn pri">Simpan sebagai versi ${P.version + 1}</button></div></form>`;
+}
+function aAudit() {
+  return `<h1 class="title">Audit</h1><p class="muted small">Setiap tindakan penting tercatat dan tidak dapat diubah dari aplikasi.</p><div class="tw"><table class="tmin"><thead><tr><th>Waktu</th><th>Pelaku</th><th>Tindakan</th><th>Rincian</th></tr></thead><tbody>${NK.S.audit.slice(0, 80).map((a) => `<tr><td class="small" style="white-space:nowrap">${tgl(a.at)}</td><td>${esc(a.actor)}</td><td>${esc(a.action)}</td><td class="small muted">${esc(a.detail)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+function vAdmin(tab) {
+  const u = NK.me();
+  if (!u || u.role !== 'ADMIN') return `<div class="wrap page" style="max-width:560px"><div class="stack"><div><h1 class="title">Dashboard pengelola</h1><p class="muted">Khusus tim Ariba Indonesia.</p></div><button class="persona" data-a="login" data-id="admin">${av(NK.user('admin'))}<span class="grow"><strong>Masuk sebagai pengelola</strong><br><span class="muted small">Akun contoh. Versi tayang memakai login dua langkah.</span></span></button></div></div>`;
+  const c = adminCounts(), t = tab || 'ringkasan';
+  const N = [['ringkasan', 'Ringkasan', 'home', 0], ['moderasi', 'Moderasi', 'flag', c.moderasi], ['verifikasi', 'Verifikasi', 'shield', c.verifikasi], ['pengguna', 'Pengguna', 'users', 0], ['kontrak', 'Kontrak', 'file', 0], ['sengketa', 'Sengketa', 'scale', c.sengketa], ['keuangan', 'Keuangan', 'wallet', c.pencairan], ['kebijakan', 'Kebijakan', 'sliders', 0], ['audit', 'Audit', 'list', 0]];
+  const V = { ringkasan: aOverview, moderasi: aModeration, verifikasi: aVerify, pengguna: aUsers, kontrak: aContracts, sengketa: aDisputes, keuangan: aFinance, kebijakan: aPolicy, audit: aAudit };
+  return `<div class="adm"><nav class="adm-side" aria-label="Menu pengelola">${N.map(([h, l, i, n]) => `<a href="#admin${h === 'ringkasan' ? '' : '-' + h}" class="${t === h ? 'on' : ''}">${ic(i)}${l}${n ? `<em>${n}</em>` : ''}</a>`).join('')}</nav><div class="adm-main">${(V[t] || aOverview)()}</div></div>`;
+}
+const AA = {
+  modOk(d) { done(d.t === 'Jasa' ? NK.moderateService(ADMIN_NAME, d.id, true, '') : NK.moderateJob(ADMIN_NAME, d.id, true, ''), 'Disetujui dan tayang.'); },
+  modNo(d) { form('Tolak dari tayangan', 'Alasan akan terlihat oleh pemiliknya.', '<label class="f">Alasan penolakan<textarea class="in" id="md-r" name="reason"></textarea></label>', 'Tolak', 'modNo', `data-t="${d.t}" data-id="${d.id}"`); },
+  kycOk(d) { done(NK.reviewKyc(ADMIN_NAME, d.id, true, ''), 'Identitas terverifikasi.'); },
+  kycNo(d) { form('Tolak identitas', '', '<label class="f">Alasan penolakan<textarea class="in" id="ky-r" name="reason"></textarea></label>', 'Tolak', 'kycNo', `data-id="${d.id}"`); },
+  suspend(d) { form('Tangguhkan akun', `${esc(NK.user(d.id).name)} tidak dapat melamar, memasang, atau mencairkan dana.`, '<label class="f">Alasan<textarea class="in" id="su-r" name="reason"></textarea></label>', 'Tangguhkan', 'suspend', `data-id="${d.id}"`); },
+  unsuspend(d) { done(NK.setUserStatus(ADMIN_NAME, d.id, 'AKTIF', ''), 'Akun diaktifkan.'); },
+  resolve(d) {
+    const x = NK.S.disputes.find((y) => y.id === d.id), c = NK.getC(x.contractId), m = c.milestones.find((y) => y.id === x.msId);
+    form('Putuskan sengketa', `Nilai termin ${rp(m.amount)}. Sisanya kembali ke klien tanpa potongan. Komisi hanya dihitung dari bagian freelancer.`, `<label class="f">Bagian freelancer (Rp)<input class="in num" id="rs-a" name="amount" inputmode="numeric" value="${Math.floor(m.amount / 2)}"></label><label class="f">Dasar keputusan<small>Kedua pihak akan membacanya.</small><textarea class="in" id="rs-n" name="note"></textarea></label>`, 'Tetapkan putusan', 'resolve', `data-id="${d.id}"`);
+  },
+  payYes(d) { done(NK.payPayout(ADMIN_NAME, d.id), 'Pencairan dibayar (simulasi).'); },
+  payNo(d) { form('Tolak pencairan', 'Dana kembali ke saldo freelancer.', '<label class="f">Alasan<textarea class="in" id="pn-r" name="reason"></textarea></label>', 'Tolak', 'payNo', `data-id="${d.id}"`); },
+};
+const FA = {
+  modNo(v, el) { done(el.dataset.t === 'Jasa' ? NK.moderateService(ADMIN_NAME, el.dataset.id, false, v.reason) : NK.moderateJob(ADMIN_NAME, el.dataset.id, false, v.reason), 'Ditolak.'); },
+  kycNo(v, el) { done(NK.reviewKyc(ADMIN_NAME, el.dataset.id, false, v.reason), 'Identitas ditolak.'); },
+  suspend(v, el) { done(NK.setUserStatus(ADMIN_NAME, el.dataset.id, 'DITANGGUHKAN', v.reason), 'Akun ditangguhkan.'); },
+  resolve(v, el) { done(NK.resolveDispute(ADMIN_NAME, el.dataset.id, v.amount, v.note), 'Sengketa diputus.'); },
+  payNo(v, el) { done(NK.rejectPayout(ADMIN_NAME, el.dataset.id, v.reason), 'Pencairan ditolak.'); },
+  policy(v) { done(NK.setPolicy(ADMIN_NAME, v), 'Kebijakan baru tersimpan.'); },
+};
+NK.load();
+render();
+
+</script>
+</body>
+</html>
