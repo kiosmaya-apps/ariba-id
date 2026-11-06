@@ -5,6 +5,7 @@ Situs statis halaman depan ARIBA (aplikasi koperasi digital) untuk GitHub Pages.
 - `index.html` — halaman depan (SEO: title, meta description, canonical, Open Graph, JSON-LD Organization/WebSite/SoftwareApplication/FAQPage)
 - `skor-kredit/` — ketentuan Skor Kredit Ariba Indonesia (ARIBA-SKOR-2.0)
 - `demo/` — prototipe ARIBA Cooperative OS dengan data contoh (noindex)
+- `narakarya/` — prototipe portal kerja lepas Narakarya dengan data contoh (noindex); `narakarya/admin/` membuka dashboard pengelola
 - `img/` — screenshot aplikasi (data contoh), `og/` — gambar pratinjau tautan
 - `robots.txt`, `sitemap.xml`, `404.html`
 
