@@ -60,3 +60,21 @@ jobs:
             **/.git*/**
             .github/**
             README.md
+
+      # DirectAdmin menyajikan https:// dari private_html. Biasanya itu symlink ke public_html
+      # (langkah ini lalu tidak mengubah apa pun); bila folder terpisah, situs juga diunggah ke sana.
+      - name: Unggah ke private_html (https)
+        continue-on-error: true
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          server-dir: ${{ vars.FTP_DIR_HTTPS || 'private_html/' }}
+          dangerous-clean-slate: false
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            README.md
