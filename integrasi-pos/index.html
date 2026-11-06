@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#182B3A">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/logo.png">
+<title>Manual Integrasi Mesin Kasir (POS) Minimarket Koperasi | ARIBA</title>
+<meta name="description" content="Manual integrasi mesin kasir (POS) minimarket koperasi dengan aplikasi koperasi digital ARIBA: autentikasi, katalog, kirim struk idempoten, pembatalan, rekap luring, kode galat, dan uji dengan Postman.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ariba.id/integrasi-pos/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="ARIBA">
+<meta property="og:url" content="https://ariba.id/integrasi-pos/">
+<meta property="og:title" content="Manual Integrasi Mesin Kasir (POS) Minimarket Koperasi">
+<meta property="og:description" content="Manual integrasi mesin kasir (POS) minimarket koperasi dengan aplikasi koperasi digital ARIBA: autentikasi, katalog, kirim struk idempoten, pembatalan, rekap luring, kode galat, dan uji dengan Postman.">
+<meta property="og:image" content="https://ariba.id/og/aplikasi-koperasi-digital-ariba.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://ariba.id/"}, {"@type": "ListItem", "position": 2, "name": "Integrasi POS", "item": "https://ariba.id/integrasi-pos/"}]}, {"@type": "WebPage", "url": "https://ariba.id/integrasi-pos/", "name": "Manual Integrasi Mesin Kasir (POS) Minimarket Koperasi", "inLanguage": "id-ID", "description": "Manual integrasi mesin kasir (POS) minimarket koperasi dengan aplikasi koperasi digital ARIBA: autentikasi, katalog, kirim struk idempoten, pembatalan, rekap luring, kode galat, dan uji dengan Postman."}]}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F5F0}
+a{color:#7E293C}a:hover{color:#5E1E2D}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details[open] .faq-plus{transform:rotate(45deg)}
+</style>
+
+<style>
+.k table{border-collapse:collapse;width:100%;font-size:14.5px;margin:8px 0 18px}
+.k .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.k th,.k td{border:1px solid #E2DDD3;padding:9px 11px;text-align:left;vertical-align:top}
+.k th{background:#F1EEE7;color:#182B3A}
+.k td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.k a{color:#7E293C}
+.k h3{color:#182B3A;font-size:18px;margin:26px 0 8px}
+.k li{font-size:16px;line-height:1.7;color:#2B3540}
+.k pre{background:#0F1C26;color:#E6EDF3;padding:14px 16px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.55}
+.k code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.92em}
+.k p code,.k li code,.k td code{background:#EFEBE3;padding:1px 5px;border-radius:4px}
+.k details{border-top:1px solid #D9D3C7;padding:6px 0}
+.k details:last-of-type{border-bottom:1px solid #D9D3C7}
+.k summary{min-height:48px;display:flex;align-items:center;font-weight:600;color:#182B3A;cursor:pointer}
+</style>
+</head>
+<body><div style="font-family: Inter, system-ui, sans-serif; color: #1C2430; background: #F7F5F0; min-width: 0; overflow-x: hidden">
+<header style="background: #182B3A; color: #F7F5F0">
+<nav aria-label="Navigasi utama" style="max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+<a href="https://ariba.id/" aria-label="ARIBA, aplikasi koperasi digital — beranda" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #F7F5F0">
+<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="5" fill="#7E293C"></rect><rect x="8" y="11" width="16" height="3" rx="1" fill="#F7F5F0"></rect><rect x="8" y="18" width="16" height="3" rx="1" fill="#F7F5F0"></rect></svg>
+<span style="display: flex; flex-direction: column; line-height: 1">
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 21px; font-weight: 600; letter-spacing: 0.18em">ARIBA</span>
+<span style="font-size: 10px; letter-spacing: 0.22em; color: #B9C4CE; margin-top: 4px">ARIBA INDONESIA</span>
+</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-size: 14px">
+<a href="/fitur/" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Fitur</a>
+<a href="/#dompet" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Dompet</a>
+<a href="/#tanpa-bunga" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Tanpa bunga</a>
+<a href="/#tepercaya" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Keamanan</a>
+<a href="/#mudah" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Aplikasi anggota</a>
+<a href="/#untuk-siapa" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Untuk siapa</a>
+<a href="/#tanya-jawab" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Tanya jawab</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid #4A6175; color: #F7F5F0; text-decoration: none; font-size: 14px; font-weight: 500; box-sizing: border-box">Masuk</a>
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; background: #7E293C; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Coba demo</a>
+</div>
+</nav>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 64px; display: flex; flex-direction: column; gap: 18px">
+<nav aria-label="Breadcrumb" style="font-size: 13px; color: #9FB0BE"><a href="/" style="color: #C9D3DC">Beranda</a> › Integrasi POS</nav>
+<h1 style="margin: 0; max-width: 900px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.1; color: #FFFFFF">Manual integrasi mesin kasir (POS) minimarket koperasi</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #C9D3DC">Sambungkan kasir di toko koperasi ke ARIBA: katalog dan harga ditarik dari ARIBA, setiap struk dibukukan sekali, dan belanja anggota otomatis menjadi dasar SHU.</p>
+</section>
+</header>
+<main class="k">
+<section style="background: #FFFFFF"><div style="max-width: 880px; margin: 0 auto; padding: 64px 24px"><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px">
+<a href="/integrasi-pos/ARIBA-POS.postman_collection.json" download style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; background: #182B3A; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 15px">Unduh koleksi Postman</a>
+<a href="/integrasi-pos/ARIBA-POS.postman_environment.json" download style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1.5px solid #182B3A; color: #182B3A; text-decoration: none; font-weight: 600; font-size: 15px">Unduh environment</a>
+</div>
+<div style="font-size: 16px; line-height: 1.7"><p>Untuk pengurus koperasi, vendor POS, dan teknisi yang memasang kasir di toko koperasi.</p>
+<blockquote>
+<p><strong>Status:</strong> rancangan API v1. Di prototipe v2.0 alurnya disimulasikan di <strong>Toko &amp; Minimarket → Integrasi POS</strong>. Tombol "Simulasikan struk dari POS" membukukan struk contoh persis seperti yang akan dilakukan server. Belum ada server yang menerima permintaan. Alamat <code>api.ariba.example</code> hanya contoh.</p>
+</blockquote>
+<p>Berkas pendamping (unduh di bawah):</p>
+<ul>
+<li><a href="/integrasi-pos/ARIBA-POS.postman_collection.json"><code>ARIBA-POS.postman_collection.json</code></a>: semua permintaan beserta skrip uji.</li>
+<li><a href="/integrasi-pos/ARIBA-POS.postman_environment.json"><code>ARIBA-POS.postman_environment.json</code></a>: variabel (alamat, kode toko, client id/secret).</li>
+</ul>
+<hr />
+<h2>1. Gambaran</h2>
+<pre><code> ┌────────────┐   1. token (client credentials)   ┌──────────────┐
+ │  POS toko  │ ────────────────────────────────▶ │  ARIBA API   │
+ │ (kasir di  │   2. tarik katalog &amp; harga        │              │
+ │  lokasi)   │ ◀──────────────────────────────── │  Toko &amp;      │
+ │            │   3. cek nomor anggota            │  Minimarket  │
+ │            │ ────────────────────────────────▶ │      │       │
+ │            │   4. kirim struk / rekap harian   │      ▼       │
+ │            │ ────────────────────────────────▶ │ Buku besar + │
+ └────────────┘                                   │ dasar SHU    │
+                                                  └──────────────┘
+</code></pre>
+<p>Yang terjadi di ARIBA ketika struk diterima:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Langkah</th>
+<th>Jurnal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Penjualan</td>
+<td>Dr Kas (1-1100) / Cr Penjualan Toko (4-4100)</td>
+</tr>
+<tr>
+<td>Harga pokok</td>
+<td>Dr HPP (5-2100) / Cr Persediaan (1-1900), dengan biaya rata-rata bergerak</td>
+</tr>
+<tr>
+<td>Stok</td>
+<td>Berkurang sesuai jumlah barang</td>
+</tr>
+<tr>
+<td>Anggota</td>
+<td>Bila struk membawa <code>member_no</code>, total belanja masuk dasar <strong>jasa transaksi</strong> saat pembagian SHU</td>
+</tr>
+</tbody>
+</table></div>
+<p>Pembatalan struk membuat <strong>jurnal balik</strong> (reversal). Jurnal asli tidak pernah diubah atau dihapus.</p>
+<h3>Prinsip</h3>
+<ol>
+<li><strong>ARIBA adalah sumber harga dan stok.</strong> POS menarik katalog; harga di struk harus sama dengan harga ARIBA saat itu (selisih ditolak <code>PRICE_MISMATCH</code>, kecuali koperasi mengaktifkan "harga POS dipercaya").</li>
+<li><strong>Idempoten.</strong> <code>receipt_no</code> adalah kunci unik per toko. Struk yang dikirim ulang (mis. karena sinyal putus) tidak dibukukan dua kali.</li>
+<li><strong>Data minimal.</strong> POS hanya menerima nomor dan nama anggota yang disamarkan. Tidak ada NIK, saldo, atau skor kredit.</li>
+<li><strong>Rahasia tetap di server.</strong> <code>client_secret</code> disimpan di perangkat kasir yang terkunci atau di server vendor POS, tidak di aplikasi web publik.</li>
+</ol>
+<hr />
+<h2>2. Persiapan di ARIBA (pengurus koperasi)</h2>
+<ol>
+<li><strong>Koperasi → Ubah profil → Unit usaha</strong>: centang <em>Toko / minimarket</em>. Menu <strong>Toko &amp; Minimarket</strong> muncul.</li>
+<li><strong>Toko &amp; Minimarket → Produk &amp; stok</strong>: lengkapi SKU dan barcode setiap produk. SKU harus sama dengan kode barang di POS.</li>
+<li><strong>Integrasi → Tambah mitra</strong>: pilih jenis <em>Mesin kasir (POS) toko/minimarket</em>. Scope bawaan:</li>
+<li><code>pos:produk</code>: membaca katalog dan harga</li>
+<li><code>pos:penjualan</code>: mengirim dan membatalkan struk</li>
+<li><code>anggota:baca</code>: mengecek nomor anggota</li>
+<li>Salin <strong>client id</strong> dan <strong>client secret</strong> (secret hanya tampil sekali) lalu serahkan ke teknisi POS lewat jalur aman, tidak lewat grup chat.</li>
+<li>Catat <strong>kode toko</strong> (contoh demo: <code>KMY-TOKO-01</code>).</li>
+</ol>
+<hr />
+<h2>3. Autentikasi</h2>
+<pre><code class="language-http">POST /oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&amp;client_id=…&amp;client_secret=…&amp;scope=pos:produk pos:penjualan anggota:baca
+</code></pre>
+<p>Respons:</p>
+<pre><code class="language-json">{ &quot;access_token&quot;: &quot;eyJ…&quot;, &quot;token_type&quot;: &quot;Bearer&quot;, &quot;expires_in&quot;: 900, &quot;scope&quot;: &quot;pos:produk pos:penjualan anggota:baca&quot; }
+</code></pre>
+<p>Kirim <code>Authorization: Bearer &lt;access_token&gt;</code> di setiap permintaan. Minta token baru sebelum 15 menit habis.</p>
+<hr />
+<h2>4. Endpoint</h2>
+<p>Alamat dasar: <code>https://api.ariba.example/v1</code>.</p>
+<h3>4.1 Katalog produk</h3>
+<pre><code class="language-http">GET /stores/{store_code}/products?updated_since=2026-11-01T00:00:00+07:00
+</code></pre>
+<pre><code class="language-json">{
+  &quot;store_code&quot;: &quot;KMY-TOKO-01&quot;,
+  &quot;items&quot;: [
+    { &quot;sku&quot;: &quot;BRS-5&quot;, &quot;barcode&quot;: &quot;2075…&quot;, &quot;name&quot;: &quot;Beras premium 5 kg&quot;, &quot;unit&quot;: &quot;karung&quot;, &quot;price&quot;: 78000, &quot;stock&quot;: 44, &quot;active&quot;: true, &quot;updated_at&quot;: &quot;2026-11-01T08:00:00+07:00&quot; }
+  ],
+  &quot;next_cursor&quot;: null
+}
+</code></pre>
+<p>Tarik penuh saat POS menyala, lalu tarik perubahan tiap 15 menit dengan <code>updated_since</code>. Harga dalam rupiah bulat, tanpa desimal.</p>
+<h3>4.2 Cek anggota</h3>
+<pre><code class="language-http">GET /members?member_no=KMY-250004
+</code></pre>
+<pre><code class="language-json">{ &quot;member_no&quot;: &quot;KMY-250004&quot;, &quot;name&quot;: &quot;Ah*** Ha***&quot;, &quot;status&quot;: &quot;AKTIF&quot; }
+</code></pre>
+<p>Kasir memindai kartu anggota (QR/barcode berisi nomor anggota) atau mengetik nomornya. Hanya anggota berstatus <code>AKTIF</code> yang dihitung untuk SHU. Bila tidak ditemukan, struk tetap bisa dikirim tanpa <code>member_no</code> sebagai penjualan umum.</p>
+<h3>4.3 Kirim satu struk</h3>
+<pre><code class="language-http">POST /stores/{store_code}/sales
+Idempotency-Key: AM-20261106-0101
+Content-Type: application/json
+</code></pre>
+<pre><code class="language-json">{
+  &quot;receipt_no&quot;: &quot;AM-20261106-0101&quot;,
+  &quot;occurred_at&quot;: &quot;2026-11-06T14:05:00+07:00&quot;,
+  &quot;cashier&quot;: &quot;Kasir 1&quot;,
+  &quot;member_no&quot;: &quot;KMY-250004&quot;,
+  &quot;payment&quot;: &quot;TUNAI&quot;,
+  &quot;items&quot;: [
+    { &quot;sku&quot;: &quot;BRS-5&quot;, &quot;qty&quot;: 1, &quot;unit_price&quot;: 78000 },
+    { &quot;sku&quot;: &quot;KPI-10&quot;, &quot;qty&quot;: 2, &quot;unit_price&quot;: 14000 }
+  ],
+  &quot;total&quot;: 106000
+}
+</code></pre>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Kolom</th>
+<th>Wajib</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>receipt_no</code></td>
+<td>ya</td>
+<td>Nomor struk dari POS, unik per toko. Sama dengan <code>Idempotency-Key</code>.</td>
+</tr>
+<tr>
+<td><code>occurred_at</code></td>
+<td>ya</td>
+<td>Waktu transaksi di kasir (ISO 8601 dengan zona waktu).</td>
+</tr>
+<tr>
+<td><code>cashier</code></td>
+<td>ya</td>
+<td>Nama atau kode kasir.</td>
+</tr>
+<tr>
+<td><code>member_no</code></td>
+<td>tidak</td>
+<td>Nomor anggota. Kosongkan untuk pembeli umum.</td>
+</tr>
+<tr>
+<td><code>payment</code></td>
+<td>ya</td>
+<td><code>TUNAI</code>, <code>QRIS</code>, atau <code>TRANSFER</code>.</td>
+</tr>
+<tr>
+<td><code>items[].sku</code> / <code>qty</code> / <code>unit_price</code></td>
+<td>ya</td>
+<td>Kuantitas bilangan bulat &gt; 0; harga rupiah bulat.</td>
+</tr>
+<tr>
+<td><code>total</code></td>
+<td>ya</td>
+<td>Harus sama dengan Σ qty × unit_price.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Respons <code>201 Created</code>:</p>
+<pre><code class="language-json">{ &quot;sale_id&quot;: &quot;JUAL-KMY-20261106-0003&quot;, &quot;receipt_no&quot;: &quot;AM-20261106-0101&quot;, &quot;status&quot;: &quot;DIBUKUKAN&quot;, &quot;journal_id&quot;: &quot;JRN-…&quot;, &quot;member_counted_for_shu&quot;: true }
+</code></pre>
+<p>Kirim ulang dengan <code>receipt_no</code> sama → <code>200 OK</code> dengan isi respons pertama dan header <code>Idempotent-Replay: true</code>.</p>
+<h3>4.4 Cek status struk</h3>
+<pre><code class="language-http">GET /stores/{store_code}/sales/{receipt_no}
+</code></pre>
+<p>Status: <code>DIBUKUKAN</code>, <code>DIBATALKAN</code>, atau <code>404</code> bila belum pernah diterima. Pakai ini saat POS ragu apakah struk sudah terkirim.</p>
+<h3>4.5 Batalkan struk</h3>
+<pre><code class="language-http">POST /stores/{store_code}/sales/{receipt_no}/void
+{ &quot;reason&quot;: &quot;Salah input barang&quot;, &quot;voided_at&quot;: &quot;2026-11-06T14:20:00+07:00&quot;, &quot;cashier&quot;: &quot;Kasir 1&quot; }
+</code></pre>
+<p>ARIBA membuat jurnal balik dan mengembalikan stok. Struk yang sudah dibatalkan tidak bisa dibatalkan lagi (<code>409 ALREADY_VOIDED</code>). Retur sebagian dilakukan dengan membatalkan struk lalu mengirim struk baru.</p>
+<h3>4.6 Rekap akhir hari (mode luring)</h3>
+<p>Untuk toko dengan internet tidak stabil, POS boleh menyimpan struk lalu mengirimnya sekaligus:</p>
+<pre><code class="language-http">POST /stores/{store_code}/sales:batch
+{ &quot;business_date&quot;: &quot;2026-11-06&quot;, &quot;sales&quot;: [ { …struk 1… }, { …struk 2… } ] }
+</code></pre>
+<p>Respons memuat hasil per struk:</p>
+<pre><code class="language-json">{ &quot;accepted&quot;: 41, &quot;replayed&quot;: 2, &quot;rejected&quot;: 1, &quot;results&quot;: [ { &quot;receipt_no&quot;: &quot;AM-20261106-0102&quot;, &quot;status&quot;: &quot;DITOLAK&quot;, &quot;error&quot;: &quot;SKU_NOT_FOUND&quot; } ] }
+</code></pre>
+<p>Maksimal 500 struk per permintaan. Struk yang ditolak diperbaiki lalu dikirim ulang satu per satu. Toko tanpa POS sama sekali bisa memakai <strong>rekap harian manual</strong> di aplikasi (kanal <code>REKAP</code>).</p>
+<hr />
+<h2>5. Kode galat</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>HTTP</th>
+<th>Kode</th>
+<th>Arti</th>
+<th>Tindakan POS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>400</td>
+<td><code>VALIDATION</code></td>
+<td>Kolom wajib kosong/format salah</td>
+<td>Perbaiki data</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>TOKEN_EXPIRED</code></td>
+<td>Token habis</td>
+<td>Minta token baru, ulangi</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>SCOPE_MISSING</code></td>
+<td>Kunci tak punya scope</td>
+<td>Minta pengurus menambah scope</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>SKU_NOT_FOUND</code></td>
+<td>SKU tidak ada di katalog toko</td>
+<td>Sinkron katalog, cek SKU</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>MEMBER_NOT_FOUND</code></td>
+<td>Nomor anggota tak dikenal</td>
+<td>Kirim tanpa <code>member_no</code></td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>ALREADY_VOIDED</code></td>
+<td>Struk sudah dibatalkan</td>
+<td>Tidak perlu diulang</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>TOTAL_MISMATCH</code></td>
+<td>Total ≠ jumlah baris</td>
+<td>Hitung ulang</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>PRICE_MISMATCH</code></td>
+<td>Harga beda dengan ARIBA</td>
+<td>Sinkron katalog</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>STOCK_INSUFFICIENT</code></td>
+<td>Stok ARIBA kurang</td>
+<td>Catat penerimaan barang di ARIBA dulu</td>
+</tr>
+<tr>
+<td>422</td>
+<td><code>RULE_BLOCKED</code></td>
+<td>Ditolak Konstitusi Ekonomi</td>
+<td>Hubungi pengurus</td>
+</tr>
+<tr>
+<td>429</td>
+<td><code>RATE_LIMITED</code></td>
+<td>Terlalu sering</td>
+<td>Tunggu sesuai <code>Retry-After</code></td>
+</tr>
+<tr>
+<td>5xx</td>
+<td>—</td>
+<td>Gangguan server</td>
+<td>Simpan struk, kirim ulang (aman karena idempoten)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Bentuk badan galat:</p>
+<pre><code class="language-json">{ &quot;error&quot;: { &quot;code&quot;: &quot;SKU_NOT_FOUND&quot;, &quot;message&quot;: &quot;SKU TIDAK-ADA tidak terdaftar di toko KMY-TOKO-01&quot;, &quot;field&quot;: &quot;items[0].sku&quot; } }
+</code></pre>
+<hr />
+<h2>6. Uji dengan Postman (langkah demi langkah)</h2>
+<ol>
+<li>Pasang Postman (aplikasi desktop atau web).</li>
+<li><strong>Import</strong> → seret kedua berkas <code>ARIBA-POS.postman_collection.json</code> dan <code>ARIBA-POS.postman_environment.json</code>.</li>
+<li>Pojok kanan atas → pilih environment <strong>ARIBA POS (demo)</strong>.</li>
+<li>Buka environment, isi <code>client_id</code> dan <code>client_secret</code> (kolom secret tersembunyi). Sesuaikan <code>base_url</code>, <code>token_url</code>, dan <code>store_code</code> bila server sungguhan sudah tersedia.</li>
+<li>Jalankan <strong>0. Autentikasi → Minta token</strong>. Skrip uji menyimpan <code>access_token</code> ke environment secara otomatis.</li>
+<li>Jalankan <strong>1. Katalog produk</strong>. Pastikan SKU di POS sama dengan daftar ini.</li>
+<li>Jalankan <strong>2. Anggota → Cek nomor anggota</strong>.</li>
+<li>Jalankan <strong>3. Penjualan → Kirim satu struk</strong> (harus <code>201</code>), lalu <strong>Kirim ulang struk yang sama</strong> (harus <code>200</code> dengan <code>Idempotent-Replay: true</code>, tidak dibukukan dua kali).</li>
+<li><strong>Cek status struk</strong> → <code>DIBUKUKAN</code>. <strong>Batalkan struk</strong> → status <code>DIBATALKAN</code>.</li>
+<li>Jalankan folder <strong>4. Contoh galat</strong> untuk memastikan POS menangani 404/422 dengan benar.</li>
+<li>Untuk uji menyeluruh: klik kanan koleksi → <strong>Run collection</strong>. Semua tes harus hijau.</li>
+</ol>
+<p>Selama server belum tersedia, gunakan simulasi di aplikasi: <strong>Toko &amp; Minimarket → Integrasi POS → Simulasikan struk dari POS</strong>, lalu periksa tab <strong>Penjualan</strong> (kanal "POS") dan <strong>Universal Ledger</strong> (sumber "Penjualan toko").</p>
+<hr />
+<h2>7. Checklist pemasangan di toko</h2>
+<ul>
+<li>☐ SKU dan barcode di POS sama dengan ARIBA</li>
+<li>☐ Jam perangkat kasir sinkron (NTP), zona waktu WIB/WITA/WIT benar</li>
+<li>☐ Client secret tersimpan di perangkat terkunci atau server vendor</li>
+<li>☐ Pemindai kartu anggota terpasang; kasir tahu cara memasukkan nomor anggota</li>
+<li>☐ Mode luring diuji: cabut internet, buat 3 transaksi, sambungkan, pastikan rekap terkirim sekali saja</li>
+<li>☐ Uji pembatalan struk</li>
+<li>☐ Stok awal di ARIBA dicatat lewat <em>Terima barang</em> sebelum toko buka</li>
+</ul>
+<h2>8. Keamanan &amp; kepatuhan</h2>
+<ul>
+<li>Kunci POS bisa dicabut kapan saja dari halaman Integrasi; semua panggilan tercatat di Audit Trail.</li>
+<li>ARIBA tidak menyimpan data kartu pembayaran. Pembayaran QRIS/transfer diproses penyedia pembayaran berizin; ARIBA hanya mencatat metodenya.</li>
+<li>Penjualan ke non-anggota tetap dibukukan, tetapi tidak menjadi dasar SHU anggota. Kewajiban pajak (mis. PPN bila koperasi PKP) mengikuti konsultan pajak koperasi; ARIBA belum menghitung pajak.</li>
+</ul></div></div></section>
+<section style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 96px">
+<div style="background: #7E293C; color: #FFFFFF; border-radius: 16px; padding: clamp(28px, 5vw, 52px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<div style="flex: 1 1 420px; min-width: 0"><h2 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3.2vw, 36px); line-height: 1.15; font-weight: 600; color: #FFFFFF">Lihat sendiri dengan data contoh.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #F4DDE3">Demo berjalan di peramban, tanpa mendaftar. Semua pembayaran disimulasikan.</p></div>
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 6px; background: #FFFFFF; color: #182B3A; text-decoration: none; font-size: 16px; font-weight: 600">Coba demo aplikasi</a>
+</div></section>
+</main>
+<footer id="kontak" style="background: #12212D; color: #B9C4CE">
+<div style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="display: flex; align-items: center; gap: 10px">
+<svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="5" fill="#7E293C"></rect><rect x="8" y="11" width="16" height="3" rx="1" fill="#F7F5F0"></rect><rect x="8" y="18" width="16" height="3" rx="1" fill="#F7F5F0"></rect></svg>
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; letter-spacing: 0.18em; color: #F7F5F0">ARIBA</span>
+</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.6">ARIBA adalah aplikasi koperasi digital tanpa sistem berbunga oleh Ariba Indonesia.</p>
+</div>
+<nav aria-label="Produk" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F7F5F0; font-weight: 600">Produk</span>
+<a href="/fitur/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Semua fitur</a>
+<a href="/#dompet" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Dompet anggota</a>
+<a href="/fitur/#laba-rugi" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Laporan laba rugi</a>
+<a href="/shu/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">SHU &amp; bagi hasil</a>
+<a href="/koperasi-merah-putih/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Koperasi Merah Putih</a>
+<a href="/integrasi-pos/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Integrasi POS minimarket</a>
+<a href="/#tanpa-bunga" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Konstitusi Ekonomi</a>
+<a href="/#skor" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Skor kredit</a>
+<a href="/#untuk-siapa" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Integrasi HRIS &amp; sekolah</a>
+</nav>
+<nav aria-label="Legal" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F7F5F0; font-weight: 600">Legal</span>
+<a href="/skor-kredit/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Ketentuan skor kredit</a>
+</nav>
+</div>
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px 24px 96px; border-top: 1px solid #2A3E4F; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #8FA1B0">
+<span>© 2026 Ariba Indonesia</span>
+<span>ariba.id</span>
+</div>
+</footer>
+
+<a href="https://wa.me/6287788995336?text=Halo%20ARIBA%2C%20saya%20ingin%20bertanya%20tentang%20aplikasi%20koperasi%20digital." target="_blank" rel="noopener" aria-label="Chat via WhatsApp dengan ARIBA" style="position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 50; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 20px 0 16px; border-radius: 999px; background: #1F7A4D; color: #FFFFFF; text-decoration: none; font-family: Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 10px 28px rgba(12, 40, 26, 0.35)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.6-5.2A8.5 8.5 0 1 1 21 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2L9 9.5z" fill="currentColor" stroke="none"></path></svg>Chat via WA</a>
+
+</div></body></html>

@@ -1,0 +1,556 @@
+{
+  "info": {
+    "name": "ARIBA POS — Integrasi Kasir Toko/Minimarket",
+    "_postman_id": "5b7c4a8e-1f2d-4c3b-9e8a-0a1b2c3d4e5f",
+    "description": "Koleksi uji integrasi mesin kasir (POS) dengan ARIBA Cooperative OS. Rancangan: server API belum aktif; gunakan bersama docs/POS-INTEGRASI.md. Nilai Rupiah selalu bilangan bulat.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.ariba.example/v1"
+    },
+    {
+      "key": "token_url",
+      "value": "https://api.ariba.example/oauth/token"
+    },
+    {
+      "key": "client_id",
+      "value": "ariba_kmy_xxxxxxxx"
+    },
+    {
+      "key": "client_secret",
+      "value": "ISI_DI_ENVIRONMENT_BUKAN_DI_SINI"
+    },
+    {
+      "key": "store_code",
+      "value": "KMY-TOKO-01"
+    },
+    {
+      "key": "receipt_no",
+      "value": "AM-20261106-0001"
+    },
+    {
+      "key": "access_token",
+      "value": ""
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Nomor struk unik per kirim bila belum diisi manual",
+          "if (!pm.collectionVariables.get('receipt_no')) pm.collectionVariables.set('receipt_no', 'AM-' + Date.now());"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "0. Autentikasi",
+      "item": [
+        {
+          "name": "Minta token (client credentials)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{client_id}}"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{client_secret}}"
+                },
+                {
+                  "key": "scope",
+                  "value": "pos:produk pos:penjualan anggota:baca"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{token_url}}",
+              "host": [
+                "{{token_url}}"
+              ]
+            },
+            "description": "Token berlaku 15 menit. Simpan client_secret di Environment (tipe secret), jangan di koleksi."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Token diterima', () => pm.response.to.have.status(200));",
+                  "const j = pm.response.json();",
+                  "pm.collectionVariables.set('access_token', j.access_token);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "1. Katalog produk",
+      "item": [
+        {
+          "name": "Ambil katalog toko",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/products?updated_since=2026-11-01T00:00:00+07:00",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "updated_since",
+                  "value": "2026-11-01T00:00:00+07:00"
+                }
+              ]
+            },
+            "description": "Daftar SKU, barcode, nama, harga jual, status aktif, dan stok menurut ARIBA. Panggil saat POS dibuka dan setiap 15 menit."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));",
+                  "pm.test('Ada daftar produk', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "2. Anggota",
+      "item": [
+        {
+          "name": "Cek nomor anggota (untuk SHU)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/members?member_no=KMY-250004",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "members"
+              ],
+              "query": [
+                {
+                  "key": "member_no",
+                  "value": "KMY-250004"
+                }
+              ]
+            },
+            "description": "Kasir memindai kartu/QR anggota. Respons hanya status keanggotaan; tidak ada saldo atau data pribadi lain."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 OK', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "3. Penjualan",
+      "item": [
+        {
+          "name": "Kirim satu struk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{receipt_no}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales"
+              ]
+            },
+            "description": "Kirim tiap struk segera setelah dibayar. Idempotency-Key = nomor struk: mengirim ulang struk yang sama tidak membukukan dua kali (200, duplicate=true).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_no\": \"{{receipt_no}}\",\n  \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n  \"cashier\": \"Kasir 1\",\n  \"member_no\": \"KMY-250004\",\n  \"payment\": \"TUNAI\",\n  \"items\": [\n    {\n      \"sku\": \"BRS-5\",\n      \"qty\": 1,\n      \"unit_price\": 78000\n    },\n    {\n      \"sku\": \"KPI-10\",\n      \"qty\": 2,\n      \"unit_price\": 14000\n    }\n  ],\n  \"total\": 106000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Diterima', () => pm.expect([200,201]).to.include(pm.response.code));",
+                  "pm.test('Ada sale_id', () => pm.expect(pm.response.json().sale_id).to.be.a('string'));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Kirim ulang struk yang sama (uji idempoten)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "{{receipt_no}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales"
+              ]
+            },
+            "description": "Harus mengembalikan 200 dengan duplicate=true dan sale_id yang sama.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_no\": \"{{receipt_no}}\",\n  \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n  \"cashier\": \"Kasir 1\",\n  \"member_no\": \"KMY-250004\",\n  \"payment\": \"TUNAI\",\n  \"items\": [\n    {\n      \"sku\": \"BRS-5\",\n      \"qty\": 1,\n      \"unit_price\": 78000\n    },\n    {\n      \"sku\": \"KPI-10\",\n      \"qty\": 2,\n      \"unit_price\": 14000\n    }\n  ],\n  \"total\": 106000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Duplikat tidak dibukukan ulang', () => pm.expect(pm.response.json().duplicate).to.eql(true));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cek status struk",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales/{{receipt_no}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales",
+                "{{receipt_no}}"
+              ]
+            },
+            "description": "Untuk rekonsiliasi: status DIBUKUKAN atau DIBATALKAN beserta nomor jurnal."
+          }
+        },
+        {
+          "name": "Batalkan struk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales/{{receipt_no}}/void",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales",
+                "{{receipt_no}}",
+                "void"
+              ]
+            },
+            "description": "Membuat jurnal pembalik dan mengembalikan stok. Struk yang sudah dibatalkan tidak bisa dibatalkan lagi (409).",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"Salah input barang\",\n  \"voided_at\": \"2026-11-06T14:20:00+07:00\",\n  \"cashier\": \"Kasir 1\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Kirim rekap akhir hari (batch)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "Z-KMY-TOKO-01-20261106"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales:batch",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales:batch"
+              ]
+            },
+            "description": "Untuk POS yang offline: maksimal 500 struk per batch. Setiap struk tetap idempoten per receipt_no; respons berisi hasil per struk.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"business_date\": \"2026-11-06\",\n  \"sales\": [\n    {\n      \"receipt_no\": \"AM-20261106-0101\",\n      \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n      \"cashier\": \"Kasir 1\",\n      \"member_no\": \"KMY-250004\",\n      \"payment\": \"TUNAI\",\n      \"items\": [\n        {\n          \"sku\": \"BRS-5\",\n          \"qty\": 1,\n          \"unit_price\": 78000\n        },\n        {\n          \"sku\": \"KPI-10\",\n          \"qty\": 2,\n          \"unit_price\": 14000\n        }\n      ],\n      \"total\": 106000\n    },\n    {\n      \"receipt_no\": \"AM-20261106-0102\",\n      \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n      \"cashier\": \"Kasir 1\",\n      \"member_no\": null,\n      \"payment\": \"QRIS\",\n      \"items\": [\n        {\n          \"sku\": \"BRS-5\",\n          \"qty\": 1,\n          \"unit_price\": 78000\n        },\n        {\n          \"sku\": \"KPI-10\",\n          \"qty\": 2,\n          \"unit_price\": 14000\n        }\n      ],\n      \"total\": 106000\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. Contoh galat",
+      "item": [
+        {
+          "name": "SKU tidak dikenal (404)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "AM-ERR-SKU"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales"
+              ]
+            },
+            "description": "Respons: 404 SKU_NOT_FOUND.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_no\": \"AM-ERR-SKU\",\n  \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n  \"cashier\": \"Kasir 1\",\n  \"member_no\": \"KMY-250004\",\n  \"payment\": \"TUNAI\",\n  \"items\": [\n    {\n      \"sku\": \"TIDAK-ADA\",\n      \"qty\": 1,\n      \"unit_price\": 1000\n    }\n  ],\n  \"total\": 1000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Stok tidak cukup (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "AM-ERR-STOK"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales"
+              ]
+            },
+            "description": "Respons: 422 STOCK_INSUFFICIENT. POS menampilkan pesan dan kasir menyesuaikan jumlah.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_no\": \"AM-ERR-STOK\",\n  \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n  \"cashier\": \"Kasir 1\",\n  \"member_no\": \"KMY-250004\",\n  \"payment\": \"TUNAI\",\n  \"items\": [\n    {\n      \"sku\": \"BRS-5\",\n      \"qty\": 99999,\n      \"unit_price\": 78000\n    }\n  ],\n  \"total\": 7799922000\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Total tidak cocok (422)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Idempotency-Key",
+                "value": "AM-ERR-TOTAL"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/stores/{{store_code}}/sales",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "stores",
+                "{{store_code}}",
+                "sales"
+              ]
+            },
+            "description": "Respons: 422 TOTAL_MISMATCH. Total harus sama dengan jumlah qty × unit_price.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receipt_no\": \"AM-ERR-TOTAL\",\n  \"occurred_at\": \"2026-11-06T14:05:00+07:00\",\n  \"cashier\": \"Kasir 1\",\n  \"member_no\": \"KMY-250004\",\n  \"payment\": \"TUNAI\",\n  \"items\": [\n    {\n      \"sku\": \"BRS-5\",\n      \"qty\": 1,\n      \"unit_price\": 78000\n    },\n    {\n      \"sku\": \"KPI-10\",\n      \"qty\": 2,\n      \"unit_price\": 14000\n    }\n  ],\n  \"total\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

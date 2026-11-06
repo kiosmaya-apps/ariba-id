@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#182B3A">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/logo.png">
+<title>SHU Koperasi: Cara Menghitung dan Membagi Sisa Hasil Usaha | ARIBA</title>
+<meta name="description" content="Cara aplikasi koperasi digital ARIBA menghitung SHU dari laporan laba rugi, membaginya sesuai keputusan RAT (jasa transaksi, jasa modal, cadangan), dan menangani tahun rugi tanpa memotong simpanan.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://ariba.id/shu/">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="ARIBA">
+<meta property="og:url" content="https://ariba.id/shu/">
+<meta property="og:title" content="SHU Koperasi: Cara Menghitung dan Membagi Sisa Hasil Usaha">
+<meta property="og:description" content="Cara aplikasi koperasi digital ARIBA menghitung SHU dari laporan laba rugi, membaginya sesuai keputusan RAT (jasa transaksi, jasa modal, cadangan), dan menangani tahun rugi tanpa memotong simpanan.">
+<meta property="og:image" content="https://ariba.id/og/aplikasi-koperasi-digital-ariba.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Beranda", "item": "https://ariba.id/"}, {"@type": "ListItem", "position": 2, "name": "SHU & bagi hasil", "item": "https://ariba.id/shu/"}]}, {"@type": "WebPage", "url": "https://ariba.id/shu/", "name": "SHU Koperasi: Cara Menghitung dan Membagi Sisa Hasil Usaha", "inLanguage": "id-ID", "description": "Cara aplikasi koperasi digital ARIBA menghitung SHU dari laporan laba rugi, membaginya sesuai keputusan RAT (jasa transaksi, jasa modal, cadangan), dan menangani tahun rugi tanpa memotong simpanan."}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Apakah SHU sama dengan bunga simpanan?", "acceptedAnswer": {"@type": "Answer", "text": "Tidak. Bunga dijanjikan di depan dan tetap dibayar walau usaha merugi. SHU hanya ada bila usaha koperasi benar-benar menghasilkan sisa setelah semua beban, dan besarnya diputuskan anggota di RAT."}}, {"@type": "Question", "name": "Bagaimana kalau saya tidak pernah belanja di koperasi?", "acceptedAnswer": {"@type": "Answer", "text": "Anda tetap mendapat bagian jasa modal sebanding simpanan pokok dan wajib Anda. Bagian jasa transaksi hanya untuk anggota yang belanja, menyewa alat, atau memakai jasa koperasi tahun itu."}}, {"@type": "Question", "name": "Apakah simpanan saya berkurang bila koperasi rugi?", "acceptedAnswer": {"@type": "Answer", "text": "Tidak. Rugi ditutup dari cadangan koperasi atau dibawa ke tahun berikutnya dan ditutup dari SHU tahun depan, sesuai keputusan RAT. Simpanan anggota tidak dipotong."}}, {"@type": "Question", "name": "Kapan SHU dibagikan?", "acceptedAnswer": {"@type": "Answer", "text": "Setelah tutup buku per 31 Desember dan setelah RAT memutuskan pembagiannya, biasanya pada triwulan pertama tahun berikutnya. Bagian Anda langsung masuk saldo dompet (simpanan sukarela)."}}, {"@type": "Question", "name": "Siapa yang menentukan persentase pembagian?", "acceptedAnswer": {"@type": "Answer", "text": "Rapat anggota tahunan. Pengurus mengusulkan, anggota memberi suara di aplikasi, dan pembagian hanya bisa dijalankan setelah keputusan RAT sah dan diterima."}}]}]}</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F7F5F0}
+a{color:#7E293C}a:hover{color:#5E1E2D}
+details summary{cursor:pointer;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details[open] .faq-plus{transform:rotate(45deg)}
+</style>
+
+<style>
+.k table{border-collapse:collapse;width:100%;font-size:14.5px;margin:8px 0 18px}
+.k .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.k th,.k td{border:1px solid #E2DDD3;padding:9px 11px;text-align:left;vertical-align:top}
+.k th{background:#F1EEE7;color:#182B3A}
+.k td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.k a{color:#7E293C}
+.k h3{color:#182B3A;font-size:18px;margin:26px 0 8px}
+.k li{font-size:16px;line-height:1.7;color:#2B3540}
+.k pre{background:#0F1C26;color:#E6EDF3;padding:14px 16px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.55}
+.k code{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:.92em}
+.k p code,.k li code,.k td code{background:#EFEBE3;padding:1px 5px;border-radius:4px}
+.k details{border-top:1px solid #D9D3C7;padding:6px 0}
+.k details:last-of-type{border-bottom:1px solid #D9D3C7}
+.k summary{min-height:48px;display:flex;align-items:center;font-weight:600;color:#182B3A;cursor:pointer}
+</style>
+</head>
+<body><div style="font-family: Inter, system-ui, sans-serif; color: #1C2430; background: #F7F5F0; min-width: 0; overflow-x: hidden">
+<header style="background: #182B3A; color: #F7F5F0">
+<nav aria-label="Navigasi utama" style="max-width: 1200px; margin: 0 auto; padding: 18px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px">
+<a href="https://ariba.id/" aria-label="ARIBA, aplikasi koperasi digital — beranda" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #F7F5F0">
+<svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="5" fill="#7E293C"></rect><rect x="8" y="11" width="16" height="3" rx="1" fill="#F7F5F0"></rect><rect x="8" y="18" width="16" height="3" rx="1" fill="#F7F5F0"></rect></svg>
+<span style="display: flex; flex-direction: column; line-height: 1">
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 21px; font-weight: 600; letter-spacing: 0.18em">ARIBA</span>
+<span style="font-size: 10px; letter-spacing: 0.22em; color: #B9C4CE; margin-top: 4px">ARIBA INDONESIA</span>
+</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-size: 14px">
+<a href="/fitur/" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Fitur</a>
+<a href="/#dompet" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Dompet</a>
+<a href="/#tanpa-bunga" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Tanpa bunga</a>
+<a href="/#tepercaya" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Keamanan</a>
+<a href="/#mudah" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Aplikasi anggota</a>
+<a href="/#untuk-siapa" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Untuk siapa</a>
+<a href="/#tanya-jawab" style="color: #D5DDE4; text-decoration: none; padding: 10px 0">Tanya jawab</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; border: 1px solid #4A6175; color: #F7F5F0; text-decoration: none; font-size: 14px; font-weight: 500; box-sizing: border-box">Masuk</a>
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 6px; background: #7E293C; color: #FFFFFF; text-decoration: none; font-size: 14px; font-weight: 600; box-sizing: border-box">Coba demo</a>
+</div>
+</nav>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 64px; display: flex; flex-direction: column; gap: 18px">
+<nav aria-label="Breadcrumb" style="font-size: 13px; color: #9FB0BE"><a href="/" style="color: #C9D3DC">Beranda</a> › SHU &amp; bagi hasil</nav>
+<h1 style="margin: 0; max-width: 900px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: clamp(32px, 4.4vw, 52px); line-height: 1.1; color: #FFFFFF">SHU koperasi: dari hasil usaha sampai bagian setiap anggota</h1>
+<p style="margin: 0; max-width: 760px; font-size: 18px; line-height: 1.6; color: #C9D3DC">Laba dan rugi dihitung dari buku besar, anggota memutuskan pembagiannya di RAT, dan bagian setiap anggota masuk dompetnya. Tanpa bunga dan tanpa imbal hasil yang dijanjikan.</p>
+</section>
+</header>
+<main class="k">
+<section style="background: #F7F5F0"><div style="max-width: 1100px; margin: 0 auto; padding: 64px 24px"><h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A">Prinsipnya sederhana</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Koperasi menjalankan usaha: minimarket, sewa alat, jasa giling, gudang, iuran, dan layanan lain. Setelah satu tahun buku, pendapatan dikurangi semua beban. Bila ada sisa, itulah <strong>sisa hasil usaha (SHU)</strong>. Bila beban lebih besar, koperasi <strong>rugi</strong>. Tidak ada imbal hasil yang dijanjikan di depan.</p>
+<ol style="margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px"><li style="background: #FFFFFF; border: 1px solid #E2DDD3; border-radius: 12px; padding: 20px"><div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; color: #7E293C; line-height: 1">1</div><h3 style="margin: 10px 0 6px; font-size: 17px">Usaha berjalan</h3><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A5563">Setiap penjualan, sewa, jasa, dan beban dibukukan otomatis di buku besar koperasi.</p></li><li style="background: #FFFFFF; border: 1px solid #E2DDD3; border-radius: 12px; padding: 20px"><div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; color: #7E293C; line-height: 1">2</div><h3 style="margin: 10px 0 6px; font-size: 17px">Laporan laba rugi</h3><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A5563">Bisa dilihat bulanan, triwulan, semester, atau tahunan, dan dibandingkan dengan periode sebelumnya.</p></li><li style="background: #FFFFFF; border: 1px solid #E2DDD3; border-radius: 12px; padding: 20px"><div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; color: #7E293C; line-height: 1">3</div><h3 style="margin: 10px 0 6px; font-size: 17px">Tutup buku</h3><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A5563">Setelah 31 Desember, angka tahun itu dikunci menjadi SHU atau rugi.</p></li><li style="background: #FFFFFF; border: 1px solid #E2DDD3; border-radius: 12px; padding: 20px"><div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; color: #7E293C; line-height: 1">4</div><h3 style="margin: 10px 0 6px; font-size: 17px">Keputusan RAT</h3><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A5563">Anggota memutuskan persentase cadangan, jasa transaksi, jasa modal, dan dana lain, atau cara menutup rugi.</p></li><li style="background: #FFFFFF; border: 1px solid #E2DDD3; border-radius: 12px; padding: 20px"><div style="font-family: 'Source Serif 4', Georgia, serif; font-size: 28px; color: #7E293C; line-height: 1">5</div><h3 style="margin: 10px 0 6px; font-size: 17px">Masuk dompet</h3><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #4A5563">Bagian setiap anggota dihitung otomatis dan masuk saldo dompet (simpanan sukarela).</p></li></ol></div></section><section style="background: #FFFFFF"><div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center"><div style="flex: 1 1 400px; min-width: 0"><span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #7E293C; font-weight: 600">Contoh koperasi untung</span>
+<h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A; margin-top: 10px">Minimarket koperasi menghasilkan SHU Rp 21.372.200</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Data contoh Koperasi Ariba Indonesia tahun buku 2025: penjualan minimarket Rp 352,4 juta, harga pokok Rp 311,2 juta, beban usaha Rp 20,4 juta. RAT memutuskan pembagian berikut:</p>
+<div class="tw"><table><thead><tr><th>Pos</th><th>Persen</th><th>Jumlah</th></tr></thead><tbody><tr><td>Cadangan koperasi</td><td class="n">30%</td><td class="n">Rp 6.411.660</td></tr><tr><td>Jasa transaksi anggota</td><td class="n">30%</td><td class="n">Rp 6.411.660</td></tr><tr><td>Jasa modal (simpanan pokok & wajib)</td><td class="n">20%</td><td class="n">Rp 4.274.440</td></tr><tr><td>Dana pengurus & pengawas</td><td class="n">5%</td><td class="n">Rp 1.068.610</td></tr><tr><td>Dana pendidikan</td><td class="n">5%</td><td class="n">Rp 1.068.610</td></tr><tr><td>Dana sosial</td><td class="n">10%</td><td class="n">Rp 2.137.220</td></tr><tr><th>Jumlah</th><th class="n">100%</th><th class="n">Rp 21.372.200</th></tr></tbody></table></div></div><div style="flex: 1 1 520px; min-width: 0"><div style="position: relative; padding-bottom: 28px"><div style="width: 86%"><figure style="margin: 0"><div style="background: #0B141C; border-radius: 14px 14px 0 0; padding: 9px 9px 11px; box-shadow: 0 22px 50px rgba(24, 43, 58, 0.2)"><img src="/img/l-shu-2.webp" alt="Rincian pembagian SHU per anggota koperasi di aplikasi ARIBA" width="1600" height="1000" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 4px"></div><div style="height: 12px; margin: 0 -4%; background: #C9CFD5; border-radius: 0 0 12px 12px; border-top: 2px solid #9AA3AB"></div></figure></div><div style="position: absolute; right: 0; bottom: 0; width: 27%; min-width: 104px"><div style="background: #0B141C; border-radius: 28px; padding: 6px; box-shadow: 0 20px 40px rgba(24, 43, 58, 0.3)"><img src="/img/p-shu-2.webp" alt="Bagian SHU anggota di aplikasi ponsel" width="585" height="1266" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 22px"></div></div></div></div></div></section><section style="background: #FFFFFF"><div style="max-width: 1100px; margin: 0 auto; padding: 64px 24px"><h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A">Contoh hitungan bagian satu anggota</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Misalkan SHU sebuah koperasi Rp 100.000.000 dan RAT memutuskan jasa transaksi 40% dan jasa modal 20%.</p>
+<div class="tw"><table><thead><tr><th></th><th>Jasa transaksi</th><th>Jasa modal</th></tr></thead><tbody>
+<tr><td>Dana yang dibagi</td><td class="n">40% × Rp 100 juta = Rp 40.000.000</td><td class="n">20% × Rp 100 juta = Rp 20.000.000</td></tr>
+<tr><td>Dasar seluruh anggota</td><td class="n">Belanja + sewa + jasa: Rp 800.000.000</td><td class="n">Simpanan pokok + wajib: Rp 250.000.000</td></tr>
+<tr><td>Dasar Bu Siti</td><td class="n">Rp 4.000.000 (0,5%)</td><td class="n">Rp 1.250.000 (0,5%)</td></tr>
+<tr><td><strong>Bagian Bu Siti</strong></td><td class="n"><strong>Rp 200.000</strong></td><td class="n"><strong>Rp 100.000</strong></td></tr>
+</tbody></table></div>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Total Rp 300.000 masuk saldo dompet Bu Siti. Pembulatan ke rupiah memakai metode sisa terbesar, sehingga jumlah semua bagian anggota selalu tepat sama dengan dana yang dibagi. Bagian yang tidak punya dasar (misalnya tidak ada transaksi anggota sama sekali) masuk cadangan.</p></div></section><section style="background: #F7F5F0"><div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px; display: flex; flex-wrap: wrap-reverse; gap: 48px; align-items: center"><div style="flex: 1 1 520px; min-width: 0"><figure style="margin: 0"><div style="background: #0B141C; border-radius: 14px 14px 0 0; padding: 9px 9px 11px; box-shadow: 0 22px 50px rgba(24, 43, 58, 0.2)"><img src="/img/l-rugi.webp" alt="Laporan rugi koperasi dan penanganannya di aplikasi ARIBA" width="1600" height="1000" loading="lazy" style="display: block; width: 100%; height: auto; border-radius: 4px"></div><div style="height: 12px; margin: 0 -4%; background: #C9CFD5; border-radius: 0 0 12px 12px; border-top: 2px solid #9AA3AB"></div></figure></div><div style="flex: 1 1 400px; min-width: 0"><span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #7E293C; font-weight: 600">Contoh koperasi rugi</span>
+<h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A; margin-top: 10px">Bila koperasi rugi, tidak ada pembagian</h2>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Data contoh Koperasi Nelayan Bahari tahun 2025: kompresor cold storage rusak di musim puncak sehingga beban perbaikan Rp 7,8 juta. Hasilnya rugi Rp 9.177.200.</p>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px"><li style="display: flex; gap: 10px; align-items: flex-start"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7E293C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size: 15.5px; line-height: 1.6"><strong>Ditutup dari cadangan</strong> koperasi, sebatas saldo cadangan yang ada; sisanya dibawa ke tahun berikutnya.</span></li><li style="display: flex; gap: 10px; align-items: flex-start"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7E293C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size: 15.5px; line-height: 1.6"><strong>Dibawa ke tahun berikutnya</strong> dan ditutup dari SHU tahun depan sebelum ada pembagian.</span></li><li style="display: flex; gap: 10px; align-items: flex-start"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7E293C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M20 6 9 17l-5-5"></path></svg></span><span style="font-size: 15.5px; line-height: 1.6">Pilihan diputuskan RAT. <strong>Simpanan anggota tidak dipotong.</strong></span></li></ul></div></div></section><section style="background: #FFFFFF"><div style="max-width: 1100px; margin: 0 auto; padding: 64px 24px"><h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A">Empat koperasi contoh di demo</h2>
+<div class="tw"><table><thead><tr><th>Koperasi</th><th>Unit usaha</th><th>Hasil 2025</th><th>Keputusan RAT</th></tr></thead><tbody>
+<tr><td>Koperasi Ariba Indonesia</td><td>Minimarket + mesin kasir (POS)</td><td class="n">SHU Rp 21.372.200</td><td>Dibagi ke 20 anggota</td></tr>
+<tr><td>Koperasi Tani Makmur Sejahtera</td><td>Sewa traktor &amp; excavator, giling, pengeringan, gudang</td><td class="n">SHU Rp 33.848.390</td><td>Diputuskan, siap dibagi (bisa dicoba di demo)</td></tr>
+<tr><td>Koperasi Nelayan Bahari</td><td>Toko perbekalan, cold storage</td><td class="n">Rugi Rp 9.177.200</td><td>Dibawa ke 2026</td></tr>
+<tr><td>Koperasi Desa Merah Putih Sukamaju</td><td>Gerai sembako, sewa traktor desa, giling, angkut</td><td class="n">Rugi Rp 5.444.190</td><td>Tahun pertama; dibawa ke 2026</td></tr>
+</tbody></table></div>
+<p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Semua angka adalah data contoh. Laporan laba rugi per bulan, triwulan, semester, dan tahun bisa dilihat di <a href="/fitur/#laba-rugi">fitur laporan laba rugi</a>.</p></div></section><section style="background: #F7F5F0"><div style="max-width: 1100px; margin: 0 auto; padding: 64px 24px"><h2 style="margin: 0 0 14px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3vw, 34px); line-height: 1.18; font-weight: 600; color: #182B3A">Tanya jawab</h2><details><summary>Apakah SHU sama dengan bunga simpanan?</summary><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Tidak. Bunga dijanjikan di depan dan tetap dibayar walau usaha merugi. SHU hanya ada bila usaha koperasi benar-benar menghasilkan sisa setelah semua beban, dan besarnya diputuskan anggota di RAT.</p></details><details><summary>Bagaimana kalau saya tidak pernah belanja di koperasi?</summary><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Anda tetap mendapat bagian <em>jasa modal</em> sebanding simpanan pokok dan wajib Anda. Bagian <em>jasa transaksi</em> hanya untuk anggota yang belanja, menyewa alat, atau memakai jasa koperasi tahun itu.</p></details><details><summary>Apakah simpanan saya berkurang bila koperasi rugi?</summary><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Tidak. Rugi ditutup dari cadangan koperasi atau dibawa ke tahun berikutnya dan ditutup dari SHU tahun depan, sesuai keputusan RAT. Simpanan anggota tidak dipotong.</p></details><details><summary>Kapan SHU dibagikan?</summary><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Setelah tutup buku per 31 Desember dan setelah RAT memutuskan pembagiannya, biasanya pada triwulan pertama tahun berikutnya. Bagian Anda langsung masuk saldo dompet (simpanan sukarela).</p></details><details><summary>Siapa yang menentukan persentase pembagian?</summary><p style="margin: 0 0 14px; font-size: 16px; line-height: 1.7; color: #2B3540">Rapat anggota tahunan. Pengurus mengusulkan, anggota memberi suara di aplikasi, dan pembagian hanya bisa dijalankan setelah keputusan RAT sah dan diterima.</p></details></div></section>
+<section style="max-width: 1200px; margin: 0 auto; padding: 24px 24px 96px">
+<div style="background: #7E293C; color: #FFFFFF; border-radius: 16px; padding: clamp(28px, 5vw, 52px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+<div style="flex: 1 1 420px; min-width: 0"><h2 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: clamp(26px, 3.2vw, 36px); line-height: 1.15; font-weight: 600; color: #FFFFFF">Lihat sendiri dengan data contoh.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #F4DDE3">Demo berjalan di peramban, tanpa mendaftar. Semua pembayaran disimulasikan.</p></div>
+<a href="/demo/" style="display: inline-flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 6px; background: #FFFFFF; color: #182B3A; text-decoration: none; font-size: 16px; font-weight: 600">Coba demo aplikasi</a>
+</div></section>
+</main>
+<footer id="kontak" style="background: #12212D; color: #B9C4CE">
+<div style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="display: flex; align-items: center; gap: 10px">
+<svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="5" fill="#7E293C"></rect><rect x="8" y="11" width="16" height="3" rx="1" fill="#F7F5F0"></rect><rect x="8" y="18" width="16" height="3" rx="1" fill="#F7F5F0"></rect></svg>
+<span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; letter-spacing: 0.18em; color: #F7F5F0">ARIBA</span>
+</span>
+<p style="margin: 0; font-size: 14px; line-height: 1.6">ARIBA adalah aplikasi koperasi digital tanpa sistem berbunga oleh Ariba Indonesia.</p>
+</div>
+<nav aria-label="Produk" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F7F5F0; font-weight: 600">Produk</span>
+<a href="/fitur/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Semua fitur</a>
+<a href="/#dompet" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Dompet anggota</a>
+<a href="/fitur/#laba-rugi" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Laporan laba rugi</a>
+<a href="/shu/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">SHU &amp; bagi hasil</a>
+<a href="/koperasi-merah-putih/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Koperasi Merah Putih</a>
+<a href="/integrasi-pos/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Integrasi POS minimarket</a>
+<a href="/#tanpa-bunga" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Konstitusi Ekonomi</a>
+<a href="/#skor" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Skor kredit</a>
+<a href="/#untuk-siapa" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Integrasi HRIS &amp; sekolah</a>
+</nav>
+<nav aria-label="Legal" style="display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<span style="font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #F7F5F0; font-weight: 600">Legal</span>
+<a href="/skor-kredit/" style="color: #B9C4CE; text-decoration: none; padding: 4px 0">Ketentuan skor kredit</a>
+</nav>
+</div>
+<div style="max-width: 1200px; margin: 0 auto; padding: 20px 24px 96px; border-top: 1px solid #2A3E4F; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #8FA1B0">
+<span>© 2026 Ariba Indonesia</span>
+<span>ariba.id</span>
+</div>
+</footer>
+
+<a href="https://wa.me/6287788995336?text=Halo%20ARIBA%2C%20saya%20ingin%20bertanya%20tentang%20aplikasi%20koperasi%20digital." target="_blank" rel="noopener" aria-label="Chat via WhatsApp dengan ARIBA" style="position: fixed; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 50; display: inline-flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 20px 0 16px; border-radius: 999px; background: #1F7A4D; color: #FFFFFF; text-decoration: none; font-family: Inter, system-ui, sans-serif; font-size: 15px; font-weight: 600; box-shadow: 0 10px 28px rgba(12, 40, 26, 0.35)">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.6-5.2A8.5 8.5 0 1 1 21 11.5z"></path><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1c-1-.5-2-1.5-2.5-2.5l1-1-1-2L9 9.5z" fill="currentColor" stroke="none"></path></svg>Chat via WA</a>
+
+</div></body></html>
