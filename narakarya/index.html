@@ -279,6 +279,8 @@ details.card summary::after{content:"＋";float:right;color:var(--ink3)}details.
 .rev{margin:0;background:var(--putih);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
 .rev blockquote{margin:0;font:500 16px/1.5 var(--serif);color:var(--merah-gelap)}
 .rev figcaption{border-top:1px solid var(--line2);padding-top:10px;flex-wrap:nowrap}
+img.av{object-fit:cover;background:var(--abu-soft);display:block}
+.av.xl{width:96px;height:96px;font-size:30px}.av.xs{width:22px;height:22px;font-size:9px}
 </style>
 <div id="app"></div>
 <noscript>Narakarya memerlukan JavaScript.</noscript>
@@ -453,6 +455,21 @@ const NK = (() => {
     audit(u.name, 'Pendaftaran akun', kind === 'F' ? 'Freelancer umum' : 'Klien umum');
     save(); return ok(u);
   };
+  /* ---------- foto profil (wajib) ---------- */
+  const setPhoto = (uid, data) => {
+    const u = user(uid); if (!u) return err('Akun tidak ditemukan.');
+    if (!/^data:image\/(jpeg|png|webp);base64,/.test(String(data))) return err('Berkas harus berupa foto JPG, PNG, atau WebP.');
+    if (String(data).length > 600000) return err('Foto terlalu besar. Gunakan foto di bawah 450 KB setelah dipotong.');
+    u.photo = data; u.photoAt = now(); delete u.photoReason;
+    audit(u.name, 'Mengganti foto profil', ''); save(); return ok(u);
+  };
+  const removePhoto = (admin, uid, reason) => {
+    const u = user(uid); if (!u || !u.photo) return err('Pengguna ini belum memasang foto.');
+    if (clean(reason).length < 10) return err('Tulis alasan, minimal 10 huruf. Pengguna akan membacanya.');
+    u.photo = null; u.photoReason = clean(reason);
+    audit(admin, 'Menghapus foto profil', `${u.name}: ${reason}`); save(); return ok(u);
+  };
+  const noPhoto = (uid) => { const u = user(uid); return u && u.role !== 'ADMIN' && !u.photo ? err('Pasang foto profil dahulu. Semua pengguna Narakarya wajib memakai foto profil.', 'FOTO') : null; };
   const login = (uid) => { S.session = uid; save(); };
   const logout = () => { S.session = null; save(); };
   const me = () => user(S.session);
@@ -509,6 +526,7 @@ const NK = (() => {
   const postJob = (cid, j) => {
     const u = user(cid);
     if (!u || u.status !== 'AKTIF') return err('Akun Anda sedang ditangguhkan.');
+    const pj = noPhoto(cid); if (pj) return pj;
     const title = clean(j.title), desc = clean(j.desc), budget = num(j.budget);
     if (title.length < 10) return err('Judul minimal 10 huruf agar mudah dipahami.');
     if (desc.length < 30) return err('Jelaskan pekerjaannya minimal 30 huruf. Lingkup yang jelas mencegah sengketa.');
@@ -550,6 +568,7 @@ const NK = (() => {
     if (!u || u.status !== 'AKTIF') return err('Akun Anda sedang ditangguhkan.');
     if (!j || j.status !== 'TERBUKA') return err('Lowongan ini sudah tidak menerima lamaran.');
     if (j.clientId === fid) return err('Anda tidak dapat melamar lowongan sendiri.');
+    const pf = noPhoto(fid); if (pf) return pf;
     if (S.proposals.some((x) => x.jobId === jid && x.freelancerId === fid && x.status !== 'DITARIK')) return err('Anda sudah melamar lowongan ini.');
     const cover = clean(p.cover), price = num(p.price), days = num(p.days);
     if (cover.length < 30) return err('Tulis surat lamaran minimal 30 huruf: apa yang akan Anda kerjakan dan pengalaman yang relevan.');
@@ -590,6 +609,7 @@ const NK = (() => {
     const p = S.proposals.find((x) => x.id === pid); if (!p || p.status !== 'TERKIRIM') return err('Proposal ini sudah tidak aktif.');
     const j = S.jobs.find((x) => x.id === p.jobId); if (!j || j.clientId !== cid) return err('Hanya pemilik lowongan yang dapat menerima proposal.');
     if (user(p.freelancerId).status !== 'AKTIF') return err('Akun freelancer ini sedang ditangguhkan.');
+    const pa = noPhoto(cid); if (pa) return pa;
     if (!idVerified(user(cid))) return err('Verifikasi identitas atau perusahaan Anda dahulu sebelum merekrut. Freelancer perlu tahu siapa pemberi kerjanya.', 'VERIFIKASI');
     const ms = rows.map((r) => ({ title: clean(r.title), amount: num(r.amount) })).filter((r) => r.title || r.amount);
     if (!ms.length) return err('Isi minimal satu termin.');
@@ -610,6 +630,7 @@ const NK = (() => {
     if (!s || s.status !== 'TAYANG') return err('Jasa ini tidak tersedia.');
     if (s.freelancerId === cid) return err('Anda tidak dapat memesan jasa sendiri.');
     const t = s.tiers[tier]; if (!t) return err('Pilih paket.');
+    const po = noPhoto(cid); if (po) return po;
     if (!idVerified(u)) return err('Verifikasi identitas atau perusahaan Anda dahulu sebelum memesan jasa.', 'VERIFIKASI');
     const c = newContract({ clientId: cid, freelancerId: s.freelancerId, title: `${s.title} (${t.name})`, cat: s.cat, serviceId: sid, milestones: [{ title: t.scope, amount: t.price, days: t.days }] });
     newThread({ kind: 'KONTRAK', clientId: cid, freelancerId: s.freelancerId, contractId: c.id });
@@ -726,6 +747,7 @@ const NK = (() => {
     const p = S.proposals.find((x) => x.id === pid); if (!p) return err('Proposal tidak ditemukan.');
     const j = S.jobs.find((x) => x.id === p.jobId); if (!j || j.clientId !== cid) return err('Hanya pemilik lowongan yang dapat mengajak interview.');
     if (!active(cid)) return err('Akun Anda sedang ditangguhkan.');
+    const pi = noPhoto(cid); if (pi) return pi;
     const ex = S.threads.find((t) => t.proposalId === pid);
     if (ex) return ex.status === 'TERBUKA' ? ok(ex) : err('Ruang interview ini sudah ditutup dan tidak dapat dibuka kembali.');
     if (p.status !== 'TERKIRIM') return err('Proposal ini sudah tidak aktif.');
@@ -737,6 +759,7 @@ const NK = (() => {
     const t = thread(tid); if (!isParty(t, uid)) return err('Anda bukan peserta percakapan ini.');
     if (t.status !== 'TERBUKA') return err('Percakapan ini sudah ditutup.');
     if (!active(uid)) return err('Akun Anda sedang ditangguhkan sehingga tidak dapat mengirim pesan.');
+    const pm = noPhoto(uid); if (pm) return pm;
     const raw = clean(text); if (!raw) return err('Tulis pesan terlebih dahulu.');
     const pf = profane(raw), flags = [];
     if (pf.hit) flags.push('KASAR');
@@ -907,6 +930,7 @@ const NK = (() => {
   /* ---------- jasa siap pesan ---------- */
   const postService = (uid, s) => {
     const u = user(uid), title = clean(s.title), desc = clean(s.desc);
+    const ps = noPhoto(uid); if (ps) return ps;
     if (title.length < 10) return err('Judul jasa minimal 10 huruf.');
     if (desc.length < 30) return err('Deskripsi minimal 30 huruf.');
     const rs = rude(title, desc, s.s1, s.s2, s.s3); if (rs) return rs;
@@ -993,9 +1017,22 @@ const NK = (() => {
   };
 
   /* ---------- data contoh ---------- */
+  /* Foto contoh adalah ilustrasi buatan, bukan foto orang sungguhan. */
+  const portrait = (id, org) => {
+    const h = [...id].reduce((a, c) => a * 31 + c.charCodeAt(0), 7) >>> 0;
+    const bg = ['#E9D6D2', '#D9E4DE', '#E8DFCB', '#D8DCE6', '#EAD9E0', '#DCE3D1'][h % 6];
+    const skin = ['#F1C9A5', '#D9A47E', '#B97E57', '#8D5A3B', '#E5B48F'][(h >> 3) % 5];
+    const hair = ['#2B1B14', '#4A2E1F', '#151515', '#5B3A24'][(h >> 6) % 4];
+    const top = ['#8C1D2F', '#2F5D50', '#3B4A6B', '#6B4E2E', '#5E1E2D', '#44505C'][(h >> 9) % 6];
+    const veil = (h >> 12) % 3 === 0;
+    const svg = org
+      ? `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="${top}"/><rect x="26" y="34" width="44" height="38" rx="3" fill="#fff" opacity=".92"/><rect x="34" y="24" width="28" height="12" rx="2" fill="#fff" opacity=".75"/><rect x="33" y="44" width="8" height="8" fill="${top}"/><rect x="55" y="44" width="8" height="8" fill="${top}"/><rect x="44" y="56" width="8" height="16" fill="${top}"/></svg>`
+      : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="${bg}"/><path d="M14 96c2-20 16-30 34-30s32 10 34 30z" fill="${top}"/>${veil ? `<path d="M24 50c0-20 10-32 24-32s24 12 24 32c0 10-4 18-10 22H34c-6-4-10-12-10-22z" fill="${top}" opacity=".85"/>` : `<path d="M28 40c0-14 9-22 20-22s20 8 20 22v4H28z" fill="${hair}"/>`}<ellipse cx="48" cy="44" rx="15" ry="17" fill="${skin}"/>${veil ? '' : `<path d="M33 40c2-10 8-14 15-14s13 4 15 14c-6-5-24-5-30 0z" fill="${hair}"/>`}</svg>`;
+    return 'data:image/svg+xml;base64,' + (typeof btoa === 'function' ? btoa(svg) : Buffer.from(svg).toString('base64'));
+  };
   function seed() {
     const at = (d, h = 0) => Date.now() - d * DAY + h * 36e5;
-    const mk = (u) => { S.users.push({ status: 'AKTIF', kyc: 'BELUM', member: null, skills: [], rate: 0, bio: '', headline: '', cat: CATS[0], credits: 0, joinedAt: at(200), ...u }); return u.id; };
+    const mk = (u) => { S.users.push({ photo: portrait(u.id, u.kind === 'K' && !/^(Hana|Andi)/.test(u.name)), status: 'AKTIF', kyc: 'BELUM', member: null, skills: [], rate: 0, bio: '', headline: '', cat: CATS[0], credits: 0, joinedAt: at(200), ...u }); return u.id; };
     const M = (no, coop) => ({ no, coop, status: 'AKTIF' });
     const k = 'TERVERIFIKASI';
 
@@ -1180,6 +1217,7 @@ const NK = (() => {
     load, reset, save, now, DAY, ACC, REV, CATS, TIERS, get S() { return S; }, pol, user, me, isMember, login, logout, register, saveProfile, requestKyc,
     postJob, moderateJob, closeJob, propose, withdrawProposal, rejectProposal, acceptProposal, orderService, screen,
     idVerified, payVerified, payBasis, verifyPayment, mask,
+    setPhoto, removePhoto,
     profane, thread, threadOfContract, openInterview, scheduleInterview, confirmInterview, closeThread, report, adminCloseThread, resolveReport,
     postProgress, msProgress, contractProgress, rankOf,
     feesFor, freelancerPct, quote, creditCost, credits, plusActive, packFor, buyCredits, plusPrice, subscribePlus,
@@ -1207,7 +1245,8 @@ const I = {
 };
 const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
 const avatarColors = ['#8B1A1A', '#8C1D2F', '#5B4A42', '#9A6410', '#2F7A69', '#6B2737'];
-const av = (u, c = '') => { const ini = u.name.replace(/^(CV|PT|Koperasi Desa Merah Putih|Koperasi|Yayasan)\s/, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase(); const k = [...u.id].reduce((a, x) => a + x.charCodeAt(0), 0) % avatarColors.length; return `<span class="av ${c}" style="background:${avatarColors[k]}" aria-hidden="true">${esc(ini)}</span>`; };
+const avInit = (u, c = '') => { const ini = u.name.replace(/^(CV|PT|Koperasi Desa Merah Putih|Koperasi|Yayasan)\s/, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase(); const k = [...u.id].reduce((a, x) => a + x.charCodeAt(0), 0) % avatarColors.length; return `<span class="av ${c}" style="background:${avatarColors[k]}" aria-hidden="true">${esc(ini)}</span>`; };
+const av = (u, c = '') => (u.photo ? `<img class="av ${c}" src="${u.photo}" alt="" loading="lazy">` : avInit(u, c));
 const mBadge = (u) => (NK.isMember(u) ? `<span class="badge-m" title="${esc(u.member.coop)}">${ic('shield')} Anggota koperasi ARIBA</span>` : '');
 const plusBadge = (u) => (NK.plusActive(u) ? '<span class="pill gold">Plus</span>' : '');
 const TIERC = { 'Terbaik Plus': 'gold', Terbaik: 'red', 'Naik Daun': 'sea', Terdaftar: '', Baru: '', 'Klien utama': 'gold', 'Klien tepercaya': 'red', 'Klien terdaftar': '', 'Klien baru': '', 'Belum terverifikasi': 'bad' };
@@ -1234,7 +1273,7 @@ let filt = { q: '', cat: '', member: false, sort: 'baru', budget: 0 };
 let currentRoute = '';
 let rankTab = 'F';
 const go = (h) => { if (location.hash === '#' + h) render(); else location.hash = h; };
-const toast = (t, bad) => { const el = document.createElement('div'); el.className = 'toast' + (bad ? ' bad' : ''); el.setAttribute('role', 'status'); el.textContent = t; document.body.append(el); setTimeout(() => el.remove(), bad ? 5200 : 3000); };
+const toast = (t, bad) => { document.querySelectorAll('.toast').forEach((x) => x.remove()); const el = document.createElement('div'); el.className = 'toast' + (bad ? ' bad' : ''); el.setAttribute('role', 'status'); el.textContent = t; document.body.append(el); setTimeout(() => el.remove(), bad ? 5200 : 3000); };
 const done = (r, msg, after) => { if (!r.ok) { toast(r.error, true); return false; } if (msg) toast(msg); closeModal(); if (after) go(after); else render(); return true; };
 const modal = (html) => { closeModal(); const o = document.createElement('div'); o.className = 'ov'; o.id = 'ov'; o.innerHTML = `<div class="modal" role="dialog" aria-modal="true">${html}</div>`; document.body.append(o); o.addEventListener('click', (e) => { if (e.target === o) closeModal(); }); const f = $('input,textarea,select,button', o); if (f) f.focus(); };
 function closeModal() { const o = $('#ov'); if (o) o.remove(); }
@@ -1258,7 +1297,7 @@ function header(route) {
     <button class="burger" data-a="burger" aria-label="Buka menu">${ic('menu')}</button>
     <nav class="nav" id="nav" aria-label="Navigasi utama">${L.map(([h, t]) => `<a href="#${h}" class="${route === h ? 'on' : ''}">${t}</a>`).join('')}${u ? '' : '<a class="only-m" href="#daftar">Daftar gratis</a>'}</nav>
     <div class="acts">${u
-      ? `${u.role === 'ADMIN' ? '<a class="btn s" href="#admin">Dashboard admin</a>' : `${u.kind === 'F' ? `<a class="btn s" href="#kredit" title="Sisa kredit">${NK.credits(u.id).total} kredit</a>` : ''}<a class="btn s" href="#ruang">Ruang kerja</a>`}<button class="btn s" data-a="logout" aria-label="Keluar">${ic('out')}</button>`
+      ? `${u.role === 'ADMIN' ? '<a class="btn s" href="#admin">Dashboard admin</a>' : `${u.kind === 'F' ? `<a class="btn s" href="#kredit" title="Sisa kredit">${NK.credits(u.id).total} kredit</a>` : ''}<a class="btn s" href="#ruang">${av(u, 'xs')} Ruang kerja</a>`}<button class="btn s" data-a="logout" aria-label="Keluar">${ic('out')}</button>`
       : '<a class="btn s" href="#masuk">Masuk</a><a class="btn pri s" href="#daftar">Daftar gratis</a>'}</div>
   </div></header>`;
 }
@@ -1279,7 +1318,7 @@ const talentCard = (u) => { const r = NK.rankOf(u.id); return `<a class="card st
 const serviceCard = (s) => { const f = NK.user(s.freelancerId); return `<a class="card stack-s" href="#jasa-${s.id}"><span class="tag" style="align-self:flex-start">${esc(s.cat)}</span><h3>${esc(s.title)}</h3>
   <div class="row small">${av(f, 'sm')}<span class="muted">${esc(f.name)}</span></div>
   <div class="row between small"><span>${stars(f.id)}</span><span class="price">mulai ${rp(Math.min(...s.tiers.map((t) => t.price)))}</span></div><div class="row small">${tierPill(f.id)}${mBadge(f)}</div></a>`; };
-const talents = () => NK.S.users.filter((u) => u.kind === 'F' && u.status === 'AKTIF' && u.headline);
+const talents = () => NK.S.users.filter((u) => u.kind === 'F' && u.status === 'AKTIF' && u.headline && u.photo);
 const sortTalents = (a) => a.slice().sort((x, y) => ((NK.rankOf(y.id).score ?? -1) - (NK.rankOf(x.id).score ?? -1)) || (NK.isMember(y) - NK.isMember(x)) || (NK.ratingOf(y.id).n - NK.ratingOf(x.id).n));
 const openJobs = () => NK.S.jobs.filter((j) => j.status === 'TERBUKA');
 const liveServices = () => NK.S.services.filter((s) => s.status === 'TAYANG');
@@ -1446,7 +1485,7 @@ function vRegister() {
   <label class="choice"><input type="radio" name="kind" value="F" checked><span><strong>Saya mencari kerja</strong><br><span class="muted small">Melamar lowongan dan menjual jasa. Dapat ${NK.pol().freeCreditsPublic} kredit gratis tiap bulan.</span></span></label>
   <label class="choice"><input type="radio" name="kind" value="K"><span><strong>Saya mencari freelancer</strong><br><span class="muted small">Memasang lowongan gratis dan memesan jasa.</span></span></label>
   <label class="f">Nama lengkap atau nama usaha<input class="in" id="rg-n" name="name" required></label><label class="f">Email<input class="in" id="rg-e" name="email" type="email" required></label><label class="f">Kota<input class="in" id="rg-c" name="city"></label>
-  <button class="btn pri">Buat akun</button><p class="muted xs">Dalam prototipe ini, data hanya tersimpan di peramban Anda.</p></form></div>`;
+  <p class="xs muted">Setelah mendaftar, Anda wajib memasang foto profil.</p><button class="btn pri">Buat akun</button><p class="muted xs">Dalam prototipe ini, data hanya tersimpan di peramban Anda.</p></form></div>`;
 }
 
 /* ---------- ruang kerja ---------- */
@@ -1454,8 +1493,9 @@ function shell(active, body) {
   const u = NK.me(); const F = u.kind === 'F';
   const unread = NK.S.threads.filter((t) => (t.clientId === u.id || t.freelancerId === u.id) && t.status === 'TERBUKA' && t.kind === 'INTERVIEW').length;
   const L = F ? [['ruang', 'Ringkasan'], ['kontrak', 'Kontrak'], ['proposal', 'Proposal'], ['pesan', `Pesan${unread ? ` (${unread})` : ''}`], ['jasa-saya', 'Jasa saya'], ['kredit', 'Kredit & Plus'], ['penghasilan', 'Penghasilan'], ['verifikasi', 'Verifikasi'], ['profil', 'Profil']]
-    : [['ruang', 'Ringkasan'], ['kontrak', 'Kontrak'], ['lowongan-saya', 'Lowongan saya'], ['pesan', `Pesan${unread ? ` (${unread})` : ''}`], ['pembayaran', 'Pembayaran'], ['verifikasi', 'Verifikasi']];
-  return `<div class="sub"><div class="wrap">${L.map(([h, t]) => `<a href="#${h}" class="${active === h ? 'on' : ''}">${t}</a>`).join('')}</div></div><div class="wrap page stack">${body}</div>`;
+    : [['ruang', 'Ringkasan'], ['kontrak', 'Kontrak'], ['lowongan-saya', 'Lowongan saya'], ['pesan', `Pesan${unread ? ` (${unread})` : ''}`], ['pembayaran', 'Pembayaran'], ['verifikasi', 'Verifikasi'], ['profil', 'Profil']];
+  const nophoto = !u.photo && active !== 'profil' ? `<div class="note bad row between"><span><strong>Foto profil wajib.</strong> Anda belum bisa melamar, memasang lowongan, atau mengirim pesan.</span><a class="btn s" href="#profil">Pasang foto</a></div>` : '';
+  return `<div class="sub"><div class="wrap">${L.map(([h, t]) => `<a href="#${h}" class="${active === h ? 'on' : ''}">${t}</a>`).join('')}</div></div><div class="wrap page stack">${nophoto}${body}</div>`;
 }
 const myContracts = (u) => NK.S.contracts.filter((c) => c.clientId === u.id || c.freelancerId === u.id);
 const other = (c, u) => NK.user(c.clientId === u.id ? c.freelancerId : c.clientId);
@@ -1628,9 +1668,11 @@ function vVerify() {
   return shell('verifikasi', `<div><h1 class="title">Verifikasi</h1><p class="muted small">${m ? 'Sebagai anggota koperasi ARIBA, identitas dan pembayaran Anda terverifikasi otomatis.' : F ? 'Identitas terverifikasi diperlukan sebelum mencairkan dana.' : 'Identitas atau perusahaan terverifikasi diperlukan sebelum merekrut atau memesan jasa.'}</p></div>
   <div class="card stack"><div class="row between"><h2 class="h2s">${F ? 'Identitas' : 'Identitas atau perusahaan'}</h2>${st}</div>${idForm}</div>${pay}`);
 }
+const photoBox = (u) => `<div class="card stack-s"><div class="row" style="flex-wrap:nowrap;gap:16px">${av(u, 'xl')}<div class="grow stack-s"><strong>Foto profil ${u.photo ? '' : '<span class="pill bad">Wajib</span>'}</strong><span class="small muted">${u.kind === 'K' && u.kycType === 'PERUSAHAAN' ? 'Logo perusahaan atau foto penanggung jawab.' : 'Foto wajah Anda sendiri, jelas, tanpa kacamata hitam.'}</span>${u.photoReason ? `<span class="note bad small">Foto sebelumnya dihapus pengelola: ${esc(u.photoReason)}</span>` : ''}<label class="btn s" style="align-self:flex-start">${u.photo ? 'Ganti foto' : 'Unggah foto'}<input type="file" accept="image/jpeg,image/png,image/webp" data-photo hidden></label></div></div></div>`;
 function vProfile() {
   const u = NK.me();
-  return shell('profil', `<form class="fgrid" data-f="profile" style="max-width:720px"><h1 class="title span2">Profil</h1><label class="f span2">Judul profil<input class="in" id="pf-h" name="headline" value="${esc(u.headline)}" placeholder="Contoh: Pembukuan koperasi dan UMKM"></label><label class="f span2">Tentang Anda<textarea class="in" id="pf-b" name="bio">${esc(u.bio)}</textarea></label><label class="f">Kategori utama<select class="in" id="pf-c" name="cat">${NK.CATS.map((c) => `<option ${c === u.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label><label class="f">Kota<input class="in" id="pf-k" name="city" value="${esc(u.city)}"></label><label class="f">Tarif acuan per jam<input class="in num" id="pf-r" name="rate" inputmode="numeric" value="${u.rate || ''}"></label><label class="f">Keahlian (pisahkan koma)<input class="in" id="pf-s" name="skills" value="${esc(u.skills.join(', '))}"></label>
+  if (u.kind === 'K') return shell('profil', `<div class="stack" style="max-width:720px"><h1 class="title">Profil</h1>${photoBox(u)}<div class="card lines"><div><span>Nama</span><span>${esc(u.name)}</span></div><div><span>Kota</span><span>${esc(u.city)}</span></div></div><a class="btn" style="align-self:flex-start" href="#klien-${u.id}">Lihat profil publik</a></div>`);
+  return shell('profil', `<form class="fgrid" data-f="profile" style="max-width:720px"><h1 class="title span2">Profil</h1><div class="span2">${photoBox(u)}</div><label class="f span2">Judul profil<input class="in" id="pf-h" name="headline" value="${esc(u.headline)}" placeholder="Contoh: Pembukuan koperasi dan UMKM"></label><label class="f span2">Tentang Anda<textarea class="in" id="pf-b" name="bio">${esc(u.bio)}</textarea></label><label class="f">Kategori utama<select class="in" id="pf-c" name="cat">${NK.CATS.map((c) => `<option ${c === u.cat ? 'selected' : ''}>${esc(c)}</option>`).join('')}</select></label><label class="f">Kota<input class="in" id="pf-k" name="city" value="${esc(u.city)}"></label><label class="f">Tarif acuan per jam<input class="in num" id="pf-r" name="rate" inputmode="numeric" value="${u.rate || ''}"></label><label class="f">Keahlian (pisahkan koma)<input class="in" id="pf-s" name="skills" value="${esc(u.skills.join(', '))}"></label>
   <label class="choice span2"><input type="checkbox" name="pph22Stmt" ${u.pph22Stmt ? 'checked' : ''}><span><strong>Surat pernyataan omzet</strong><br><span class="muted small">Saya wajib pajak orang pribadi dengan peredaran bruto tahun ini sampai Rp 500 juta, sehingga tidak dipungut PPh 22 oleh Narakarya (PMK 37/2025).</span></span></label><div class="span2"><button class="btn pri">Simpan profil</button></div></form>`);
 }
 
@@ -1690,7 +1732,7 @@ const Fm = {
   noop() {},
   hsearch(v) { filt = { ...filt, q: v.q || '', cat: '', member: false, budget: 0 }; go(v.t); },
   filter(v) { filt = { ...filt, q: v.q || '', cat: v.cat || '', member: !!v.member, budget: Number(v.budget) || 0, pay: !!v.pay }; render(); },
-  register(v) { done(NK.register(v), 'Akun dibuat.', 'ruang'); },
+  register(v) { done(NK.register(v), 'Akun dibuat. Pasang foto profil untuk mulai.', 'profil'); },
   apply(v, el) { const u = need('F'); if (u) done(NK.propose(u.id, el.dataset.id, v), 'Proposal terkirim.'); },
   accept(v, el) { const r = NK.acceptProposal(NK.me().id, el.dataset.id, [1, 2, 3].map((i) => ({ title: v['t' + i], amount: v['a' + i] }))); done(r, 'Kontrak dibuat. Danai termin pertama.', r.ok ? 'kontrak-' + r.value.id : null); },
   fund(v, el) { done(NK.fund(NK.me().id, el.dataset.c, el.dataset.m, v.method), 'Dana ditahan aman sampai hasil disetujui.'); },
@@ -1745,7 +1787,7 @@ function render() {
   else if (r === 'kredit') html = authed(vCredits, 'F');
   else if (r === 'penghasilan') html = authed(vEarn, 'F');
   else if (r === 'pembayaran') html = authed(vPaid, 'K');
-  else if (r === 'profil') html = authed(vProfile, 'F');
+  else if (r === 'profil') html = authed(vProfile);
   else if (r === 'verifikasi') html = authed(vVerify);
   else html = `<div class="wrap page">${empty('Halaman tidak ditemukan', '<a href="#beranda">Kembali ke beranda</a>')}</div>`;
   $('#app').innerHTML = header(r) + `<main>${html}</main>` + footer();
@@ -1769,6 +1811,21 @@ document.addEventListener('input', (e) => {
   const t = e.target.dataset && e.target.dataset.net; if (!t) return;
   const n = Math.round(Number(e.target.value.replace(/[^\d]/g, '')) || 0);
   $('#' + t).innerHTML = fLines(qFor(n, e.target.dataset.cat, NK.me(), NK.user(e.target.dataset.cl)));
+});
+document.addEventListener('change', (e) => {
+  if (!e.target.matches('[data-photo]')) return;
+  const f = e.target.files && e.target.files[0]; if (!f) return;
+  if (!/^image\/(jpeg|png|webp)$/.test(f.type)) { toast('Pilih foto JPG, PNG, atau WebP.', true); return; }
+  if (f.size > 10 * 1024 * 1024) { toast('Foto maksimal 10 MB.', true); return; }
+  const img = new Image(), url = URL.createObjectURL(f);
+  img.onload = () => {
+    const n = Math.min(img.width, img.height), c = document.createElement('canvas'); c.width = c.height = 320;
+    c.getContext('2d').drawImage(img, (img.width - n) / 2, (img.height - n) / 2, n, n, 0, 0, 320, 320);
+    URL.revokeObjectURL(url);
+    done(NK.setPhoto(NK.me().id, c.toDataURL('image/jpeg', 0.85)), 'Foto profil tersimpan.');
+  };
+  img.onerror = () => { URL.revokeObjectURL(url); toast('Foto tidak dapat dibaca. Coba berkas lain.', true); };
+  img.src = url;
 });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 window.addEventListener('hashchange', render);
@@ -1830,7 +1887,7 @@ function aVerify() {
 }
 function aUsers() {
   const L = NK.S.users.filter((u) => u.role !== 'ADMIN');
-  return `<h1 class="title">Pengguna</h1><div class="tw"><table class="tmin"><thead><tr><th>Nama</th><th>Jenis</th><th>Keanggotaan</th><th>Peringkat</th><th class="r">Pelanggaran</th><th>Status</th><th></th></tr></thead><tbody>${L.map((u) => { const r = NK.rankOf(u.id); return `<tr><td><strong>${esc(u.name)}</strong><div class="muted xs">${esc(u.city)}${NK.plusActive(u) ? ' · Plus' : ''}</div></td><td>${u.kind === 'F' ? 'Freelancer' : 'Pemberi kerja'}<div class="xs">${vBadges(u)}</div></td><td class="small">${NK.isMember(u) ? `${mBadge(u)}<div class="muted xs">${esc(u.member.coop)}</div>` : '<span class="muted">Umum</span>'}</td><td>${tierPill(u.id)} <span class="muted xs">${r.score ?? ''}</span></td><td class="r small">${(u.upheld || 0)} laporan · ${(u.rudeCount || 0)} kasar</td><td>${u.status === 'AKTIF' ? '<span class="pill sea">Aktif</span>' : `<span class="pill bad">Ditangguhkan</span><div class="xs muted">${esc(u.statusReason || '')}</div>`}</td><td>${u.status === 'AKTIF' ? `<button class="btn s danger" data-a="suspend" data-id="${u.id}">Tangguhkan</button>` : `<button class="btn s" data-a="unsuspend" data-id="${u.id}">Aktifkan</button>`}</td></tr>`; }).join('')}</tbody></table></div>`;
+  return `<h1 class="title">Pengguna</h1><div class="tw"><table class="tmin"><thead><tr><th>Nama</th><th>Jenis</th><th>Keanggotaan</th><th>Peringkat</th><th class="r">Pelanggaran</th><th>Status</th><th></th></tr></thead><tbody>${L.map((u) => { const r = NK.rankOf(u.id); return `<tr><td><div class="row" style="flex-wrap:nowrap">${av(u, 'sm')}<span><strong>${esc(u.name)}</strong><div class="muted xs">${esc(u.city)}${NK.plusActive(u) ? ' · Plus' : ''}${u.photo ? '' : ' · <span style="color:var(--bad)">tanpa foto</span>'}</div></span></div></td><td>${u.kind === 'F' ? 'Freelancer' : 'Pemberi kerja'}<div class="xs">${vBadges(u)}</div></td><td class="small">${NK.isMember(u) ? `${mBadge(u)}<div class="muted xs">${esc(u.member.coop)}</div>` : '<span class="muted">Umum</span>'}</td><td>${tierPill(u.id)} <span class="muted xs">${r.score ?? ''}</span></td><td class="r small">${(u.upheld || 0)} laporan · ${(u.rudeCount || 0)} kasar</td><td>${u.status === 'AKTIF' ? '<span class="pill sea">Aktif</span>' : `<span class="pill bad">Ditangguhkan</span><div class="xs muted">${esc(u.statusReason || '')}</div>`}</td><td><div class="row" style="flex-wrap:nowrap">${u.photo ? `<button class="btn s" data-a="rmPhoto" data-id="${u.id}">Hapus foto</button>` : ''}${u.status === 'AKTIF' ? `<button class="btn s danger" data-a="suspend" data-id="${u.id}">Tangguhkan</button>` : `<button class="btn s" data-a="unsuspend" data-id="${u.id}">Aktifkan</button>`}</div></td></tr>`; }).join('')}</tbody></table></div>`;
 }
 function aContracts() {
   return `<h1 class="title">Kontrak</h1><div class="tw"><table class="tmin"><thead><tr><th>Nomor</th><th>Judul</th><th>Pemberi kerja</th><th>Freelancer</th><th class="r">Nilai</th><th>Progres</th><th class="r">Biaya layanan</th><th>Status</th></tr></thead><tbody>${NK.S.contracts.map((c) => { const g = NK.contractProgress(c); return `<tr><td><a class="mono" href="#kontrak-${c.id}">${c.no}</a></td><td>${esc(c.title)}</td><td>${esc(NK.user(c.clientId).name)}</td><td>${esc(NK.user(c.freelancerId).name)}</td><td class="r">${rp(c.total)}</td><td style="min-width:110px"><div class="row small" style="flex-wrap:nowrap">${bar(g)}<span class="num">${g}%</span></div></td><td class="r">${rp(c.milestones.reduce((a, m) => a + (m.komisi || 0) + (m.cfEarned || 0), 0))}</td><td>${pill(c.status)}</td></tr>`; }).join('')}</tbody></table></div>`;
@@ -1886,6 +1943,7 @@ const AA = {
   kycOk(d) { done(NK.reviewKyc(ADMIN_NAME, d.id, true, ''), 'Identitas terverifikasi.'); },
   kycNo(d) { form('Tolak identitas', '', '<label class="f">Alasan penolakan<textarea class="in" id="ky-r" name="reason"></textarea></label>', 'Tolak', 'kycNo', `data-id="${d.id}"`); },
   suspend(d) { form('Tangguhkan akun', `${esc(NK.user(d.id).name)} tidak dapat melamar, memasang, atau mengirim pesan. Pembayaran dan pencairan kontrak berjalan tetap diproses agar pihak lain tidak dirugikan.`, '<label class="f">Alasan<textarea class="in" id="su-r" name="reason"></textarea></label>', 'Tangguhkan', 'suspend', `data-id="${d.id}"`); },
+  rmPhoto(d) { form('Hapus foto profil', `${esc(NK.user(d.id).name)} wajib memasang foto baru sebelum bisa beraktivitas lagi.`, '<label class="f">Alasan<small>Misalnya bukan foto wajah, memakai foto orang lain, atau tidak pantas.</small><textarea class="in" id="rf-r" name="reason"></textarea></label>', 'Hapus foto', 'rmPhoto', `data-id="${d.id}"`); },
   unsuspend(d) { done(NK.setUserStatus(ADMIN_NAME, d.id, 'AKTIF', ''), 'Akun diaktifkan.'); },
   admCloseT(d) { form('Tutup percakapan', 'Kedua pihak tidak dapat mengirim pesan lagi di sini.', '<label class="f">Alasan<textarea class="in" id="ac-r" name="reason"></textarea></label>', 'Tutup percakapan', 'admCloseT', `data-id="${d.id}"`); },
   resolveR(d) { const r = NK.S.reports.find((x) => x.id === d.id); form('Tindak lanjut laporan', `Laporan ${esc(NK.user(r.by).name)} tentang ${esc(NK.user(r.against).name)}.`, `<label class="choice"><input type="radio" name="action" value="TANGGUHKAN" checked><span><strong>Tangguhkan ${esc(NK.user(r.against).name)}</strong> dan tutup percakapan</span></label><label class="choice"><input type="radio" name="action" value="TUTUP"><span><strong>Tutup percakapan</strong> dan beri peringatan</span></label><label class="choice"><input type="radio" name="action" value="ABAIKAN"><span><strong>Tolak laporan</strong>, tidak ada pelanggaran</span></label><label class="f">Catatan<small>Terlihat oleh pelapor.</small><textarea class="in" id="rr-n" name="note"></textarea></label>`, 'Simpan', 'resolveR', `data-id="${d.id}"`); },
@@ -1899,6 +1957,7 @@ const AA = {
 const FA = {
   modNo(v, el) { done(el.dataset.t === 'Jasa' ? NK.moderateService(ADMIN_NAME, el.dataset.id, false, v.reason) : NK.moderateJob(ADMIN_NAME, el.dataset.id, false, v.reason), 'Ditolak.'); },
   kycNo(v, el) { done(NK.reviewKyc(ADMIN_NAME, el.dataset.id, false, v.reason), 'Identitas ditolak.'); },
+  rmPhoto(v, el) { done(NK.removePhoto(ADMIN_NAME, el.dataset.id, v.reason), 'Foto dihapus.'); },
   suspend(v, el) { done(NK.setUserStatus(ADMIN_NAME, el.dataset.id, 'DITANGGUHKAN', v.reason), 'Akun ditangguhkan.'); },
   admCloseT(v, el) { done(NK.adminCloseThread(ADMIN_NAME, el.dataset.id, v.reason), 'Percakapan ditutup.'); },
   resolveR(v, el) { done(NK.resolveReport(ADMIN_NAME, el.dataset.id, v.action, v.note), 'Laporan ditindaklanjuti.'); },
