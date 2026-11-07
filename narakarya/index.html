@@ -276,6 +276,9 @@ details.card summary::after{content:"＋";float:right;color:var(--ink3)}details.
 .rules div{background:var(--putih);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px}.rules strong{color:var(--merah-gelap)}
 .card{border-radius:10px}
 @media(max-width:600px){.hcards a.hcard:nth-child(n+2){display:none}.strip .wrap{flex-wrap:nowrap}}
+.rev{margin:0;background:var(--putih);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.rev blockquote{margin:0;font:500 16px/1.5 var(--serif);color:var(--merah-gelap)}
+.rev figcaption{border-top:1px solid var(--line2);padding-top:10px;flex-wrap:nowrap}
 </style>
 <div id="app"></div>
 <noscript>Narakarya memerlukan JavaScript.</noscript>
@@ -1063,6 +1066,8 @@ const NK = (() => {
       ['f1', 'c3', 'Laporan keuangan yayasan', 'Akuntansi & Pajak', 2600000, 19, 5, 'Teliti, pertanyaan auditor terjawab.'],
       ['f3', 'c2', 'Dasbor stok gabah', 'Web & Aplikasi', 5200000, 11, 5, 'Pengurus langsung bisa memakainya.'],
     ];
+    const FR = [[5, 'Arahan jelas sejak awal dan termin selalu didanai tepat waktu.'], [5, 'Responsif saat ditanya, revisi wajar, pembayaran lancar.'], [4, 'Brief cukup jelas, sesekali butuh waktu untuk menjawab.'], [5, 'Sangat menghargai waktu kerja. Senang bisa bekerja sama lagi.'], [5, 'Pengurus kompak dan cepat memberi keputusan.'], [5, 'Langsung menyetujui hasil setelah dicek, tanpa berbelit.'], [4, 'Lingkup kerja tertulis rapi sehingga mudah diikuti.'], [5, 'Komunikatif dan sopan, dana langsung cair setelah serah terima.']];
+    let fi = 0;
     history.forEach(([f, c, title, cat, amount, d, stars, text]) => {
       const j = openJob(c, title, cat, amount, 'Menengah', 14, '', `${title}. Rincian lengkap dibahas setelah proposal diterima.`, d);
       const p = P(f, j, amount, 10, 'Saya sudah beberapa kali mengerjakan pekerjaan serupa dan siap memulai segera.', d - 0.2);
@@ -1076,7 +1081,8 @@ const NK = (() => {
       });
       clock = at(d - 8);
       mustOk(review(c, ct.id, stars, text));
-      mustOk(review(f, ct.id, 5, 'Klien jelas memberi arahan dan cepat membayar.'));
+      const fr = title === 'Audit akun Instagram' ? [3, 'Brief berubah di tengah jalan, tetapi pembayaran tetap lancar.'] : FR[fi++ % FR.length];
+      mustOk(review(f, ct.id, fr[0], fr[1]));
     });
 
     const a1 = openJob('c1', 'Laporan keuangan semester dan rekonsiliasi bank', 'Akuntansi & Pajak', 4000000, 'Berpengalaman', 21, 'Pembukuan, Excel', 'Kami butuh rekonsiliasi bank enam bulan dan laporan keuangan semester untuk bahan rapat pemilik.', 16);
@@ -1208,6 +1214,13 @@ const TIERC = { 'Terbaik Plus': 'gold', Terbaik: 'red', 'Naik Daun': 'sea', Terd
 const tierPill = (uid) => { const r = NK.rankOf(uid); return `<span class="pill ${TIERC[r.tier]}" title="Skor ${r.score ?? 'belum ada'}">${ic('star')} ${esc(r.tier)}</span>`; };
 const vBadges = (u) => `${NK.idVerified(u) ? `<span class="vchk ok">✓ ${u.kind === 'K' && u.kycType === 'PERUSAHAAN' ? 'Perusahaan' : 'Identitas'} terverifikasi</span>` : '<span class="vchk">Identitas belum terverifikasi</span>'}${u.kind === 'K' ? (NK.payVerified(u) ? '<span class="vchk ok">✓ Pembayaran terverifikasi</span>' : '<span class="vchk">Pembayaran belum terverifikasi</span>') : ''}`;
 const stars = (uid) => { const r = NK.ratingOf(uid); return r.n ? `<span class="star num">★ ${r.avg.toFixed(1).replace('.', ',')}</span> <span class="muted small">(${r.n})</span>` : '<span class="muted small">Belum ada ulasan</span>'; };
+const posReviews = (uid) => {
+  const all = NK.S.reviews.filter((x) => x.to === uid), pos = all.filter((x) => x.stars >= 4).sort((a, b) => b.at - a.at);
+  const r = NK.ratingOf(uid);
+  const head = `<div class="row between"><h2 class="h2s">Ulasan positif</h2>${r.n ? `<span class="small"><span class="star">★ ${r.avg.toFixed(1).replace('.', ',')}</span> <span class="muted">dari semua ${r.n} ulasan</span></span>` : ''}</div>`;
+  if (!pos.length) return `<div class="stack-s">${head}${empty(all.length ? 'Belum ada ulasan bintang 4 atau 5' : 'Belum ada ulasan')}</div>`;
+  return `<div class="stack-s">${head}<div class="grid2">${pos.map((x) => { const f = NK.user(x.from), c = NK.getC(x.contractId); return `<figure class="rev"><span class="star">${'★'.repeat(x.stars)}</span><blockquote>“${esc(x.text)}”</blockquote><figcaption class="row small">${av(f, 'sm')}<span class="grow"><strong>${esc(f.name)}</strong><br><span class="muted xs">${esc(c ? c.title : '')} · ${ago(x.at)}</span></span></figcaption></figure>`; }).join('')}</div>${pos.length < all.length ? `<p class="xs muted">Menampilkan ${pos.length} ulasan bintang 4–5. Nilai rata-rata tetap dihitung dari semua ulasan.</p>` : ''}</div>`;
+};
 const empty = (t, sub = '') => `<div class="card" style="text-align:center;padding:28px"><strong>${esc(t)}</strong>${sub ? `<div class="muted small">${sub}</div>` : ''}</div>`;
 const STAT = {
   BELUM_DANA: ['Menunggu dana klien', ''], DITAHAN: ['Dana ditahan, sedang dikerjakan', 'sea'], DIKIRIM: ['Hasil dikirim, menunggu klien', 'warn'], SENGKETA: ['Sengketa', 'bad'], CAIR: ['Selesai, dana cair', 'ok'], DIKEMBALIKAN: ['Dikembalikan', 'red'],
@@ -1337,7 +1350,7 @@ function vJob(id) {
   return `<div class="wrap page split"><div class="stack"><div><div class="crumb"><a href="#lowongan">Cari kerja</a> / ${esc(j.cat)}</div><h1 class="title">${esc(j.title)}</h1><div class="row small muted" style="margin-top:6px">${pill(j.status)}<span>Dipasang ${ago(j.at)}</span></div></div>
     <div class="card stack-s"><p style="white-space:pre-line">${esc(j.desc)}</p>${j.skills.length ? `<div class="tags">${j.skills.map((s) => `<span class="tag">${esc(s)}</span>`).join('')}</div>` : ''}</div>${range}${act}</div>
   <aside class="stack"><div class="card"><div class="lines"><div><span>Anggaran</span><span class="price">${rp(j.budget)}</span></div><div><span>Jenis harga</span><span>Tetap per termin</span></div><div><span>Perkiraan lama</span><span>${j.days} hari</span></div><div><span>Tingkat</span><span>${esc(j.level)}</span></div><div><span>Kredit untuk melamar</span><span>${NK.creditCost(j.budget)}</span></div></div></div>
-    <div class="card stack-s"><div class="row" style="flex-wrap:nowrap">${av(c)}<div class="grow"><strong>${esc(c.name)}</strong><div class="muted xs">${esc(c.city)}</div></div></div><div class="row small">${tierPill(c.id)}${mBadge(c)}</div><div class="small">${stars(c.id)}</div>
+    <div class="card stack-s"><a class="row" href="#klien-${c.id}" style="flex-wrap:nowrap;text-decoration:none;color:inherit">${av(c)}<div class="grow"><strong class="nm">${esc(c.name)}</strong><div class="muted xs">${esc(c.city)} · lihat profil →</div></div></a><div class="row small">${tierPill(c.id)}${mBadge(c)}</div><div class="small">${stars(c.id)}</div>
     <div class="stack-s xs">${vBadges(c)}</div>${NK.payBasis(c) ? `<span class="xs muted">Dasar verifikasi pembayaran: ${esc(NK.payBasis(c))}</span>` : ''}<div class="lines small"><div><span>Tingkat rekrut</span><span>${Math.round(cr.hireRate * 100)}%</span></div><div><span>Total dibayar</span><span>${rp(cr.spent)}</span></div></div>
     ${mine && j.status === 'TERBUKA' ? `<button class="btn s danger" data-a="closeJob" data-id="${j.id}">Tutup lowongan tanpa merekrut</button><p class="xs muted">Kredit para pelamar akan dikembalikan.</p>` : ''}</div></aside></div>`;
 }
@@ -1363,9 +1376,17 @@ function vTalent(id) {
   return `<div class="wrap page split"><div class="stack"><div class="row" style="flex-wrap:nowrap;align-items:flex-start">${av(f, 'lg')}<div class="grow"><div class="crumb"><a href="#talenta">Cari talenta</a></div><h1 class="title">${esc(f.name)}</h1><div>${esc(f.headline)}</div><div class="row small" style="margin-top:4px"><span class="muted">${esc(f.city)}</span>${tierPill(id)}${mBadge(f)}${plusBadge(f)}${f.kyc === 'TERVERIFIKASI' ? '<span class="pill ok">Identitas terverifikasi</span>' : ''}</div></div></div>
     <div class="card stack-s"><h3>Tentang</h3><p>${esc(f.bio)}</p><div class="tags">${f.skills.map((s) => `<span class="tag">${esc(s)}</span>`).join('')}</div></div>
     ${sv.length ? `<div class="stack-s"><h2 class="h2s">Jasa siap pesan</h2><div class="grid2">${sv.map(serviceCard).join('')}</div></div>` : ''}
-    <div class="stack-s"><h2 class="h2s">Ulasan (${rv.length})</h2>${rv.length ? rv.map((x) => `<div class="card stack-s"><div class="row between"><span class="star">${'★'.repeat(x.stars)}</span><span class="muted xs">${ago(x.at)}</span></div><p class="small">${esc(x.text)}</p><span class="muted xs">${esc(NK.user(x.from).name)}</span></div>`).join('') : empty('Belum ada ulasan')}</div></div>
+    ${posReviews(id)}</div>
   <aside class="stack"><div class="card"><div class="lines"><div><span>Peringkat</span><span>${esc(r.tier)}</span></div><div><span>Skor</span><span>${r.score ?? '–'}</span></div><div><span>Keberhasilan kontrak</span><span>${r.jss ?? '–'}${r.jss !== null ? '%' : ''}</span></div><div><span>Nilai ulasan</span><span>${stars(id)}</span></div><div><span>Kontrak selesai</span><span>${r.done}</span></div><div><span>Total penghasilan</span><span>${rp(r.earned)}</span></div><div><span>Tarif acuan</span><span>${rp(f.rate)}/jam</span></div>${NK.isMember(f) ? `<div><span>Koperasi</span><span style="white-space:normal;text-align:right">${esc(f.member.coop)}</span></div>` : ''}</div></div>
   ${myJobs.length ? `<form class="card stack-s" data-f="invite" data-id="${f.id}"><label class="f">Undang ke lowongan<select class="in" id="inv-j" name="job">${myJobs.map((j) => `<option value="${j.id}">${esc(j.title)}</option>`).join('')}</select></label><button class="btn pri">Kirim undangan</button></form>` : (!u || u.kind === 'K' ? `<a class="btn pri" href="${u ? '#pasang' : '#masuk'}">Pasang lowongan untuk mengundang</a>` : '')}</aside></div>`;
+}
+function vClient(id) {
+  const c = NK.user(id); if (!c || c.kind !== 'K') return `<div class="wrap page">${empty('Pemberi kerja tidak ditemukan')}</div>`;
+  const r = NK.rankOf(id), jobs = openJobs().filter((j) => j.clientId === id);
+  return `<div class="wrap page split"><div class="stack"><div class="row" style="flex-wrap:nowrap;align-items:flex-start">${av(c, 'lg')}<div class="grow"><div class="crumb">Pemberi kerja</div><h1 class="title">${esc(c.name)}</h1><div class="row small" style="margin-top:4px"><span class="muted">${esc(c.city)}</span>${tierPill(id)}${mBadge(c)}</div><div class="row xs" style="margin-top:6px">${vBadges(c)}</div></div></div>
+    ${posReviews(id)}
+    <div class="stack-s"><h2 class="h2s">Lowongan terbuka (${jobs.length})</h2>${jobs.length ? `<div class="grid2">${jobs.map(jobCard).join('')}</div>` : empty('Tidak ada lowongan terbuka')}</div></div>
+  <aside class="stack"><div class="card"><div class="lines"><div><span>Peringkat</span><span>${esc(r.tier)}</span></div><div><span>Skor</span><span>${r.score ?? '–'}</span></div><div><span>Nilai dari freelancer</span><span>${stars(id)}</span></div><div><span>Kontrak</span><span>${r.hires}</span></div><div><span>Tingkat rekrut</span><span>${Math.round(r.hireRate * 100)}%</span></div><div><span>Total dibayar</span><span>${rp(r.spent)}</span></div><div><span>Bergabung</span><span>${tgl(c.joinedAt)}</span></div>${NK.isMember(c) ? `<div><span>Koperasi</span><span style="white-space:normal;text-align:right">${esc(c.member.coop)}</span></div>` : ''}</div></div></aside></div>`;
 }
 function vService(id) {
   const s = NK.S.services.find((x) => x.id === id); if (!s) return `<div class="wrap page">${empty('Jasa tidak ditemukan')}</div>`;
@@ -1408,7 +1429,7 @@ function vRank() {
   const head = isF ? '<th class="r">Keberhasilan</th><th class="r">Kontrak selesai</th><th class="r">Penghasilan</th>' : '<th class="r">Tingkat rekrut</th><th class="r">Kontrak</th><th class="r">Total dibayar</th>';
   return `<div class="wrap page stack"><div><h1 class="title">Peringkat</h1><p class="muted">Dari kinerja nyata, tidak bisa dibeli.</p></div>
   <div class="tabs" role="tablist"><button role="tab" aria-selected="${isF}" class="${isF ? 'on' : ''}" data-a="rankTab" data-t="F">Freelancer</button><button role="tab" aria-selected="${!isF}" class="${isF ? '' : 'on'}" data-a="rankTab" data-t="K">Pemberi kerja</button></div>
-  <div class="tw"><table class="tmin"><thead><tr><th>#</th><th>Nama</th><th>Peringkat</th><th class="r">Skor</th><th class="r">Ulasan</th>${head}</tr></thead><tbody>${L.map(({ u, r }, i) => `<tr><td class="num">${i + 1}</td><td>${isF ? `<a href="#talenta-${u.id}">${esc(u.name)}</a>` : esc(u.name)} ${mBadge(u)}</td><td>${tierPill(u.id)}</td><td class="r"><strong>${r.score ?? '–'}</strong></td><td class="r">${r.rating.n ? r.rating.avg.toFixed(1).replace('.', ',') + ' ★' : '–'}</td>${isF ? `<td class="r">${r.jss ?? '–'}${r.jss !== null ? '%' : ''}</td><td class="r">${r.done}</td><td class="r">${rp(r.earned)}</td>` : `<td class="r">${Math.round(r.hireRate * 100)}%</td><td class="r">${r.hires}</td><td class="r">${rp(r.spent)}</td>`}</tr>`).join('')}</tbody></table></div>
+  <div class="tw"><table class="tmin"><thead><tr><th>#</th><th>Nama</th><th>Peringkat</th><th class="r">Skor</th><th class="r">Ulasan</th>${head}</tr></thead><tbody>${L.map(({ u, r }, i) => `<tr><td class="num">${i + 1}</td><td><a href="#${isF ? 'talenta' : 'klien'}-${u.id}">${esc(u.name)}</a> ${mBadge(u)}</td><td>${tierPill(u.id)}</td><td class="r"><strong>${r.score ?? '–'}</strong></td><td class="r">${r.rating.n ? r.rating.avg.toFixed(1).replace('.', ',') + ' ★' : '–'}</td>${isF ? `<td class="r">${r.jss ?? '–'}${r.jss !== null ? '%' : ''}</td><td class="r">${r.done}</td><td class="r">${rp(r.earned)}</td>` : `<td class="r">${Math.round(r.hireRate * 100)}%</td><td class="r">${r.hires}</td><td class="r">${rp(r.spent)}</td>`}</tr>`).join('')}</tbody></table></div>
   <details class="card"><summary><strong>Cara menghitung</strong></summary><div class="grid2" style="margin-top:12px"><div class="card stack-s"><h3>Freelancer</h3><p class="small muted">Skor = 50% keberhasilan kontrak + 50% nilai ulasan, dikurangi 10 per laporan terbukti, sampai 10 untuk kata kasar, dan 30 bila ditangguhkan. Keberhasilan kontrak menghitung kontrak selesai dikurangi sengketa yang kalah.</p><div class="lines small"><div><span>Terbaik Plus</span><span>Skor ≥ 90, ≥ 10 kontrak, ≥ Rp 20 juta</span></div><div><span>Terbaik</span><span>Skor ≥ 90, ≥ 3 kontrak, ≥ Rp 5 juta</span></div><div><span>Naik Daun</span><span>Skor ≥ 80</span></div><div><span>Terdaftar</span><span>Sudah punya kontrak selesai</span></div></div></div>
   <div class="card stack-s"><h3>Pemberi kerja</h3><p class="small muted">Skor = 50% nilai ulasan dari freelancer + 30% tingkat rekrut + 20% total dibayar (penuh pada Rp 20 juta), dikurangi pelanggaran.</p><div class="lines small"><div><span>Klien utama</span><span>Skor ≥ 85, ≥ 5 kontrak, ≥ Rp 20 juta</span></div><div><span>Klien tepercaya</span><span>Skor ≥ 60 dan pernah mendanai</span></div><div><span>Klien terdaftar</span><span>Sudah punya kontrak</span></div></div></div></div></details></div>`;
 }
@@ -1709,6 +1730,7 @@ function render() {
   else if (r === 'beranda') html = vHome();
   else if (r === 'lowongan') html = arg === 'saya' ? authed(vMyJobs, 'K') : (arg ? vJob(arg) : vJobs());
   else if (r === 'talenta') html = arg ? vTalent(arg) : vTalents();
+  else if (r === 'klien') html = vClient(arg);
   else if (r === 'jasa') html = arg === 'saya' ? authed(vMyServices, 'F') : (arg ? vService(arg) : vServices());
   else if (r === 'harga' || r === 'biaya') html = vPricing();
   else if (r === 'peringkat') html = vRank();
