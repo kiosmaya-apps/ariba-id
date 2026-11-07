@@ -228,6 +228,54 @@ details.q p{margin-top:6px;color:var(--ink2);max-width:72ch}
 .vchk{display:inline-flex;align-items:center;gap:3px;font-size:12px;color:var(--ink3);white-space:nowrap}
 .vchk.ok{color:var(--ok);font-weight:600}
 .stack>.bar,.stack-s>.bar{flex:0 0 auto}
+/* --- v3: lebih visual, lebih sedikit kata --- */
+.center{text-align:center;align-items:center}
+.eyebrow{align-self:flex-start;display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:#EBD3D8;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px}
+.hero h1{font-size:clamp(40px,6vw,68px);line-height:1.02}
+.hero p.lead{margin-top:0;font-size:18px}
+.searchbox{margin-top:4px}
+.hstats{display:flex;gap:28px;flex-wrap:wrap;margin-top:6px}
+.hstats div{display:flex;flex-direction:column}.hstats b{font:600 26px/1.1 var(--serif);color:#fff;font-variant-numeric:tabular-nums}.hstats span{font-size:12.5px;color:#D9B9BF}
+.hcards{display:flex;flex-direction:column;gap:12px;position:relative}
+.hcard{display:flex;align-items:center;gap:12px;background:#fff;color:var(--ink);border-radius:10px;padding:12px 14px;text-decoration:none;box-shadow:0 10px 28px rgba(0,0,0,.28);margin-left:calc(var(--i,0) * 22px)}
+.hcard:hover{color:var(--ink)}.hcard strong{display:block;font-size:14.5px}.hcard .xs{color:var(--ink3)}
+.hcard.receipt{flex-direction:column;align-items:flex-start;gap:2px;margin-left:66px;border-top:4px solid var(--merah)}
+.hcard.receipt b{font:600 24px/1.2 var(--sans);color:var(--merah-gelap);font-variant-numeric:tabular-nums}
+@media(max-width:900px){.hcard{margin-left:0}.hcard.receipt{margin-left:0}}
+.cats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+@media(max-width:980px){.cats{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.cats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cat{display:flex;flex-direction:column;gap:6px;background:var(--putih);border:1px solid var(--line);border-radius:10px;padding:16px;text-decoration:none;color:var(--merah-gelap)}
+.cat:hover{border-color:var(--merah-line);color:var(--merah-gelap)}.cat strong{font-size:14px;line-height:1.3}
+.ci{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--merah-soft);color:var(--merah)}.ci svg.i{width:22px;height:22px}
+.price.big{font-size:18px}
+.steps2{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+@media(max-width:820px){.steps2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.steps2>div{display:flex;flex-direction:column;gap:6px}.steps2 strong{font-size:16px;color:var(--merah-gelap)}
+.si{position:relative;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--merah);color:#fff;margin-bottom:6px}.si svg.i{width:24px;height:24px}
+.si em{position:absolute;right:-4px;top:-4px;font:600 11px/1 var(--sans);font-style:normal;background:#fff;color:var(--merah);border:2px solid var(--merah);border-radius:50%;width:22px;height:22px;display:grid;place-items:center}
+.bigs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+@media(max-width:820px){.bigs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bigs div{display:flex;flex-direction:column;gap:4px;border-left:3px solid rgba(255,255,255,.35);padding-left:14px}
+.bigs b{font:600 clamp(30px,4vw,44px)/1 var(--serif);color:#fff}.bigs span{color:#D9B9BF;font-size:14px}
+.cta2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:620px){.cta2{grid-template-columns:minmax(0,1fr)}}
+.ctab{display:flex;flex-direction:column;gap:4px;padding:26px;border-radius:12px;background:var(--merah);color:#fff;text-decoration:none}
+.ctab:hover{background:var(--merah-d);color:#fff}.ctab span{font-size:14px;opacity:.85}.ctab strong{font:600 26px/1.1 var(--serif)}
+.ctab.alt{background:var(--putih);color:var(--merah-gelap);border:1px solid var(--line)}.ctab.alt:hover{border-color:var(--merah-line);background:var(--putih);color:var(--merah-gelap)}
+.pcard{background:var(--putih);border:1px solid var(--line);border-radius:12px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.pcard.hot{border:2px solid var(--merah)}
+.ptag{font-size:13px;font-weight:600;color:var(--merah)}
+.pbig{font:600 34px/1.05 var(--serif);color:var(--merah-gelap);font-variant-numeric:tabular-nums}.pbig small{display:block;font:400 13px var(--sans);color:var(--ink3);margin-top:4px}
+.pcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.pcard li{display:flex;gap:8px;align-items:flex-start}.pcard li svg.i{color:var(--sea);margin-top:2px}
+.packs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}@media(max-width:820px){.packs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pack{background:var(--putih);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.pack .pill{margin-bottom:6px}.pack b{font:600 38px/1 var(--serif);color:var(--merah-gelap)}.pack strong{margin-top:8px;font-size:17px;color:var(--merah-gelap)}
+details.card summary{cursor:pointer;list-style:none;color:var(--merah-gelap)}details.card summary::-webkit-details-marker{display:none}
+details.card summary::after{content:"＋";float:right;color:var(--ink3)}details.card[open] summary::after{content:"－"}
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}@media(max-width:700px){.rules{grid-template-columns:minmax(0,1fr)}}
+.rules div{background:var(--putih);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:6px}.rules strong{color:var(--merah-gelap)}
+.card{border-radius:10px}
+@media(max-width:600px){.hcards a.hcard:nth-child(n+2){display:none}.strip .wrap{flex-wrap:nowrap}}
 </style>
 <div id="app"></div>
 <noscript>Narakarya memerlukan JavaScript.</noscript>
@@ -1149,7 +1197,7 @@ const I = {
   menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', plus: '<path d="M12 5v14M5 12h14"/>', out: '<path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/>',
   home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/>', file: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/>', flag: '<path d="M5 21V4h13l-3 4 3 4H5"/>', users: '<circle cx="9" cy="8" r="3.5"/><path d="M3 20c0-3.5 2.5-6 6-6s6 2.5 6 6"/><path d="M16 5a3.5 3.5 0 0 1 0 6.5M21 20c0-3-1.5-5-4-5.6"/>',
   wallet: '<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M3 10h18M16 15h2"/>', sliders: '<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>', list: '<path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/>',
-  scale: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7c1.5 1.5 4.5 1.5 6 0zM19 7l-3 7c1.5 1.5 4.5 1.5 6 0z"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  scale: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7c1.5 1.5 4.5 1.5 6 0zM19 7l-3 7c1.5 1.5 4.5 1.5 6 0z"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/>', check: '<path d="M20 6 9 17l-5-5"/>', pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>', code: '<path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/>', type: '<path d="M4 7V4h16v3M9 20h6M12 4v16"/>', mega: '<path d="m3 11 18-6v14L3 13z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>', video: '<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4z"/>', calc: '<rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>', grid: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/>', brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>', book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
 };
 const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
 const avatarColors = ['#8B1A1A', '#8C1D2F', '#5B4A42', '#9A6410', '#2F7A69', '#6B2737'];
@@ -1190,7 +1238,7 @@ const cLines = (q) => `<div><span>Nilai pekerjaan</span><span>${rp(q.amount)}</s
 function header(route) {
   const u = NK.me();
   const L = [['talenta', 'Cari Talenta'], ['lowongan', 'Cari Kerja'], ['jasa', 'Jasa Siap Pesan'], ['peringkat', 'Peringkat'], ['harga', 'Harga & Kredit']];
-  return `<div class="flag" aria-hidden="true"></div><div class="strip"><div class="wrap"><span><strong>Prototipe.</strong> Data contoh tersimpan di peramban Anda. Tidak ada uang sungguhan.</span><button class="linkbtn" data-a="reset">Mulai ulang data contoh</button></div></div>
+  return `<div class="flag" aria-hidden="true"></div><div class="strip"><div class="wrap"><span><strong>Prototipe</strong> · data contoh, tanpa uang sungguhan</span><button class="linkbtn" data-a="reset">Mulai ulang</button></div></div>
   ${u && u.status !== 'AKTIF' ? `<div class="note bad" style="border-radius:0;text-align:center">Akun Anda ditangguhkan Ariba Indonesia${u.statusReason ? ': ' + esc(u.statusReason) : ''}. Anda tidak dapat melamar, memasang, atau mengirim pesan.</div>` : ''}
   <header class="top"><div class="wrap">
     <a class="brand" href="#beranda" aria-label="Narakarya, beranda"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="16" rx="0" fill="#8C1D2F"/><rect y="16" width="32" height="16" fill="#FFFFFF" stroke="#E4D6D2"/><rect x="0.5" y="0.5" width="31" height="31" rx="5" fill="none" stroke="#8C1D2F"/></svg><span><b>Narakarya</b><i>OLEH ARIBA INDONESIA</i></span></a>
@@ -1207,15 +1255,14 @@ const footer = () => `<footer class="foot"><div class="wrap"><div><strong style=
 
 const jobCard = (j) => { const c = NK.user(j.clientId); const n = NK.S.proposals.filter((p) => p.jobId === j.id).length; return `<a class="card stack-s" href="#lowongan-${j.id}">
   <div class="row between"><span class="tag">${esc(j.cat)}</span><span class="muted xs">${ago(j.at)}</span></div>
-  <h3>${esc(j.title)}</h3><p class="muted small clamp2">${esc(j.desc)}</p>
-  <div class="row between"><span class="price">${rp(j.budget)}</span><span class="muted xs">${j.days} hari · ${n} proposal · ${NK.creditCost(j.budget)} kredit</span></div>
-  <div class="row small"><span class="muted">${esc(c.name)}</span>${tierPill(c.id)}${mBadge(c)}</div><div class="row xs">${vBadges(c)}</div></a>`; };
+  <h3>${esc(j.title)}</h3>
+  <div class="row between"><span class="price big">${rp(j.budget)}</span><span class="muted xs">${j.days} hari · ${n} proposal</span></div>
+  <div class="row small" style="border-top:1px solid var(--line2);padding-top:8px"><span class="muted">${esc(c.name)}</span>${NK.payVerified(c) ? '<span class="vchk ok">✓ Pembayaran terverifikasi</span>' : ''}${NK.isMember(c) ? `<span class="badge-m" title="${esc(c.member.coop)}">${ic('shield')} Anggota</span>` : ''}</div></a>`; };
 const talentCard = (u) => { const r = NK.rankOf(u.id); return `<a class="card stack-s" href="#talenta-${u.id}">
   <div class="row" style="flex-wrap:nowrap">${av(u)}<div class="grow"><strong class="nm">${esc(u.name)}</strong><div class="muted xs">${esc(u.city)}</div></div>${plusBadge(u)}</div>
   <div class="small clamp2">${esc(u.headline)}</div>
-  <div class="row between small"><span>${stars(u.id)}</span><span class="muted">${r.done} kontrak${r.jss !== null ? ` · sukses ${r.jss}%` : ''}</span></div>
-  <div class="row small">${tierPill(u.id)}${mBadge(u)}</div>
-  <div class="price small">${rp(u.rate)}<span class="muted" style="font-weight:400">/jam acuan</span></div></a>`; };
+  <div class="row between small"><span>${stars(u.id)}</span>${tierPill(u.id)}</div>
+  <div class="row between small" style="border-top:1px solid var(--line2);padding-top:8px"><span class="price">${rp(u.rate)}<span class="muted" style="font-weight:400">/jam</span></span>${NK.isMember(u) ? `<span class="badge-m" title="${esc(u.member.coop)}">${ic('shield')} Anggota</span>` : ''}</div></a>`; };
 const serviceCard = (s) => { const f = NK.user(s.freelancerId); return `<a class="card stack-s" href="#jasa-${s.id}"><span class="tag" style="align-self:flex-start">${esc(s.cat)}</span><h3>${esc(s.title)}</h3>
   <div class="row small">${av(f, 'sm')}<span class="muted">${esc(f.name)}</span></div>
   <div class="row between small"><span>${stars(f.id)}</span><span class="price">mulai ${rp(Math.min(...s.tiers.map((t) => t.price)))}</span></div><div class="row small">${tierPill(f.id)}${mBadge(f)}</div></a>`; };
@@ -1225,32 +1272,32 @@ const openJobs = () => NK.S.jobs.filter((j) => j.status === 'TERBUKA');
 const liveServices = () => NK.S.services.filter((s) => s.status === 'TAYANG');
 
 /* ---------- beranda ---------- */
+const CATICON = { 'Desain & Kreatif': 'pen', 'Web & Aplikasi': 'code', 'Penulisan & Terjemahan': 'type', 'Pemasaran Digital': 'mega', 'Video & Animasi': 'video', 'Akuntansi & Pajak': 'calc', 'Administrasi & Data': 'grid', 'Hukum & Perizinan': 'scale', 'Konsultasi Usaha': 'brief', 'Pelatihan & Mengajar': 'book' };
+const short = (v) => (v >= 1e9 ? (v / 1e9).toLocaleString('id-ID', { maximumFractionDigits: 1 }) + ' M' : v >= 1e6 ? (v / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + ' jt' : Math.round(v / 1e3) + ' rb');
 function vHome() {
   const P = NK.pol(), S = NK.S, q = qFor(5000000, 'Desain & Kreatif', null, null);
+  const top = sortTalents(talents()).slice(0, 3);
+  const paid = S.earnings.reduce((a, e) => a + e.gross, 0);
   const counts = Object.fromEntries(NK.CATS.map((c) => [c, S.jobs.filter((j) => j.cat === c && j.status === 'TERBUKA').length + talents().filter((u) => u.cat === c).length]));
-  return `<section class="hero"><div class="wrap"><div>
-    <h1>Kerja lepas yang dibayar adil, tanpa bunga dan tanpa denda.</h1>
-    <p class="lead">Temukan freelancer tepercaya atau pekerjaan berikutnya. Dana klien ditahan aman sampai hasil disetujui, dan setiap biaya tertulis sejak awal.</p>
-    <form class="searchbox" data-f="hsearch"><select id="hs-t" name="t" aria-label="Yang dicari"><option value="talenta">Talenta</option><option value="lowongan">Lowongan</option><option value="jasa">Jasa</option></select><input id="hs-q" name="q" placeholder="Contoh: pembukuan koperasi, desain kemasan" aria-label="Kata kunci"><button class="btn pri">${ic('search')} Cari</button></form>
-    <div class="chips"><span>Sering dicari:</span><a href="#talenta" data-cat="Akuntansi & Pajak">Pembukuan</a><a href="#talenta" data-cat="Desain & Kreatif">Desain kemasan</a><a href="#talenta" data-cat="Web & Aplikasi">Toko daring</a><a href="#talenta" data-cat="Hukum & Perizinan">Perizinan</a></div>
+  return `<section class="hero"><div class="wrap"><div class="stack" style="gap:20px">
+    <span class="eyebrow">${ic('shield')} Tanpa bunga · Tanpa denda</span>
+    <h1>Kerja lepas,<br>dibayar adil.</h1>
+    <p class="lead">Dana ditahan aman sampai hasil disetujui.</p>
+    <form class="searchbox" data-f="hsearch"><select id="hs-t" name="t" aria-label="Yang dicari"><option value="talenta">Talenta</option><option value="lowongan">Lowongan</option><option value="jasa">Jasa</option></select><input id="hs-q" name="q" placeholder="Pembukuan, desain kemasan…" aria-label="Kata kunci"><button class="btn pri">${ic('search')} Cari</button></form>
+    <div class="hstats"><div><b>${talents().length}</b><span>talenta</span></div><div><b>${S.contracts.filter((c) => c.status === 'SELESAI').length}</b><span>kontrak selesai</span></div><div><b>Rp ${short(paid)}</b><span>dibayarkan</span></div></div>
   </div>
-  <aside class="nota" aria-label="Contoh rincian kontrak">
-    <div class="no">CONTOH NOTA KONTRAK · DESAIN &amp; KREATIF</div><h3>Desain identitas merek</h3>
-    <div class="lines">${cLines(q)}</div><div class="lines" style="margin-top:8px">${fLines(q).replace('<div><span>Harga</span><span>' + rp(q.amount) + '</span></div>', '')}</div>
-    <p class="xs muted" style="margin-top:8px">Akun umum. Anggota koperasi ARIBA membayar biaya layanan lebih rendah.</p>
-  </aside></div></section>
-  <section class="band"><div class="wrap"><div class="sect-h"><h2>Telusuri kategori</h2></div><div class="catlist">${NK.CATS.map((c) => `<a href="#talenta" data-cat="${esc(c)}">${esc(c)} <span>${counts[c]}</span></a>`).join('')}</div></div></section>
-  <section class="band alt"><div class="wrap"><div class="sect-h"><h2>Lowongan terbaru</h2><a href="#lowongan">Lihat semua lowongan</a></div><div class="grid2">${openJobs().slice(0, 4).map(jobCard).join('')}</div></div></section>
-  <section class="band"><div class="wrap"><div class="sect-h"><h2>Talenta peringkat teratas</h2><a href="#peringkat">Lihat peringkat</a></div><div class="grid4">${sortTalents(talents()).slice(0, 4).map(talentCard).join('')}</div></div></section>
-  <section class="band alt"><div class="wrap"><div class="sect-h"><h2>Cara kerjanya</h2></div><div class="steps">
-    <div><h3>Pasang atau pesan</h3><p class="muted">Pemberi kerja memasang lowongan gratis atau memesan jasa siap pakai.</p></div>
-    <div><h3>Lamar dan interview</h3><p class="muted">Freelancer melamar dengan kredit. Pemberi kerja mengajak interview di ruang percakapan yang diawasi Ariba.</p></div>
-    <div><h3>Dana ditahan</h3><p class="muted">Pekerjaan dibagi menjadi termin. Dana termin ditahan dan progres kerja dilaporkan berkala.</p></div>
-    <div><h3>Setujui, dana cair</h3><p class="muted">Hasil disetujui, dana cair. Bila pemberi kerja diam ${P.autoReleaseDays} hari, dana cair otomatis.</p></div></div></div></section>
-  <section class="band dark"><div class="wrap"><div class="sect-h"><h2>Lebih untung bagi anggota koperasi ARIBA</h2><a href="#harga" style="color:#fff">Lihat perbandingan</a></div>
-    <p style="color:#E2C7CC;max-width:70ch;margin-bottom:18px">Berlaku untuk anggota semua koperasi yang memakai ARIBA, termasuk Koperasi Desa dan Kelurahan Merah Putih.</p><div class="grid4">
-    ${[[`Biaya layanan −${P.memberFeeDiscount} poin`, `Pemberi kerja anggota membayar ${pc(P.cFeeMember)}, bukan ${pc(P.cFeePublic)}.`], [`${P.freeCreditsMember} kredit gratis tiap bulan`, `Tiga kali akun umum, ditambah bonus ${P.memberPackBonusPct}% di setiap paket kredit.`], [`Plus hanya ${rp(P.plusPriceMember)}`, `Akun umum ${rp(P.plusPricePublic)} per bulan, keduanya berisi ${P.plusCredits} kredit.`], ['Cair ke Dompet ARIBA', 'Gratis, tanpa masa tunggu, dan identitas terverifikasi otomatis.']].map(([a, b]) => `<div><h3 style="color:#fff;font-size:18px">${a}</h3><p style="color:#E2C7CC;font-size:14px;margin-top:4px">${b}</p></div>`).join('')}
-  </div></div></section>`;
+  <div class="hcards" aria-label="Talenta pilihan">${top.map((u, i) => `<a class="hcard" style="--i:${i}" href="#talenta-${u.id}">${av(u)}<span class="grow"><strong>${esc(u.name)}</strong><span class="xs">${esc(u.cat)}</span></span><span class="star">★ ${NK.ratingOf(u.id).avg.toFixed(1).replace('.', ',')}</span></a>`).join('')}
+    <div class="hcard receipt"><span class="xs muted">Kontrak Rp 5 juta · freelancer terima</span><b>${rp(q.net)}</b><span class="vchk ok">✓ Dana ditahan aman</span></div></div>
+  </div></section>
+  <section class="band"><div class="wrap"><div class="sect-h"><h2>Kategori</h2><a href="#talenta">Semua talenta →</a></div><div class="cats">${NK.CATS.map((c) => `<a class="cat" href="#talenta" data-cat="${esc(c)}"><span class="ci">${ic(CATICON[c])}</span><strong>${esc(c)}</strong><span class="xs muted">${counts[c]} tersedia</span></a>`).join('')}</div></div></section>
+  <section class="band alt"><div class="wrap"><div class="sect-h"><h2>Lowongan terbaru</h2><a href="#lowongan">Semua lowongan →</a></div><div class="grid2">${openJobs().slice(0, 4).map(jobCard).join('')}</div></div></section>
+  <section class="band"><div class="wrap"><div class="sect-h"><h2>Talenta teratas</h2><a href="#peringkat">Peringkat →</a></div><div class="grid4">${sortTalents(talents()).slice(0, 4).map(talentCard).join('')}</div></div></section>
+  <section class="band alt"><div class="wrap"><h2 style="margin-bottom:22px">Cara kerja</h2><div class="steps2">
+    ${[['plus', 'Pasang lowongan', 'Gratis'], ['chat', 'Interview', 'Di ruang yang diawasi'], ['shield', 'Dana ditahan', 'Sebelum kerja dimulai'], ['check', 'Setujui, cair', `Otomatis ${P.autoReleaseDays} hari`]].map(([i, t, d], n) => `<div><span class="si">${ic(i)}<em>${n + 1}</em></span><strong>${t}</strong><span class="muted small">${d}</span></div>`).join('')}</div></div></section>
+  <section class="band dark"><div class="wrap"><div class="sect-h"><h2>Anggota koperasi ARIBA lebih untung</h2><a href="#harga" style="color:#fff">Bandingkan →</a></div>
+    <div class="bigs">${[[`−${P.memberFeeDiscount}%`, 'biaya layanan'], [`${P.freeCreditsMember}`, 'kredit gratis/bulan'], [`+${P.memberPackBonusPct}%`, 'bonus paket kredit'], ['Rp 0', 'cair ke Dompet ARIBA']].map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('')}</div>
+    <p class="xs" style="color:#D9B9BF;margin-top:16px">Termasuk Koperasi Desa/Kelurahan Merah Putih.</p></div></section>
+  <section class="band"><div class="wrap cta2"><a class="ctab" href="${NK.me() ? '#pasang' : '#daftar'}"><span>Butuh bantuan?</span><strong>Cari freelancer</strong></a><a class="ctab alt" href="#lowongan"><span>Punya keahlian?</span><strong>Cari kerja</strong></a></div></section>`;
 }
 
 /* ---------- daftar publik ---------- */
@@ -1265,13 +1312,13 @@ function vJobs() {
 }
 function vTalents() {
   const list = sortTalents(talents()).filter((u) => (!filt.cat || u.cat === filt.cat) && (!filt.member || NK.isMember(u)) && hit([u.name, u.headline, u.skills.join(' '), u.bio].join(' ')));
-  return `<div class="wrap page stack"><div><h1 class="title">Cari talenta</h1><p class="muted">${list.length} freelancer, diurutkan menurut skor peringkat. Saat skornya sama, anggota koperasi ARIBA tampil lebih dulu.</p></div>
+  return `<div class="wrap page stack"><div><h1 class="title">Cari talenta</h1><p class="muted">${list.length} freelancer</p></div>
   ${filterBar(`<label class="f">Keanggotaan<select class="in" id="fl-m" name="member" data-submit><option value="">Semua</option><option value="1" ${filt.member ? 'selected' : ''}>Anggota koperasi ARIBA</option></select></label>`)}
   ${list.length ? `<div class="grid3">${list.map(talentCard).join('')}</div>` : empty('Tidak ada talenta yang cocok', 'Coba kata kunci lain atau hapus filter.')}</div>`;
 }
 function vServices() {
   const list = liveServices().filter((s) => (!filt.cat || s.cat === filt.cat) && hit(s.title + ' ' + s.desc));
-  return `<div class="wrap page stack"><div><h1 class="title">Jasa siap pesan</h1><p class="muted">Harga dan isi paket sudah pasti. Pesan, danai, selesai.</p></div>${filterBar()}${list.length ? `<div class="grid3">${list.map(serviceCard).join('')}</div>` : empty('Tidak ada jasa yang cocok')}</div>`;
+  return `<div class="wrap page stack"><div><h1 class="title">Jasa siap pesan</h1><p class="muted">Harga pasti, langsung pesan.</p></div>${filterBar()}${list.length ? `<div class="grid3">${list.map(serviceCard).join('')}</div>` : empty('Tidak ada jasa yang cocok')}</div>`;
 }
 
 function vJob(id) {
@@ -1329,22 +1376,18 @@ function vService(id) {
 
 /* ---------- harga & kredit ---------- */
 function vPricing() {
-  const P = NK.pol(), plusPub = P.plusPricePublic + Math.floor(P.plusPricePublic * P.ppnPct / 100), plusMem = P.plusPriceMember + Math.floor(P.plusPriceMember * P.ppnPct / 100);
-  const R = [['Biaya layanan freelancer', 'Sesuai kategori, 8–12%', `Dikurangi ${P.memberFeeDiscount} poin, 5–9%`], ['Biaya layanan pemberi kerja', pc(P.cFeePublic), pc(P.cFeeMember)], ['PPN atas biaya layanan, kredit, dan Plus', pc(P.ppnPct), pc(P.ppnPct)], ['Kredit gratis per bulan', P.freeCreditsPublic, P.freeCreditsMember], ['Bonus kredit di setiap paket', 'Tidak ada', `+${P.memberPackBonusPct}%`], ['Narakarya Plus per bulan', `${rp(P.plusPricePublic)} + PPN`, `${rp(P.plusPriceMember)} + PPN`], ['Masa tunggu pencairan', `${P.holdDaysPublic} hari`, P.holdDaysMember ? P.holdDaysMember + ' hari' : 'Tanpa masa tunggu'], ['Biaya pencairan', `${rp(P.payoutFeePublic)} ke bank`, 'Gratis, juga ke Dompet ARIBA'], ['Verifikasi identitas', 'Ditinjau pengelola', 'Otomatis lewat akun Ariba'], ['Lowongan dan jasa baru', 'Ditinjau dahulu', 'Langsung tayang']];
-  return `<div class="wrap page stack" style="max-width:980px"><div><h1 class="title">Harga dan kredit</h1><p class="muted" style="max-width:66ch;margin-top:6px">Skema biaya mengikuti Upwork: freelancer membayar biaya layanan dari penghasilan, pemberi kerja membayar biaya layanan di atas nilai pekerjaan, dan melamar memakai kredit. Daftar dan memasang lowongan gratis. Semua biaya Narakarya dikenai PPN ${pc(P.ppnPct)}.</p></div>
-  <form class="card stack" data-f="noop"><h2 class="h2s">Hitung biaya kontrak</h2><div class="fgrid x4"><label class="f span2">Nilai pekerjaan<input class="in num" id="calc-a" value="5000000" inputmode="numeric" data-calc></label><label class="f">Kategori<select class="in" id="calc-c" data-calc>${NK.CATS.map((c) => `<option>${esc(c)}</option>`).join('')}</select></label><label class="f">Keanggotaan<select class="in" id="calc-m" data-calc><option value="">Keduanya umum</option><option value="F">Freelancer anggota</option><option value="K">Pemberi kerja anggota</option><option value="FK">Keduanya anggota</option></select></label></div><div class="grid2" id="calc-out"></div></form>
-  <h2 class="h2m">Freelancer</h2><p class="muted">Biaya layanan bervariasi per kategori seperti Upwork (0–15%), dipotong saat dana cair, dan dikunci saat kontrak dibuat.</p>
-  <div class="tw"><table><thead><tr><th>Kategori</th><th class="r">Umum</th><th class="r">Anggota koperasi ARIBA</th></tr></thead><tbody>${NK.CATS.map((c) => `<tr><td>${esc(c)}</td><td class="r">${pc(NK.freelancerPct(c, false))}</td><td class="r">${pc(NK.freelancerPct(c, true))}</td></tr>`).join('')}</tbody></table></div>
-  <h2 class="h2m">Pemberi kerja</h2><div class="grid2"><div class="card"><div class="price" style="font-size:24px">${pc(P.cFeePublic)}</div><p class="muted small">Biaya layanan akun umum, dibayar saat mendanai termin, ditambah PPN.</p></div><div class="card"><div class="price" style="font-size:24px">${pc(P.cFeeMember)}</div><p class="muted small">Untuk koperasi dan anggota koperasi ARIBA. Kembali utuh bila dana termin dikembalikan.</p></div></div>
-  <h2 class="h2m">Kredit</h2><p class="muted">1 kredit = ${rp(P.creditPrice)}. Kredit dipakai untuk melamar dan dikembalikan bila lowongan ditutup tanpa merekrut. Kredit tidak dapat diuangkan atau dipindahkan.</p>
-  <div class="tw"><table class="tmin"><thead><tr><th>Paket</th><th class="r">Harga</th><th class="r">PPN ${pc(P.ppnPct)}</th><th class="r">Total</th><th class="r">Per kredit</th><th>Hemat</th><th>Bonus anggota</th></tr></thead><tbody>${P.packs.map((k) => { const ppn = Math.floor(k.p * P.ppnPct / 100), save = Math.round((1 - k.p / (k.n * P.creditPrice)) * 100); return `<tr><td><strong>${k.n} kredit</strong></td><td class="r">${rp(k.p)}</td><td class="r">${rp(ppn)}</td><td class="r"><strong>${rp(k.p + ppn)}</strong></td><td class="r">${rp(k.p / k.n)}</td><td>${save > 0 ? `<span class="pill red">Promo ${save}%</span>` : '–'}</td><td>+${Math.floor(k.n * P.memberPackBonusPct / 100)} kredit</td></tr>`; }).join('')}</tbody></table></div>
-  <div class="tw"><table><thead><tr><th>Anggaran lowongan</th><th class="r">Kredit per proposal</th></tr></thead><tbody>${NK.TIERS.map(([lim, n], i) => `<tr><td>${i === 0 ? `Sampai ${rp(lim)}` : lim === Infinity ? `Di atas ${rp(NK.TIERS[i - 1][0])}` : `${rp(NK.TIERS[i - 1][0])} sampai ${rp(lim)}`}</td><td class="r">${n}</td></tr>`).join('')}</tbody></table></div>
-  <h2 class="h2m">Narakarya Plus</h2><div class="grid2"><div class="card stack-s plus"><span class="pill gold" style="align-self:flex-start">Plus</span><div class="price" style="font-size:24px">${rp(plusPub)}<span class="muted small" style="font-weight:400"> / bulan</span></div><p class="small muted">${rp(P.plusPricePublic)} + PPN. Upwork Freelancer Plus USD 19,99.</p></div><div class="card stack-s plus"><span class="pill gold" style="align-self:flex-start">Plus anggota koperasi ARIBA</span><div class="price" style="font-size:24px">${rp(plusMem)}<span class="muted small" style="font-weight:400"> / bulan</span></div><p class="small muted">${rp(P.plusPriceMember)} + PPN.</p></div></div>
-  <ul class="small" style="margin:0;padding-left:20px;line-height:1.8"><li>${P.plusCredits} kredit setiap bulan, menggantikan kredit gratis</li><li>Melihat kisaran harga proposal pesaing di setiap lowongan</li><li>Lencana Plus di profil dan proposal</li></ul>
-  <h2 class="h2m">Umum dan anggota koperasi ARIBA</h2><p class="muted">Anggota semua koperasi yang memakai ARIBA, termasuk Koperasi Desa dan Kelurahan Merah Putih, masuk dengan akun Ariba.</p>
-  <div class="tw"><table class="tmin"><thead><tr><th></th><th>Akun umum</th><th>Anggota koperasi ARIBA</th></tr></thead><tbody>${R.map(([a, b, c]) => `<tr><td><strong>${a}</strong></td><td>${b}</td><td>${c}</td></tr>`).join('')}</tbody></table></div>
-  <h2 class="h2m">Pertanyaan umum</h2><div>
-  ${[['Mengapa ada PPN?', `Biaya layanan, kredit, dan langganan Plus adalah jasa Ariba Indonesia yang dikenai PPN. Tarif efektifnya ${pc(P.ppnPct)} (12% dengan dasar pengenaan 11/12). Nilai pekerjaan antara freelancer dan pemberi kerja tidak dikenai PPN oleh Narakarya.`], ['Bagaimana bila pekerjaan dibatalkan?', 'Dana termin kembali utuh ke pemberi kerja, termasuk biaya layanan dan PPN-nya.'], ['Apakah kredit bisa hangus?', 'Kredit gratis dan kredit Plus berlaku per bulan kalender. Kredit yang dibeli tidak hangus.'], ['Bagaimana dengan PPh?', 'Freelancer melaporkan penghasilannya sendiri. Bila Narakarya ditunjuk DJP sebagai pemungut PPh 22 (PMK 37/2025), Narakarya memungut 0,5% kecuali freelancer orang pribadi yang menyerahkan surat pernyataan omzet sampai Rp 500 juta.'], ['Apakah ada kontrak per jam?', 'Belum. Narakarya memakai harga tetap per termin agar lingkup dan harga jelas sejak awal.']].map(([q, a]) => `<details class="q"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>`;
+  const P = NK.pol(), ppn = (x) => x + Math.floor(x * P.ppnPct / 100);
+  const card = (tag, big, unit, lines, cls = '') => `<div class="pcard ${cls}"><span class="ptag">${tag}</span><div class="pbig">${big}<small>${unit}</small></div><ul>${lines.map((l) => `<li>${ic('check')}${l}</li>`).join('')}</ul></div>`;
+  return `<div class="wrap page stack" style="max-width:1040px;gap:28px"><div class="center"><h1 class="title">Harga sederhana</h1><p class="muted">Daftar dan pasang lowongan gratis. Semua biaya + PPN ${pc(P.ppnPct)}.</p></div>
+  <div class="grid3">${card('Freelancer', '8–12%', 'dari penghasilan', ['Dipotong saat dana cair', `${P.freeCreditsPublic} kredit gratis/bulan`, `Anggota: ${pc(8 - P.memberFeeDiscount)}–${pc(12 - P.memberFeeDiscount)}`])}
+    ${card('Pemberi kerja', pc(P.cFeePublic), 'per termin', ['Pasang lowongan gratis', 'Kembali utuh bila batal', `Anggota: ${pc(P.cFeeMember)}`])}
+    ${card('Narakarya Plus', rp(ppn(P.plusPricePublic)).replace(' ', ' '), '/bulan', [`${P.plusCredits} kredit/bulan`, 'Lihat harga pesaing', `Anggota: ${rp(ppn(P.plusPriceMember))}`], 'hot')}</div>
+  <div><h2 class="h2m">Kredit</h2><p class="muted small">1 kredit = ${rp(P.creditPrice)} · 2–8 kredit per lamaran · tidak hangus</p></div>
+  <div class="packs">${P.packs.map((k) => { const save = Math.round((1 - k.p / (k.n * P.creditPrice)) * 100); return `<div class="pack">${save > 0 ? `<span class="pill red">Hemat ${save}%</span>` : '<span class="pill">Mulai</span>'}<b>${k.n}</b><span class="muted small">kredit</span><strong>${rp(ppn(k.p))}</strong><span class="xs muted">+${Math.floor(k.n * P.memberPackBonusPct / 100)} untuk anggota</span></div>`; }).join('')}</div>
+  <form class="card stack" data-f="noop"><h2 class="h2s">Hitung</h2><div class="fgrid x4"><label class="f span2">Nilai pekerjaan<input class="in num" id="calc-a" value="5000000" inputmode="numeric" data-calc></label><label class="f">Kategori<select class="in" id="calc-c" data-calc>${NK.CATS.map((c) => `<option>${esc(c)}</option>`).join('')}</select></label><label class="f">Anggota koperasi<select class="in" id="calc-m" data-calc><option value="">Tidak ada</option><option value="F">Freelancer</option><option value="K">Pemberi kerja</option><option value="FK">Keduanya</option></select></label></div><div class="grid2" id="calc-out"></div></form>
+  <details class="card"><summary><strong>Biaya per kategori</strong></summary><div class="tw" style="margin-top:12px"><table><thead><tr><th>Kategori</th><th class="r">Umum</th><th class="r">Anggota</th></tr></thead><tbody>${NK.CATS.map((c) => `<tr><td>${esc(c)}</td><td class="r">${pc(NK.freelancerPct(c, false))}</td><td class="r">${pc(NK.freelancerPct(c, true))}</td></tr>`).join('')}</tbody></table></div></details>
+  <details class="card"><summary><strong>Umum vs anggota koperasi ARIBA</strong></summary><div class="tw" style="margin-top:12px"><table><thead><tr><th></th><th>Umum</th><th>Anggota</th></tr></thead><tbody>${[['Kredit gratis/bulan', P.freeCreditsPublic, P.freeCreditsMember], ['Bonus paket', '–', `+${P.memberPackBonusPct}%`], ['Pencairan', `${rp(P.payoutFeePublic)}, ${P.holdDaysPublic} hari`, 'Gratis, langsung'], ['Verifikasi', 'Unggah dokumen', 'Otomatis'], ['Lowongan baru', 'Ditinjau', 'Langsung tayang']].map(([a, b, c]) => `<tr><td>${a}</td><td>${b}</td><td><strong>${c}</strong></td></tr>`).join('')}</tbody></table></div></details>
+  <div>${[['Kenapa ada PPN?', `Biaya layanan, kredit, dan Plus adalah jasa yang dikenai PPN efektif ${pc(P.ppnPct)}.`], ['Kalau batal?', 'Dana kembali utuh ke pemberi kerja, termasuk biaya dan PPN.'], ['PPh?', 'Bila Narakarya ditunjuk DJP, 0,5% dipungut, kecuali omzet orang pribadi sampai Rp 500 juta.']].map(([q, a]) => `<details class="q"><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>`;
 }
 const calcRender = () => {
   const out = $('#calc-out'); if (!out) return;
@@ -1355,31 +1398,30 @@ const calcRender = () => {
 
 function vRules() {
   const P = NK.pol();
-  const R = [['ARIBA-NK-001', 'Harga dan lingkup jelas', 'Setiap termin wajib memiliki hasil dan nominal yang pasti sebelum dikerjakan.'], ['ARIBA-NK-002', 'Tanpa bunga dan denda', 'Tidak ada bunga, denda keterlambatan, atau biaya tambahan karena waktu.'], ['ARIBA-NK-003', 'Pekerjaan yang dilarang', 'Riba dan pinjaman berbunga, judi, penipuan, konten terlarang, dan pekerjaan yang melanggar hukum ditolak. Joki akademik, ulasan palsu, dan sejenisnya ditahan untuk ditinjau.'], ['ARIBA-NK-004', 'Dana ditahan sampai disetujui', `Dana cair saat pemberi kerja menyetujui hasil, atau otomatis ${P.autoReleaseDays} hari setelah hasil dikirim bila tidak ada respons.`], ['ARIBA-NK-005', 'Pembatalan tanpa potongan', 'Dana yang dikembalikan ke pemberi kerja tidak dikenai biaya layanan.'], ['ARIBA-NK-006', 'Transaksi tetap di Narakarya', 'Berbagi kontak untuk memindahkan pembayaran ke luar platform ditandai untuk pengelola.'], ['ARIBA-NK-007', 'Bahasa yang sopan', 'Kata kasar disensor otomatis di percakapan dan ditolak di lowongan, proposal, jasa, profil, dan ulasan. Pelanggaran berulang menurunkan peringkat dan dapat berujung penangguhan akun.'], ['ARIBA-NK-008', 'Percakapan diawasi', 'Ruang interview dan percakapan kontrak dapat dibaca pengelola Ariba Indonesia. Ruang interview dapat ditutup salah satu pihak; percakapan kontrak tetap terbuka selama kontrak berjalan. Setiap pihak dapat melapor, dan Ariba dapat menutup percakapan serta menangguhkan akun.'], ['ARIBA-NK-009', 'Kredit bukan uang', 'Kredit hanya untuk melamar, tidak dapat diuangkan, dan tidak dapat dipindahkan ke akun lain.']];
-  return `<div class="wrap page stack" style="max-width:820px"><div><h1 class="title">Aturan Narakarya</h1><p class="muted">Berlaku versi ${P.version}. Aturan ini melengkapi Konstitusi Ekonomi ARIBA.</p></div>${R.map(([c, t, d]) => `<div class="card stack-s"><span class="mono code">${c}</span><h3>${t}</h3><p class="muted">${d}</p></div>`).join('')}</div>`;
+  const R = [['001', 'Lingkup & harga jelas'], ['002', 'Tanpa bunga & denda'], ['003', 'Tanpa riba, judi, penipuan'], ['004', `Dana cair saat disetujui atau ${P.autoReleaseDays} hari`], ['005', 'Batal = kembali utuh'], ['006', 'Transaksi tetap di Narakarya'], ['007', 'Bahasa sopan'], ['008', 'Percakapan diawasi'], ['009', 'Kredit bukan uang']];
+  return `<div class="wrap page stack" style="max-width:820px"><h1 class="title">Aturan</h1><div class="rules">${R.map(([c, t]) => `<div><span class="mono code">NK-${c}</span><strong>${t}</strong></div>`).join('')}</div></div>`;
 }
-
 /* ---------- peringkat ---------- */
 function vRank() {
   const isF = rankTab === 'F';
   const L = NK.S.users.filter((u) => u.kind === rankTab && u.status === 'AKTIF').map((u) => ({ u, r: NK.rankOf(u.id) })).sort((a, b) => (b.r.score ?? -1) - (a.r.score ?? -1) || (b.r.done ?? b.r.hires) - (a.r.done ?? a.r.hires));
   const head = isF ? '<th class="r">Keberhasilan</th><th class="r">Kontrak selesai</th><th class="r">Penghasilan</th>' : '<th class="r">Tingkat rekrut</th><th class="r">Kontrak</th><th class="r">Total dibayar</th>';
-  return `<div class="wrap page stack"><div><h1 class="title">Peringkat</h1><p class="muted" style="max-width:70ch">Peringkat dihitung dari perilaku nyata di Narakarya, bukan dari biaya yang dibayar. Laporan yang terbukti, kata kasar, dan penangguhan menurunkan skor.</p></div>
+  return `<div class="wrap page stack"><div><h1 class="title">Peringkat</h1><p class="muted">Dari kinerja nyata, tidak bisa dibeli.</p></div>
   <div class="tabs" role="tablist"><button role="tab" aria-selected="${isF}" class="${isF ? 'on' : ''}" data-a="rankTab" data-t="F">Freelancer</button><button role="tab" aria-selected="${!isF}" class="${isF ? '' : 'on'}" data-a="rankTab" data-t="K">Pemberi kerja</button></div>
   <div class="tw"><table class="tmin"><thead><tr><th>#</th><th>Nama</th><th>Peringkat</th><th class="r">Skor</th><th class="r">Ulasan</th>${head}</tr></thead><tbody>${L.map(({ u, r }, i) => `<tr><td class="num">${i + 1}</td><td>${isF ? `<a href="#talenta-${u.id}">${esc(u.name)}</a>` : esc(u.name)} ${mBadge(u)}</td><td>${tierPill(u.id)}</td><td class="r"><strong>${r.score ?? '–'}</strong></td><td class="r">${r.rating.n ? r.rating.avg.toFixed(1).replace('.', ',') + ' ★' : '–'}</td>${isF ? `<td class="r">${r.jss ?? '–'}${r.jss !== null ? '%' : ''}</td><td class="r">${r.done}</td><td class="r">${rp(r.earned)}</td>` : `<td class="r">${Math.round(r.hireRate * 100)}%</td><td class="r">${r.hires}</td><td class="r">${rp(r.spent)}</td>`}</tr>`).join('')}</tbody></table></div>
-  <div class="grid2"><div class="card stack-s"><h3>Freelancer</h3><p class="small muted">Skor = 50% keberhasilan kontrak + 50% nilai ulasan, dikurangi 10 per laporan terbukti, sampai 10 untuk kata kasar, dan 30 bila ditangguhkan. Keberhasilan kontrak menghitung kontrak selesai dikurangi sengketa yang kalah.</p><div class="lines small"><div><span>Terbaik Plus</span><span>Skor ≥ 90, ≥ 10 kontrak, ≥ Rp 20 juta</span></div><div><span>Terbaik</span><span>Skor ≥ 90, ≥ 3 kontrak, ≥ Rp 5 juta</span></div><div><span>Naik Daun</span><span>Skor ≥ 80</span></div><div><span>Terdaftar</span><span>Sudah punya kontrak selesai</span></div></div></div>
-  <div class="card stack-s"><h3>Pemberi kerja</h3><p class="small muted">Skor = 50% nilai ulasan dari freelancer + 30% tingkat rekrut + 20% total dibayar (penuh pada Rp 20 juta), dikurangi pelanggaran.</p><div class="lines small"><div><span>Klien utama</span><span>Skor ≥ 85, ≥ 5 kontrak, ≥ Rp 20 juta</span></div><div><span>Klien tepercaya</span><span>Skor ≥ 60 dan pernah mendanai</span></div><div><span>Klien terdaftar</span><span>Sudah punya kontrak</span></div></div></div></div></div>`;
+  <details class="card"><summary><strong>Cara menghitung</strong></summary><div class="grid2" style="margin-top:12px"><div class="card stack-s"><h3>Freelancer</h3><p class="small muted">Skor = 50% keberhasilan kontrak + 50% nilai ulasan, dikurangi 10 per laporan terbukti, sampai 10 untuk kata kasar, dan 30 bila ditangguhkan. Keberhasilan kontrak menghitung kontrak selesai dikurangi sengketa yang kalah.</p><div class="lines small"><div><span>Terbaik Plus</span><span>Skor ≥ 90, ≥ 10 kontrak, ≥ Rp 20 juta</span></div><div><span>Terbaik</span><span>Skor ≥ 90, ≥ 3 kontrak, ≥ Rp 5 juta</span></div><div><span>Naik Daun</span><span>Skor ≥ 80</span></div><div><span>Terdaftar</span><span>Sudah punya kontrak selesai</span></div></div></div>
+  <div class="card stack-s"><h3>Pemberi kerja</h3><p class="small muted">Skor = 50% nilai ulasan dari freelancer + 30% tingkat rekrut + 20% total dibayar (penuh pada Rp 20 juta), dikurangi pelanggaran.</p><div class="lines small"><div><span>Klien utama</span><span>Skor ≥ 85, ≥ 5 kontrak, ≥ Rp 20 juta</span></div><div><span>Klien tepercaya</span><span>Skor ≥ 60 dan pernah mendanai</span></div><div><span>Klien terdaftar</span><span>Sudah punya kontrak</span></div></div></div></div></details></div>`;
 }
 
 /* ---------- masuk & daftar ---------- */
 function vLogin() {
   const p = [['f1', 'Freelancer anggota koperasi, Plus'], ['f10', 'Freelancer anggota Koperasi Desa Merah Putih'], ['f6', 'Freelancer umum'], ['f7', 'Freelancer umum, pelapor di ruang interview'], ['c2', 'Pemberi kerja koperasi'], ['c1', 'Pemberi kerja umum'], ['admin', 'Pengelola Ariba Indonesia']];
-  return `<div class="wrap page" style="max-width:560px"><div class="stack"><div><h1 class="title">Masuk ke Narakarya</h1><p class="muted">Pilih akun contoh untuk mencoba setiap peran. Pada versi tayang, anggota koperasi masuk dengan akun Ariba.</p></div>
+  return `<div class="wrap page" style="max-width:560px"><div class="stack"><div><h1 class="title">Masuk ke Narakarya</h1><p class="muted">Pilih akun contoh.</p></div>
   <div class="stack-s">${p.map(([id, t]) => { const u = NK.user(id); return `<button class="persona" data-a="login" data-id="${id}">${av(u)}<span class="grow"><strong>${esc(u.name)}</strong><br><span class="muted small">${t}</span></span></button>`; }).join('')}</div>
   <p class="muted small">Belum punya akun? <a href="#daftar">Daftar gratis</a>.</p></div></div>`;
 }
 function vRegister() {
-  return `<div class="wrap page" style="max-width:560px"><form class="stack" data-f="register"><div><h1 class="title">Daftar gratis</h1><p class="muted">Terbuka untuk umum. Anggota koperasi ARIBA mendapat <a href="#harga">kelebihan tambahan</a>.</p></div>
+  return `<div class="wrap page" style="max-width:560px"><form class="stack" data-f="register"><div><h1 class="title">Daftar gratis</h1><p class="muted">Gratis. Anggota koperasi ARIBA dapat <a href="#harga">lebih</a>.</p></div>
   <label class="choice"><input type="radio" name="kind" value="F" checked><span><strong>Saya mencari kerja</strong><br><span class="muted small">Melamar lowongan dan menjual jasa. Dapat ${NK.pol().freeCreditsPublic} kredit gratis tiap bulan.</span></span></label>
   <label class="choice"><input type="radio" name="kind" value="K"><span><strong>Saya mencari freelancer</strong><br><span class="muted small">Memasang lowongan gratis dan memesan jasa.</span></span></label>
   <label class="f">Nama lengkap atau nama usaha<input class="in" id="rg-n" name="name" required></label><label class="f">Email<input class="in" id="rg-e" name="email" type="email" required></label><label class="f">Kota<input class="in" id="rg-c" name="city"></label>
@@ -1438,7 +1480,7 @@ function vContract(id) {
   const refunds = c.milestones.reduce((a, m) => a + (m.refund || 0), 0);
   const prog = NK.S.progress.filter((p) => p.contractId === c.id);
   const body = `<div><div class="crumb"><a href="#${admin ? 'admin-kontrak' : 'kontrak'}">Kontrak</a> / <span class="mono">${c.no}</span></div><h1 class="title">${esc(c.title)}</h1><div class="row small muted" style="margin-top:6px">${pill(c.status)}<span>Pemberi kerja ${esc(cl.name)}</span><span>Freelancer <a href="#talenta-${fr.id}">${esc(fr.name)}</a></span></div></div>
-  <div class="card stack-s"><div class="row between"><strong>Progres kerja</strong><strong class="num">${g}%</strong></div>${bar(g)}<p class="xs muted">Dihitung dari nilai tiap termin: termin yang cair atau sudah dikirim dihitung 100%, termin yang dikerjakan memakai laporan progres terakhir.</p></div>
+  <div class="card stack-s"><div class="row between"><strong>Progres kerja</strong><strong class="num">${g}%</strong></div>${bar(g)}</div>
   <div class="split"><div class="stack"><div><h2 class="h2s" style="margin-bottom:8px">Termin</h2>${c.milestones.map((m) => msRow(c, m, isC, isF)).join('')}</div>
     ${prog.length ? `<div class="card stack-s"><h3>Riwayat progres</h3>${prog.map((p) => `<div class="row small" style="flex-wrap:nowrap;align-items:flex-start"><span class="pill sea num">${p.pct}%</span><span class="grow">${esc(p.note)}<br><span class="muted xs">${esc(c.milestones.find((m) => m.id === p.msId).title)} · ${jam(p.at)}</span></span></div>`).join('')}</div>` : ''}
     ${c.status === 'SELESAI' && (isC || isF) && !reviewed ? `<form class="card stack-s" data-f="review" data-id="${c.id}"><h3>Beri ulasan untuk ${esc(other(c, u).name)}</h3><div class="fgrid"><label class="f">Nilai<select class="in" id="rv-s" name="stars">${[5, 4, 3, 2, 1].map((n) => `<option value="${n}">${'★'.repeat(n)}</option>`).join('')}</select></label></div><label class="f">Ulasan<textarea class="in" id="rv-t" name="text"></textarea></label><button class="btn pri">Kirim ulasan</button></form>` : ''}
@@ -1468,7 +1510,7 @@ const kindPill = (t) => (t.kind === 'INTERVIEW' ? '<span class="pill warn">Inter
 function vInbox() {
   const u = NK.me();
   const T = NK.S.threads.filter((t) => t.clientId === u.id || t.freelancerId === u.id).sort((a, b) => b.lastAt - a.lastAt);
-  return shell('pesan', `<div><h1 class="title">Pesan</h1><p class="muted small">Ruang interview dibuka pemberi kerja dari proposal. Setelah merekrut, percakapan tetap terbuka sebagai percakapan kontrak. Semua percakapan diawasi Ariba Indonesia.</p></div>${T.length ? `<div class="stack-s">${T.map((t) => { const o = NK.user(t.clientId === u.id ? t.freelancerId : t.clientId), last = NK.S.msgs.filter((m) => m.thread === t.id).slice(-1)[0]; return `<a class="card row" href="#pesan-${t.id}" style="flex-wrap:nowrap">${av(o)}<div class="grow"><div class="row small"><strong class="nm">${esc(o.name)}</strong>${kindPill(t)}${t.status !== 'TERBUKA' ? '<span class="pill">Ditutup</span>' : ''}</div><div class="muted xs">${esc(threadTitle(t))}</div><div class="muted small clamp2">${last ? esc(last.text) : ''}</div></div><span class="muted xs">${ago(t.lastAt)}</span></a>`; }).join('')}</div>` : empty('Belum ada percakapan', 'Percakapan dimulai saat pemberi kerja mengajak interview.')}`);
+  return shell('pesan', `<h1 class="title">Pesan</h1>${T.length ? `<div class="stack-s">${T.map((t) => { const o = NK.user(t.clientId === u.id ? t.freelancerId : t.clientId), last = NK.S.msgs.filter((m) => m.thread === t.id).slice(-1)[0]; return `<a class="card row" href="#pesan-${t.id}" style="flex-wrap:nowrap">${av(o)}<div class="grow"><div class="row small"><strong class="nm">${esc(o.name)}</strong>${kindPill(t)}${t.status !== 'TERBUKA' ? '<span class="pill">Ditutup</span>' : ''}</div><div class="muted xs">${esc(threadTitle(t))}</div><div class="muted small clamp2">${last ? esc(last.text) : ''}</div></div><span class="muted xs">${ago(t.lastAt)}</span></a>`; }).join('')}</div>` : empty('Belum ada percakapan', 'Percakapan dimulai saat pemberi kerja mengajak interview.')}`);
 }
 function threadBody(t, viewer) {
   const admin = viewer.role === 'ADMIN', mine = (m) => m.from === viewer.id;
@@ -1488,7 +1530,7 @@ function threadBody(t, viewer) {
     [cl, fr].forEach((x) => acts.push(x.status === 'AKTIF' ? `<button class="btn s danger" data-a="suspend" data-id="${x.id}">Tangguhkan ${esc(x.name.split(' ')[0])}</button>` : `<span class="pill bad">${esc(x.name.split(' ')[0])} ditangguhkan</span>`));
   }
   return `<div><div class="crumb"><a href="#${admin ? 'admin-percakapan' : 'pesan'}">Pesan</a></div><h1 class="title" style="font-size:24px">${esc(threadTitle(t))}</h1><div class="row small" style="margin-top:6px">${kindPill(t)}${pill(t.status)}<span class="muted">${esc(cl.name)} dan ${esc(fr.name)}</span></div></div>
-  <div class="note">${ic('shield')} Percakapan ini diawasi Ariba Indonesia. Kata kasar disensor otomatis${t.kind === 'KONTRAK' ? '. Percakapan kontrak tetap terbuka selama kontrak berjalan.' : '. Ruang interview dapat ditutup salah satu pihak.'}</div>
+  <p class="xs muted">${ic('shield')} Diawasi Ariba Indonesia · kata kasar disensor</p>
   ${t.status !== 'TERBUKA' ? `<div class="note bad">Ditutup ${t.closedBy === 'ADMIN' ? 'oleh Ariba Indonesia' : 'oleh ' + esc(NK.user(t.closedBy).name)} ${ago(t.closedAt)}. Alasan: ${esc(t.closedReason)}</div>` : ''}
   ${iv ? `<div class="card row between small"><span><strong>Interview</strong> ${new Date(iv.when).toLocaleString('id-ID', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Asia/Jakarta' })} WIB · ${esc(iv.mode)}${iv.link ? ` · <span class="mono">${esc(iv.link)}</span>` : ''}</span><span class="row">${iv.status === 'DIKONFIRMASI' ? '<span class="pill ok">Dikonfirmasi</span>' : iv.status === 'MINTA_JADWAL_LAIN' ? '<span class="pill warn">Minta jadwal lain</span>' : isF && t.status === 'TERBUKA' ? `<button class="btn pri s" data-a="ivYes" data-id="${t.id}">Konfirmasi hadir</button><button class="btn s" data-a="ivNo" data-id="${t.id}">Minta jadwal lain</button>` : '<span class="pill warn">Menunggu konfirmasi</span>'}</span></div>` : ''}
   <div class="card stack-s"><div class="thread" id="thread">${M.map((m) => m.from === 'SISTEM' ? `<div class="bub sys">${esc(m.text)}<small>${jam(m.at)}</small></div>` : `<div class="bub ${mine(m) || (admin && m.from === t.freelancerId) ? 'mine' : ''}">${esc(m.text)}<small>${esc(NK.user(m.from).name)} · ${jam(m.at)}${(m.flags || []).map((f) => ` · <span class="flagtxt">${f === 'KASAR' ? 'disensor ARIBA-NK-007' : 'kontak luar ARIBA-NK-006'}</span>`).join('')}</small></div>`).join('') || '<p class="muted small">Belum ada pesan.</p>'}</div>
