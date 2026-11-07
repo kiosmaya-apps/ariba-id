@@ -13,10 +13,10 @@
 <body>
 <style>/* Tata letak: pasar kerja padat dengan "nota kontrak" sebagai ciri khas.
    Tema Indonesia: merah putih. Satu tema terang, sengaja sama seperti situs induk ariba.id.
-   Merah sang saka untuk aksi dan bidang utama, putih kertas sebagai dasar, abu hangat sebagai penyeimbang. */
+   Merah marun yang dalam untuk aksi dan bidang utama, supaya tidak silau di layar, putih kertas sebagai dasar, abu hangat sebagai penyeimbang. */
 :root{
   color-scheme:light;
-  --merah:#C8102E;--merah-d:#A00D25;--merah-tua:#7A0A1C;--merah-gelap:#3B0610;--merah-soft:#FDECEE;--merah-line:#F3C3CA;
+  --merah:#8C1D2F;--merah-d:#701626;--merah-tua:#561221;--merah-gelap:#2A0B12;--merah-soft:#F6ECEE;--merah-line:#E6CBD0;
   --putih:#FFFFFF;--kertas:#FBF8F6;--abu:#8C7F7A;--abu-soft:#F3EEEB;
   --emas:#9A6B00;--emas-soft:#FBF1D9;
   --sea:#1F7A5A;--sea-soft:#E7F4EE;--ok:#1F7A4A;--ok-soft:#E6F3EA;--warn:#8F5B00;--warn-soft:#FCF0D8;--bad:#B3261E;--bad-soft:#FBE9E8;
@@ -76,16 +76,16 @@ button,input,select,textarea{font:inherit;color:inherit}
 svg.i{width:1.15em;height:1.15em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
 /* hero */
-.hero{background:var(--merah);color:#fff;border-bottom:8px solid var(--putih);box-shadow:0 1px 0 var(--line)}
+.hero{background:var(--merah-tua);color:#fff;border-bottom:8px solid var(--putih);box-shadow:0 1px 0 var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:44px 60px}
 .hero h1{color:#fff;font-size:clamp(34px,4.6vw,54px);line-height:1.08}
-.hero p.lead{color:#FDE4E7;font-size:17px;max-width:56ch;margin-top:14px}
+.hero p.lead{color:#E9D3D7;font-size:17px;max-width:56ch;margin-top:14px}
 @media(max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr);gap:28px;padding-block:28px 40px}}
 .searchbox{display:flex;flex-wrap:wrap;gap:0;background:#fff;border-radius:8px;margin-top:22px;padding:5px}
 .searchbox select{border:0;background:var(--merah-soft);border-radius:5px;padding:0 10px;min-height:44px;color:var(--merah-gelap);font-size:14px;font-weight:500}
 .searchbox input{flex:1 1 180px;min-width:0;border:0;padding:0 12px;min-height:44px;background:transparent;color:var(--ink);outline-offset:-2px}
 @media(max-width:480px){.searchbox button{flex:1 1 100%;margin-top:5px}.searchbox input{flex:1 1 150px}}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:13px;color:#FBD3D9}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:13px;color:#D9B9BF}
 .chips a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 
 /* nota */
@@ -102,7 +102,7 @@ svg.i{width:1.15em;height:1.15em;flex:none;stroke:currentColor;fill:none;stroke-
 /* bagian */
 section.band{padding-block:44px}
 .band.alt{background:var(--putih);border-block:1px solid var(--line)}
-.band.dark{background:var(--merah-tua);color:#fff}.band.dark h2{color:#fff}
+.band.dark{background:var(--merah-gelap);color:#fff}.band.dark h2{color:#fff}
 .sect-h{display:flex;flex-wrap:wrap;gap:8px 20px;justify-content:space-between;align-items:baseline;margin-bottom:20px}
 h2{font-size:clamp(25px,3vw,32px);line-height:1.15}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -1152,7 +1152,7 @@ const I = {
   scale: '<path d="M12 3v18M7 21h10M5 7h14M5 7l-3 7c1.5 1.5 4.5 1.5 6 0zM19 7l-3 7c1.5 1.5 4.5 1.5 6 0z"/>', chat: '<path d="M4 5h16v11H9l-5 4z"/>', star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
 };
 const ic = (n) => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${I[n]}</svg>`;
-const avatarColors = ['#8B1A1A', '#C8102E', '#5B4A42', '#9A6410', '#2F7A69', '#6B2737'];
+const avatarColors = ['#8B1A1A', '#8C1D2F', '#5B4A42', '#9A6410', '#2F7A69', '#6B2737'];
 const av = (u, c = '') => { const ini = u.name.replace(/^(CV|PT|Koperasi Desa Merah Putih|Koperasi|Yayasan)\s/, '').split(/\s+/).slice(0, 2).map((w) => w[0]).join('').toUpperCase(); const k = [...u.id].reduce((a, x) => a + x.charCodeAt(0), 0) % avatarColors.length; return `<span class="av ${c}" style="background:${avatarColors[k]}" aria-hidden="true">${esc(ini)}</span>`; };
 const mBadge = (u) => (NK.isMember(u) ? `<span class="badge-m" title="${esc(u.member.coop)}">${ic('shield')} Anggota koperasi ARIBA</span>` : '');
 const plusBadge = (u) => (NK.plusActive(u) ? '<span class="pill gold">Plus</span>' : '');
@@ -1193,7 +1193,7 @@ function header(route) {
   return `<div class="flag" aria-hidden="true"></div><div class="strip"><div class="wrap"><span><strong>Prototipe.</strong> Data contoh tersimpan di peramban Anda. Tidak ada uang sungguhan.</span><button class="linkbtn" data-a="reset">Mulai ulang data contoh</button></div></div>
   ${u && u.status !== 'AKTIF' ? `<div class="note bad" style="border-radius:0;text-align:center">Akun Anda ditangguhkan Ariba Indonesia${u.statusReason ? ': ' + esc(u.statusReason) : ''}. Anda tidak dapat melamar, memasang, atau mengirim pesan.</div>` : ''}
   <header class="top"><div class="wrap">
-    <a class="brand" href="#beranda" aria-label="Narakarya, beranda"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="16" rx="0" fill="#C8102E"/><rect y="16" width="32" height="16" fill="#FFFFFF" stroke="#E4D6D2"/><rect x="0.5" y="0.5" width="31" height="31" rx="5" fill="none" stroke="#C8102E"/></svg><span><b>Narakarya</b><i>OLEH ARIBA INDONESIA</i></span></a>
+    <a class="brand" href="#beranda" aria-label="Narakarya, beranda"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="16" rx="0" fill="#8C1D2F"/><rect y="16" width="32" height="16" fill="#FFFFFF" stroke="#E4D6D2"/><rect x="0.5" y="0.5" width="31" height="31" rx="5" fill="none" stroke="#8C1D2F"/></svg><span><b>Narakarya</b><i>OLEH ARIBA INDONESIA</i></span></a>
     <button class="burger" data-a="burger" aria-label="Buka menu">${ic('menu')}</button>
     <nav class="nav" id="nav" aria-label="Navigasi utama">${L.map(([h, t]) => `<a href="#${h}" class="${route === h ? 'on' : ''}">${t}</a>`).join('')}${u ? '' : '<a class="only-m" href="#daftar">Daftar gratis</a>'}</nav>
     <div class="acts">${u
@@ -1248,8 +1248,8 @@ function vHome() {
     <div><h3>Dana ditahan</h3><p class="muted">Pekerjaan dibagi menjadi termin. Dana termin ditahan dan progres kerja dilaporkan berkala.</p></div>
     <div><h3>Setujui, dana cair</h3><p class="muted">Hasil disetujui, dana cair. Bila pemberi kerja diam ${P.autoReleaseDays} hari, dana cair otomatis.</p></div></div></div></section>
   <section class="band dark"><div class="wrap"><div class="sect-h"><h2>Lebih untung bagi anggota koperasi ARIBA</h2><a href="#harga" style="color:#fff">Lihat perbandingan</a></div>
-    <p style="color:#FBE3E6;max-width:70ch;margin-bottom:18px">Berlaku untuk anggota semua koperasi yang memakai ARIBA, termasuk Koperasi Desa dan Kelurahan Merah Putih.</p><div class="grid4">
-    ${[[`Biaya layanan −${P.memberFeeDiscount} poin`, `Pemberi kerja anggota membayar ${pc(P.cFeeMember)}, bukan ${pc(P.cFeePublic)}.`], [`${P.freeCreditsMember} kredit gratis tiap bulan`, `Tiga kali akun umum, ditambah bonus ${P.memberPackBonusPct}% di setiap paket kredit.`], [`Plus hanya ${rp(P.plusPriceMember)}`, `Akun umum ${rp(P.plusPricePublic)} per bulan, keduanya berisi ${P.plusCredits} kredit.`], ['Cair ke Dompet ARIBA', 'Gratis, tanpa masa tunggu, dan identitas terverifikasi otomatis.']].map(([a, b]) => `<div><h3 style="color:#fff;font-size:18px">${a}</h3><p style="color:#FBE3E6;font-size:14px;margin-top:4px">${b}</p></div>`).join('')}
+    <p style="color:#E2C7CC;max-width:70ch;margin-bottom:18px">Berlaku untuk anggota semua koperasi yang memakai ARIBA, termasuk Koperasi Desa dan Kelurahan Merah Putih.</p><div class="grid4">
+    ${[[`Biaya layanan −${P.memberFeeDiscount} poin`, `Pemberi kerja anggota membayar ${pc(P.cFeeMember)}, bukan ${pc(P.cFeePublic)}.`], [`${P.freeCreditsMember} kredit gratis tiap bulan`, `Tiga kali akun umum, ditambah bonus ${P.memberPackBonusPct}% di setiap paket kredit.`], [`Plus hanya ${rp(P.plusPriceMember)}`, `Akun umum ${rp(P.plusPricePublic)} per bulan, keduanya berisi ${P.plusCredits} kredit.`], ['Cair ke Dompet ARIBA', 'Gratis, tanpa masa tunggu, dan identitas terverifikasi otomatis.']].map(([a, b]) => `<div><h3 style="color:#fff;font-size:18px">${a}</h3><p style="color:#E2C7CC;font-size:14px;margin-top:4px">${b}</p></div>`).join('')}
   </div></div></section>`;
 }
 
